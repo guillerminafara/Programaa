@@ -1,13 +1,13 @@
 public class Persona {
-     String nombre; 
-    String apellidos;
-    String nif; 
-    String direccion;
-    public Persona(String nombre, String apellidos, String nif, String direccion) {
+    protected String nombre; 
+    protected String apellidos;
+    protected String nif; 
+    protected Direccion direccion;
+    public Persona(String nombre, String apellidos, String nif, Direccion direccion) {
         this.nombre = nombre;
         this.apellidos = apellidos;
         this.nif = nif;
-        direccion = direccion;
+        this.direccion = direccion;
     }
     public Persona(String nombre, String apellidos, String nif) {
         this.nombre = nombre;
