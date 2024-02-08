@@ -39,13 +39,13 @@ public class Movil extends TarjetaSIM {
     public int llama(TarjetaSIM movil, int tiempoo) {
         if(tarifa.equals("plata")){
             this.coste = 0.10;
-            System.out.println("entra");
+          
         }else if(tarifa.equals("oro")){
             this.coste= 0.06;
-            System.out.println("entra2");
+            
         }else{
             this.coste= 0.03;
-            System.out.println("entra3");
+            
         }
         tiempo += tiempoo;
         coste= tiempo* coste;

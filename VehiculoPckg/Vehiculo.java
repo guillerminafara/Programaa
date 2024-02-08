@@ -1,6 +1,4 @@
-/**
- * Vehiculo
- */
+
 public abstract class Vehiculo {
     protected static Vehiculo vehiculosCreados;
     protected int kilometrosTotales;

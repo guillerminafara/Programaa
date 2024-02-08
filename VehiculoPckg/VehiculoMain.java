@@ -39,7 +39,7 @@ public class VehiculoMain {
             switch (resp) {
                 case 1:
 
-                    System.out.println("¿Cuántos kilometros desea recorrer?");
+                    System.out.println("¿Cuantos kilometros desea recorrer?");
 
                     kilometros = leer.nextInt();
                     listaBici.add(bici);
@@ -48,7 +48,7 @@ public class VehiculoMain {
                     break;
                 case 2:
 
-                    System.out.println("¿Cuántos kilometros desea recorrer?");
+                    System.out.println("¿Cuantos kilometros desea recorrer?");
                     kilometros = leer.nextInt();
                     listaAuto.add(auto);
                     auto.andaEn(kilometros);
@@ -80,7 +80,7 @@ public class VehiculoMain {
                     break;
 
                 default:
-                    System.out.println("Elige una opción (1-7):");
+                    System.out.println("Elige una opcion (1-7):");
                     resp = leer.nextInt();
                     break;
             }

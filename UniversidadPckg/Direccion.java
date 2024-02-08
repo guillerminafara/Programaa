@@ -1,6 +1,4 @@
-/**
- * Direccion
- */
+
 public class Direccion {
     String calle;
     String ciudad;

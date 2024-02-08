@@ -1,20 +1,14 @@
 /**
  * Figuras
  */
-public class Figura {
+public abstract class Figura {
 
     protected double areaa;
 
 
-    public double area(){
-        return 1;
-       
-    }
+    public abstract double area();
 
-    public double perimetro(){
-        return 1;
-       
-    }
+    public abstract double perimetro();
     
 }
 
