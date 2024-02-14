@@ -12,6 +12,8 @@ public class CartasMain {
        
        
     }
+
+    //con esto dividimos la baraja en dos 
     public void dividir(Jugador paquito, Jugador tito, Baraja baraja){
         for (int i = 0; i < 24; i++) {
             paquito.recibeCarta(baraja.repartirCarta());
