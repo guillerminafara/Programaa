@@ -2,10 +2,15 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 //Crea una clase "Jugador" que contenga información sobre la mano de cartas que tiene un jugador.
 public class Jugador {
+     String nombre;
     Cartas carta;
     Baraja baraja;
     ArrayList<Cartas> mano= new ArrayList<>();
 
+
+    public Jugador(String nombre) {
+        this.nombre = nombre;
+    }
 
     public Cartas getCarta() {
         return carta;
@@ -33,6 +38,17 @@ public class Jugador {
         this.mano = mano;
     }
 
+    public  String getNombre() {
+        return nombre;
+    }
+
+  
+
+    @Override
+    public String toString() {
+        return nombre;
+    }
+
     //que recibe una carta de la baraja
     public void recibeCarta(Cartas carta){
         mano.add(carta);
@@ -48,4 +64,6 @@ public class Jugador {
         mano.get(0);
 
     }
+
+   
 }

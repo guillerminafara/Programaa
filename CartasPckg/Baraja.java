@@ -29,7 +29,7 @@ public class Baraja {
     public void setBaraja(ArrayList<Cartas> baraja) {
         this.baraja = baraja;
     }
-
+//crear la baraja
     public void cargar() {
         
         for (int i = 0; i < palo.length; i++) {
@@ -40,18 +40,18 @@ public class Baraja {
                 baraja.add(new Cartas(palo[i], j));
             }
         }
-       // System.out.println(baraja);
+        System.out.println(baraja);
 
     }
-
+//meacla las cartas
     public void barajar(){
         Collections.shuffle(baraja);
        // System.out.println(baraja);
     }
-
+//repartirCarta(), que reparte la primera carta de la baraja.
     public Cartas repartirCarta(){
         //Cartas aux;
-        barajar();
+      //  barajar();
         //aux=baraja.get(0);
        // baraja.remove(aux);
        
