@@ -1,4 +1,15 @@
 import java.util.ArrayList;
+//Juego de la guerrita. Se reparte el mazo entre los dos jugadores. se muestra la primera carta de cada mazo y la que sea mayor gana la ronda
+// y gana la carta del otro jugador. guarda la carta jugada mas la ganada en otro mazo o debajo del mazo. La partida termina cuando 
+// uno de los 2 participantes se queda sin cartas.. pierde el que se queda sin cartas
+//Situación de empate. cada jugador pone 2 cartas ocultas, la tercera* carta se muestra y es la que define quien gana el empate.. quien gana 
+// se lleva todas las cartas jugadas en el empate
+// *situación rara pero que puede ocurrir: estando en el empate vuelve a darse empate en la definición.. se repite la situación de empate 
+// pero con solo 1 carta oculta
+
+
+//en el proyecto se muestran todas las cartas y partidas unicamente para corroborar  que los códigos funcionan correctamente
+
 
 public class JuegoX extends JuegodeCartas {
   // Juego la Guerrita
@@ -18,8 +29,8 @@ public class JuegoX extends JuegodeCartas {
   // comparar las cartas que llegan de los jugadores
   public void juega(Jugador paquito, Jugador tito) {
 
-    System.out.println(paquito.getNombre() + "carta: " + paquito.getMano().get(0));
-    System.out.println(tito.getNombre() + "Carta: " + tito.getMano().get(0));
+    System.out.println("Carta de " +paquito.getNombre()+": " + paquito.getMano().get(0));
+    System.out.println("Carta de " + tito.getNombre() + ": " + tito.getMano().get(0));
 
     // tito gana
 
@@ -53,18 +64,20 @@ public class JuegoX extends JuegodeCartas {
       // tito.getMano().get(i));
       empateTito.add(tito.getMano().remove(0));
       // System.out.println( "iiiii: " +i);
-      System.out.println("Empate Tito " + empateTito);
+    
       // System.out.println("trampa para ver cartas ocultas de paquito: " +
       // paquito.getMano().get(i));
       empatePaquito.add(paquito.getMano().remove(0));
-      System.out.println("Empate Paquito " + empatePaquito);
+      
 
       i++;
     }
+    System.out.println("Tus cartas: " + empatePaquito);
+    System.out.println("Empate Tito " + empateTito);
 
     // tito gana
-    System.out.println(paquito.getNombre() + "carta: " + empatePaquito.get(3));
-    System.out.println(tito.getNombre() + "Carta: " + empateTito.get(3));
+    System.out.println("Carta de " +paquito.getNombre()+": " +  empatePaquito.get(3));
+    System.out.println("Carta de "+ tito.getNombre() +": "  + empateTito.get(3));
     if (empatePaquito.get(cont).getNumero() < empateTito.get(cont).getNumero()) {
       tito.getMano().addAll(empatePaquito);
       tito.getMano().addAll(empateTito);
@@ -100,9 +113,5 @@ public class JuegoX extends JuegodeCartas {
     }
 
   }
+
 }
-/*
- * //
- * 
- * 
- */
