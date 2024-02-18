@@ -1,5 +1,14 @@
 import java.util.Scanner;
+//Juego de la guerrita. Se reparte el mazo entre los dos jugadores. se muestra la primera carta de cada mazo y la que sea mayor gana la ronda
+// y gana la carta del otro jugador. guarda la carta jugada mas la ganada en otro mazo o debajo del mazo. La partida termina cuando 
+// uno de los 2 participantes se queda sin cartas.. pierde el que se queda sin cartas
+//Situación de empate. cada jugador pone 2 cartas ocultas, la tercera* carta se muestra y es la que define quien gana el empate.. quien gana 
+// se lleva todas las cartas jugadas en el empate
+// *situación rara pero que puede ocurrir: estando en el empate vuelve a darse empate en la definición.. se repite la situación de empate 
+// pero con solo 1 carta oculta
 
+
+//en el proyecto se muestran todas las cartas y partidas unicamente para corroborar  que los códigos funcionan correctamente
 public class CartasMain {
 
     public static void main(String[] args) {
