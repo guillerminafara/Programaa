@@ -5,9 +5,13 @@ public class Espada extends Arma{
         //TODO Auto-generated constructor stub
     }
     public Espada(){
-    
+        super();
+        this.danyoMax=4;
+        this.danyoMin=3;
     }
     public int danyoArma(){
-        return 1;
+        int devolver;
+        devolver= (int) ((Math.random()*danyoMax)+danyoMin);
+        return devolver;
     }
 }

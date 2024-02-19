@@ -4,8 +4,16 @@ public class Hechizo extends Arma {
         super(danyoMax, danyoMin);
         //TODO Auto-generated constructor stub
     }
+
+    public Hechizo(){
+        super();
+        this.danyoMax=5;
+        this.danyoMin=1;
+    }
     public int danyoArma(){
-        return 1;
+        int devolver;
+        devolver= (int) ((Math.random()*danyoMax)+danyoMin);
+        return devolver;
     }
 
 }
