@@ -16,5 +16,7 @@ public class directorio {
             System.out.printf("el archivo %s es un fichero\n su ruta absoluta es: %s \n Tamaño: %s \n",archivo.getName(), archivo.getAbsolutePath(),archivo.getTotalSpace());
             System.out.printf(" Ejecución: %b\n Lectura: %b\n Escritura: %b\n",archivo.canExecute(),archivo.canRead(),archivo.canWrite());
         }
+
+  
     }
 }
