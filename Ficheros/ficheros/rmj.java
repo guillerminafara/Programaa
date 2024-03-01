@@ -20,11 +20,11 @@ public class rmj {
             File file = new File(fichero);
             if (file.exists()) {
                 if (file.isDirectory()) {
-                    System.out.println("no es posible eliminar carpetas");
+                    System.out.println("no es posible eliminar carpetas/directorios");
                 } else if (file.delete()) {
                     System.out.println("Fichero eliminado: " + file.getName());
                 } else {
-                    System.out.println("Fichero ya eliminado");
+                    System.out.println("Fichero no existe ");
                 }
             }else{
                 System.out.println("no ha ingresado ningún fichero");
