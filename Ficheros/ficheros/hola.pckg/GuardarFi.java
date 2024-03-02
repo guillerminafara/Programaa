@@ -1,4 +1,4 @@
-package hola;
+
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -21,14 +21,13 @@ public class GuardarFi {
             FileWriter fw = new FileWriter(nombre);
 
             // fw.write("Cómo estan? \n OK \n");
-            System.out.println("ingresa las lineas: escribe salir al terminar ");
+            System.out.println("ingresa las lineas que deseas escribe salir al terminar ");
             String palabra = "";
             do {
               
                 palabra = leer.nextLine();
                 if (palabra.equalsIgnoreCase("salir")) {
                     continue;
-                    
                 }
                 fw.write(palabra + "\n");
                 fw.flush();
@@ -40,14 +39,6 @@ public class GuardarFi {
             e.printStackTrace();
         }
 
-        // try {
-        // PrintWriter pw = new PrintWriter("ficherofachero.txt");
-        // // pw.println("Hola, esto es un ejemplo de PrintWriter");
-        // // pw.printf("Este es un número: %d", 42);
-        // pw.close();
-        // } catch (IOException e) {
-        // e.printStackTrace();
-        // }
     }
 
 }

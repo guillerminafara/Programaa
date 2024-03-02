@@ -15,22 +15,20 @@ public class rmj {
     public static void main(String[] args) {
         try {
             String fichero = args[0];
-            System.out.println(fichero);
+           // System.out.println(fichero);
 
             File file = new File(fichero);
             if (file.exists()) {
                 if (file.isDirectory()) {
-                    System.out.println("no es posible eliminar carpetas/directorios");
+                    System.out.println("No es posible eliminar carpetas/directorios");
                 } else if (file.delete()) {
                     System.out.println("Fichero eliminado: " + file.getName());
-                } else {
-                    System.out.println("Fichero no existe ");
-                }
+                } 
             }else{
-                System.out.println("no ha ingresado ningún fichero");
+                System.out.println( "El fichero no ha sido encontrado");
             }
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
+        } catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println("No ha ingresado ningún fichero");
         }
     }
 

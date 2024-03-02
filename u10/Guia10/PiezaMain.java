@@ -1,29 +1,31 @@
-class PiezaMain {
+public class PiezaMain {
 
     public static void main(String[] args) {
         Pieza p1 = new Pieza("cuadrado","rojo");
         Pieza p2 = new Pieza("cuadrado","rojo");
-        Double d = new Double(1.0);
+        Double d = Double.valueOf(1.0);
         String k = "Hola";
-        boolean b1 = p1.equals(p2);
-        boolean b2 = d.equals(k);
+        boolean b1 = p1.equalos(p2); // p2 usa el metodo equaloscreado en la clase
+        boolean b2 = d.equals(k); //d k y p1 usan el metodo equals que heredan
         boolean b3 = k.equals(p2);
-        boolean b4 = p1.equals(d);
+       boolean b4 = p1.equals(d); 
+       
+
+        System.out.printf(" %b \n %b \n %b \n %b \n ", b1, b2, b3, b4);
     }
 
 }
 
-public class Pieza {
+ class Pieza {
 
-    private String forma;
     private String color;
     private String nombre;
 
-    Pieza(String forma, String color){
-        this.forma= forma;
+    Pieza(String nombre, String color){
+        this.nombre= nombre;
         this.color= color;
     }
-    public boolean equals(Object o) {
+    public boolean equalos(Object o) {
         Pieza p = (Pieza) o;
         return this.color.equals(p.color) &&
                 this.nombre.equals(p.nombre) &&

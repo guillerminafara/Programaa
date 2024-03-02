@@ -1,7 +1,9 @@
 import java.util.Scanner;
 
 /**
- * Division
+Crea un programa que intente realizar en el main una división entre 2 números enteros
+introducidos por teclado y que capture cualquier tipo de excepción (por ejemplo, que el
+usuario no teclee números enteros o que el denominador sea distinto de 0).
  */
 public class Division {
 

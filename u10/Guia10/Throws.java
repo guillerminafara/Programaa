@@ -1,6 +1,13 @@
 import java.util.InputMismatchException;
 import java.util.Scanner;
-
+/*
+ * Modifica el programa anterior para que la excepción de la división entre 0 se traslade a un
+subprograma que se llamará desde el programa principal.
+Para ello, acuérdate que este subprograma tendrá un bloque try-catch donde hará la
+división y, en caso de producirse la excepción, incluirá la palabra reservada “throw” en el
+cuerpo del subprograma y “throws” en la cabecera para indicar al programa principal que el
+módulo ha fallado.
+ */
 public class Throws {
     static Scanner leer = new Scanner(System.in);
 
