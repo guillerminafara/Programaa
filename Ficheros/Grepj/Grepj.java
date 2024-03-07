@@ -4,11 +4,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.Arrays;
 
-/**
- * Grepj
- */
 public class Grepj {
-
     public static void main(String[] args) {
         try {
             String texto = args[0];
@@ -18,10 +14,12 @@ public class Grepj {
             FileReader fichero = new FileReader(ficherito);
             BufferedReader entrada = new BufferedReader(fichero);
             String pruebita = entrada.readLine();
-            String[] vector = pruebita.split(" ");
+            // String[] vector = pruebita.split(" ");
             int linea = 0;
             int aux = 0;
+            String recorta = "";
             while (pruebita != null) {
+                String[] vector = pruebita.split(" ");
                 // System.out.println(pruebita);
 
                 if (pruebita.contains(palabra)) {
@@ -32,11 +30,19 @@ public class Grepj {
                     for (int i = 0; i < vector.length; i++) {
 
                         if (vector[i].contains(palabra)) {
-                            System.out.print("\u001B[32m" + palabra + "\u001B[0m"+ " ");
-                        }else{
-                            System.out.print(vector[i]+ " ");
+                          //.  recorta = Arrays.toString(vector[i].split(recorta));
+                           
+                           //System.out.println( "leyendo recortre"+ recorta);
+                            // recortar(recorta);
+                            System.out.print("\u001B[32m" + palabra + recorta + "\u001B[0m" + " ");
+
+                            //vector[i].indexOf(palabra);
+
+                        } else {
+
+                            System.out.print(vector[i] + " ");
                         }
-                        
+
                     }
                     System.out.println();
                 }
@@ -45,19 +51,26 @@ public class Grepj {
                 pruebita = entrada.readLine();
             }
 
-            // for (int i = 0; i < cont; i++) {
-            // String devolucion = " " + pruebita;
-            // System.out.println(devolucion);
-
-            // }
-
         } catch (IOException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
     }
 
-    public static void leyendo(int aux, String pruebita, String palabra) {
+    public static String recortar(String recorta) {
+        for (int j = 0; j < recorta.length(); j++) {
+            recorta.trim();
+            if (recorta.charAt(j) == '[') {
+                recorta = recorta.replace("[", "");
+            }
+            if (recorta.charAt(j) == ']') {
+                recorta = recorta.replace("]", "");
+            }
+            // if (recorta.charAt(j) == ',') {
 
+            // recorta = recorta.replace(",", "");
+            // }
+        }
+        return recorta;
     }
 }
