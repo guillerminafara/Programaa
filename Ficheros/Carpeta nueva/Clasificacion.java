@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.*;
 
-class Equipo implements Serializable {
+class Equipo implements Serializable, Comparable<Equipo> {
     private String nombre;
     private int puntos;
 
@@ -21,6 +21,17 @@ class Equipo implements Serializable {
     @Override
     public String toString() {
         return nombre + " - " + puntos + " puntos";
+    }
+
+    @Override
+    public int compareTo(Equipo o) {
+        int dev = 0;
+        if (this.puntos < o.puntos) {
+            dev--;
+        } else if (this.puntos > o.puntos) {
+            dev++;
+        }
+        return dev;
     }
 }
 
@@ -66,14 +77,11 @@ public class Clasificacion implements Serializable {
         return clasificacion;
     }
 
-    public static Clasificacion ordenar(){
-        return null;
-    }
     public static void main(String[] args) {
         Clasificacion clasificacion = new Clasificacion();
         clasificacion.addEquipo(new Equipo("R. Madrid", 66));
-        clasificacion.addEquipo(new Equipo("Girona", 59));
-        clasificacion.addEquipo(new Equipo("Barcelona", 58));
+        clasificacion.addEquipo(new Equipo("Girona", 58));
+        clasificacion.addEquipo(new Equipo("Barcelona", 59));
         clasificacion.addEquipo(new Equipo("Atlético", 55));
 
         clasificacion.imprimirClasificacion();
@@ -82,6 +90,38 @@ public class Clasificacion implements Serializable {
 
         Clasificacion clasificacionRec = Clasificacion.deserializar("clasificacion.dat");
         clasificacionRec.imprimirClasificacion();
+
+        ArrayList<Equipo> eq1 = new ArrayList<>();
+        eq1.addAll(clasificacion.getEquipos());
+        // int i = 0;
+        int j = 0;
+        int k = 0;
+        // int l = 0;
+        int[] vector = new int[clasificacion.getEquipos().size()];
+        System.out.println("-----------------------");
+        HashMap<String, Integer> mapita = new HashMap<>();
+        for (Equipo equipo : eq1) {
+            j = 0;
+
+            for (int i = 0; i < clasificacion.getEquipos().size(); i++) {
+                j += equipo.compareTo(clasificacion.getEquipos().get(i));
+            }
+            vector[k] = j;
+
+            mapita.put(equipo.getNombre(), j);
+            k++;
+
+        }
+        System.out.println(mapita);
+      
+        System.out.println(Arrays.toString(vector));
+        // System.out.println("valores: " +mapita.get());
+       mapita.values();
+
+        // System.out.printf("i: %d j: %d k: %d l: %d \n", i, j, k, l);
+       
     }
 
 }
+// List<Integer> lista = new ArrayList<>(mapita.values());
+// lista.sort(Comparator.naturalOrder()); System.out.println("lista  " + lista);
