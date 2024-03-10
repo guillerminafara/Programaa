@@ -26,9 +26,11 @@ public class Cifrado {
         try {
         String nombre = args[0];
         String n = args[1];
-     
+            if(!nombre.contains(".txt")){
+                throw new Exception("Asegurate de ingresar una extension '.txt'");
+            }
         if(!n.matches("[0-9]+")){
-           throw new InputMismatchException("Ingresa un número después del fichero");
+           throw new InputMismatchException("Ingresa el número después del fichero");
         }
         char aux = 0;
         int num = Integer.parseInt(n);

@@ -11,25 +11,26 @@ import java.io.IOException;
 
 public class Cifrado2 {
     public static void main(String[] args) {
-        String nombre= args[0];
-        String n= nombre.substring(nombre.length()-1);
-        int num= Integer.parseInt(n);
-        File f= new File(nombre);
-        
         try {
-            FileReader fr= new FileReader(f);
-
-          FileWriter fw = new FileWriter("descifrado.txt");
+            String nombre = args[0];
+            String n = nombre.substring(nombre.length() - 1);
+            int num = Integer.parseInt(n);
+            File f = new File(nombre);
+            FileReader fr = new FileReader(f);
+            FileWriter fw = new FileWriter("descifrado.txt");
             fw.write(descifrado(fr, num));
             fw.close();
         } catch (FileNotFoundException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         } catch (IOException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
+        } catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println("Debes ingresar un fichero para descifrar");
+        } catch (Exception e) {
+            System.out.println("No hemos encontrado el fichero o no existe");
         }
     }// fin main
+
     public static String descifrado(FileReader fr, int num) throws IOException {
         int aux = 0;
         String devolver = "";
