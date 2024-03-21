@@ -1,8 +1,8 @@
+package Reserva;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-import javax.swing.JOptionPane;
 
 public class Conexion {
 
@@ -23,7 +23,8 @@ public class Conexion {
         try {
             conectar = DriverManager.getConnection(url, user, password);
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "error de conexion " + e);
+           // JOptionPane.showMessageDialog(null, "error de conexion " + e);
+           System.out.println(e.getMessage()+ "error en drivers");
             // e.printStackTrace();
         }
         return conectar;

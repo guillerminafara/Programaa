@@ -1,11 +1,11 @@
+package Reserva;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
+
 
 public class Vuelos {
-    private int id_vuelo;
+    private String id_vuelo;
     private String origen;
     private String destino;
     private String fecha;
@@ -17,11 +17,20 @@ public class Vuelos {
         con = Conexion.gConexion();
     }
 
-    public int getId_vuelo() {
+    public Vuelos(String id_vuelo, String origen, String destino, String fecha, int capacidad) {
+        this.id_vuelo = id_vuelo;
+        this.origen = origen;
+        this.destino = destino;
+        this.fecha = fecha;
+        this.capacidad = capacidad;
+        con = Conexion.gConexion();
+    }
+
+    public String getId_vuelo() {
         return id_vuelo;
     }
 
-    public void setId_vuelo(int id_vuelo) {
+    public void setId_vuelo(String id_vuelo) {
         this.id_vuelo = id_vuelo;
     }
 
@@ -57,22 +66,22 @@ public class Vuelos {
         this.capacidad = capacidad;
     }
 
-    public void agregarVuelo(Vuelos vuelo) {
-        String sql = "INSERT INTO vuelo(id_vuelo, origen, destino, fecha, capacidad)value(?,?,?,?,?)";
+    public void agregarVuelo() {
+        String sql = "INSERT INTO vuelos(id_vuelo, origen, destino, fecha, capacidad)value(?,?,?,?,?)";
         try {
-            PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            PreparedStatement ps = con.prepareStatement(sql);
             // Statement st= con.createStatement();
-            ps.setInt(1, id_vuelo);
+            ps.setString(1, id_vuelo);
             ps.setString(2, origen);
             ps.setString(3, destino);
             ps.setString(4, fecha);
             ps.setInt(5, capacidad);
 
             ps.executeUpdate();
-            ResultSet rs = ps.getGeneratedKeys();
-            vuelo.setId_vuelo(rs.getInt(1));// verificar que no se repita
+           
+           /// vuelo.setId_vuelo(rs.getInt(1));// verificar que no se repita
         } catch (SQLException e) {
-            // TODO Auto-generated catch block
+           
             e.printStackTrace();
         }
 
