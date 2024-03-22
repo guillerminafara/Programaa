@@ -7,7 +7,7 @@ public class Vuelo_Pasajeros {
     private int id_pasajero;
     Vuelos vuelo;
     Pasajeros Pasajero;
-    HashMap<Integer, Boolean> mapa= new HashMap<>();
+    HashMap<Integer, Boolean> mapa= new HashMap<>(); //trueocupado
     private int n_asiento;
     
     private Connection con = null;
@@ -39,6 +39,7 @@ public class Vuelo_Pasajeros {
     public void setN_asiento(int n_asiento) {
         this.n_asiento = n_asiento;
     }
+
     public void cargaMapa(){
         int n= vuelo.getCapacidad();
         for (int i = 1; i <=n; i++) {
@@ -46,14 +47,19 @@ public class Vuelo_Pasajeros {
         }
        
     }
-    public boolean corroboraAsiento(){
+    public void corroboraAsiento(){ //true ocupado
         cargaMapa();
         if(mapa.get(n_asiento)){
-            return true;
+            System.out.println("asiento ocupado");
+            
+
         }else{
-            return false;
+            mapa.replace(n_asiento, false);
+            System.out.println("Asiento Seleccionado");
+            
         }
 
     }
+   
     
 }

@@ -68,6 +68,20 @@ public class Pasajeros {
 
     }
     public ArrayList<Pasajeros> buscarPasajeros(String pasaporte){
+       // ArrayList<Pasajeros> listaPasajeros= new ArrayList<>();
+        String sql= "SELECT * FROM Pasajeros WHERE pasaporte= ?";
+        PreparedStatement ps= con.prepareStatement(sql);
+        ps.setString(1, pasaporte);
+        ResultSet rs= ps.executeQuery();
+       
+       if(rs.next()){
+        Pasajeros pasajero= null;
+        pasajero.setId_pasajero(rs.getString());
+        pasajero.setNombre_pasajero(rs.getString(nombre_pasajero));
+          
+        }else{
+            System.out.println("no existe en la base");
+        }
         return "";
     }
 

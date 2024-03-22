@@ -42,14 +42,10 @@ public class VuelosMain {
                     break;
                 case 3:
                     System.out.println("Ingresa pasaporte");
-                    String pasp= leer.nextLine();
-                    
-                    Vuelo_Pasajeros reserva= new Vuelo_Pasajeros();
-                    if (reserva.corroboraAsiento()) {
-                        System.out.println("sisePuede");
-                    }else{
-                        System.out.println("Asiento reservado");
-                    }
+                    String pasp = leer.nextLine(); //busco a ver si existe en la base
+
+                    Vuelo_Pasajeros reserva = new Vuelo_Pasajeros();
+                    reserva.corroboraAsiento();
 
                     break;
                 case 4:
@@ -67,7 +63,7 @@ public class VuelosMain {
 
                     break;
             }
-          
+
         } while (resp != 6);
     }// fin main
 
