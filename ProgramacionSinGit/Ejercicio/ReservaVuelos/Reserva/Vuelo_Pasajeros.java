@@ -1,5 +1,8 @@
 package Reserva;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.HashMap;
 
 public class Vuelo_Pasajeros {
@@ -7,7 +10,7 @@ public class Vuelo_Pasajeros {
     private int id_pasajero;
     Vuelos vuelo;
     Pasajeros Pasajero;
-    HashMap<Integer, Boolean> mapa= new HashMap<>(); //trueocupado
+
     private int n_asiento;
     
     private Connection con = null;
@@ -39,27 +42,39 @@ public class Vuelo_Pasajeros {
     public void setN_asiento(int n_asiento) {
         this.n_asiento = n_asiento;
     }
-
-    public void cargaMapa(){
-        int n= vuelo.getCapacidad();
-        for (int i = 1; i <=n; i++) {
-            mapa.put(i, false);
+    //idea para corregir hacer un metodo que seleccione todas los asientos y que devuelva un mapa 
+//buscamos asientos en gral y cargamos un mapa
+    public void buscarAsientos(Vuelos vuelo){
+        String sql = "SELECT n_asiento FROM Vuelos";
+        HashMap<Integer, Boolean> mapa= new HashMap<>(); //trueocupado
+        try {
+            PreparedStatement ps= con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            for (int i = 0; i < vuelo.getCapacidad(); i++) {
+                mapa.put(i,rs.getBoolean("n_asiento") );
+            }
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
         }
+
+    
        
     }
-    public void corroboraAsiento(){ //true ocupado
-        cargaMapa();
+    //corroboramos si se encuentran ocupados, true= ocupado. si esta libre, lo ocupamos 
+    public void corroboraAsiento(Vuelos vuelo){ //true ocupado
+        
         if(mapa.get(n_asiento)){
             System.out.println("asiento ocupado");
-            
-
         }else{
-            mapa.replace(n_asiento, false);
+            mapa.replace(n_asiento, true);
             System.out.println("Asiento Seleccionado");
-            
         }
-
     }
    
-    
+    public Vuelo_Pasajeros reservarVuelo(String id){
+        Vuelo_Pasajeros reserva= new Vuelo_Pasajeros();
+
+        return reserva;
+    }
 }

@@ -1,8 +1,12 @@
 package Reserva;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
+import javax.naming.spi.DirStateFactory.Result;
 
 public class Vuelos {
     private String id_vuelo;
@@ -86,8 +90,46 @@ public class Vuelos {
         }
 
     }
-    public void reserva_vuelo(){
-
+    //mostramos vuelos con toda su información 
+    public ArrayList<Vuelos> mostrarVuelos(){
+        ArrayList<Vuelos> lista= new ArrayList<>();
+        String sql= "SELECT * FROM Vuelos ";
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ResultSet rs= ps.executeQuery();
+        while (rs.next()) {
+            Vuelos vuelo= new Vuelos();
+            vuelo.setId_vuelo(rs.getString("id_vuelo"));
+            vuelo.setOrigen(rs.getString("origen"));
+            vuelo.setDestino(rs.getString("destino"));
+            vuelo.setFecha(rs.getString("fecha"));
+            vuelo.setCapacidad(rs.getInt("capacidad"));
+            lista.add(vuelo);
+        }
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return lista;
     }
-
+   
+    public Vuelos buscarXIDVuelos(String id_vuelo){
+        Vuelos vuelo= new Vuelos();
+        String sql= "SELECT * FROM Vuelos where id_vuelo like ?";
+        PreparedStatement ps;
+        try {
+            ps = con.prepareStatement(sql);
+            ps.setString(1, id_vuelo);
+            ResultSet rs= ps.executeQuery();
+            vuelo.setOrigen(rs.getString("origen"));
+            vuelo.setDestino(rs.getString("destino"));
+            vuelo.setFecha(rs.getString("fecha"));
+            vuelo.setCapacidad(rs.getInt("capacidad"));
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+      
+        return vuelo;
+    }
 }
