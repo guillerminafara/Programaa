@@ -1,4 +1,5 @@
 package Reserva;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -9,10 +10,10 @@ public class Vuelo_Pasajeros {
     private int id_vuelo;
     private int id_pasajero;
     Vuelos vuelo;
-    Pasajeros Pasajero;
+    Pasajeros pasajero;
 
     private int n_asiento;
-    
+
     private Connection con = null;
 
     Vuelo_Pasajeros() {
@@ -42,39 +43,40 @@ public class Vuelo_Pasajeros {
     public void setN_asiento(int n_asiento) {
         this.n_asiento = n_asiento;
     }
-    //idea para corregir hacer un metodo que seleccione todas los asientos y que devuelva un mapa 
-//buscamos asientos en gral y cargamos un mapa
-    public void buscarAsientos(Vuelos vuelo){
-        String sql = "SELECT n_asiento FROM Vuelos";
-        HashMap<Integer, Boolean> mapa= new HashMap<>(); //trueocupado
+
+    @Override
+    public String toString() {
+        return "Codigo vuelo: "+ id_vuelo+ "\nPasajero: "+pasajero.getPasaporte()+"\n Número de asiento: "+ n_asiento;
+    }
+
+    public boolean buscarAsientos(int numAsiento) {
+        String sql = "SELECT * FROM Vuelo_Pasajero where n_asiento=numAsiento";
+        boolean libre = false;
+        // HashMap<Integer, Boolean> mapa= new HashMap<>(); //trueocupado
         try {
-            PreparedStatement ps= con.prepareStatement(sql);
+            PreparedStatement ps = con.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
-            for (int i = 0; i < vuelo.getCapacidad(); i++) {
-                mapa.put(i,rs.getBoolean("n_asiento") );
+            if (rs.next()) {
+                System.out.println("asiento ocupado");
+                return true;
+            } else {
+                System.out.println("asiento disponible");
+                return false;
             }
         } catch (SQLException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-
-    
-       
+        return libre;
     }
-    //corroboramos si se encuentran ocupados, true= ocupado. si esta libre, lo ocupamos 
-    public void corroboraAsiento(Vuelos vuelo){ //true ocupado
-        
-        if(mapa.get(n_asiento)){
-            System.out.println("asiento ocupado");
-        }else{
-            mapa.replace(n_asiento, true);
-            System.out.println("Asiento Seleccionado");
+
+    public Vuelo_Pasajeros reservarVuelo(String pasaporte) {
+        Vuelo_Pasajeros reserva = new Vuelo_Pasajeros();
+        pasajero= pasajero.buscarPasajeros(pasaporte);
+        if (pasajero !=null) {
+            
+            System.out.println("pasajero existe" + pasajero);
         }
-    }
-   
-    public Vuelo_Pasajeros reservarVuelo(String id){
-        Vuelo_Pasajeros reserva= new Vuelo_Pasajeros();
-
         return reserva;
     }
 }

@@ -4,9 +4,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.naming.spi.DirStateFactory.Result;
+import javax.swing.JOptionPane;
 
 public class Vuelos {
     private String id_vuelo;
@@ -70,8 +73,14 @@ public class Vuelos {
         this.capacidad = capacidad;
     }
 
+    @Override
+    public String toString() {
+        return "codigo de vuelo: " + id_vuelo + "\n Origen: " + origen + "\n Destino: " + destino + "\n fecha: " + fecha
+                + "\n Capacidad " + capacidad;
+    }
+
     public void agregarVuelo() {
-        String sql = "INSERT INTO vuelos(id_vuelo, origen, destino, fecha, capacidad)value(?,?,?,?,?)";
+        String sql = "INSERT INTO Vuelos(id_vuelo, origen, destino, fecha, capacidad)value(?,?,?,?,?)";
         try {
             PreparedStatement ps = con.prepareStatement(sql);
             // Statement st= con.createStatement();
@@ -83,44 +92,46 @@ public class Vuelos {
 
             ps.executeUpdate();
            
-           /// vuelo.setId_vuelo(rs.getInt(1));// verificar que no se repita
+        
+            /// vuelo.setId_vuelo(rs.getInt(1));// verificar que no se repita
         } catch (SQLException e) {
-           
+
             e.printStackTrace();
         }
 
     }
-    //mostramos vuelos con toda su información 
-    public ArrayList<Vuelos> mostrarVuelos(){
-        ArrayList<Vuelos> lista= new ArrayList<>();
-        String sql= "SELECT * FROM Vuelos ";
+
+    // mostramos vuelos con toda su información
+    public ArrayList<Vuelos> mostrarVuelos() {
+        ArrayList<Vuelos> lista = new ArrayList<>();
+        String sql = "SELECT * FROM Vuelos ";
         try {
             PreparedStatement ps = con.prepareStatement(sql);
-            ResultSet rs= ps.executeQuery();
-        while (rs.next()) {
-            Vuelos vuelo= new Vuelos();
-            vuelo.setId_vuelo(rs.getString("id_vuelo"));
-            vuelo.setOrigen(rs.getString("origen"));
-            vuelo.setDestino(rs.getString("destino"));
-            vuelo.setFecha(rs.getString("fecha"));
-            vuelo.setCapacidad(rs.getInt("capacidad"));
-            lista.add(vuelo);
-        }
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Vuelos vuelo = new Vuelos();
+                vuelo.setId_vuelo(rs.getString("id_vuelo"));
+                vuelo.setOrigen(rs.getString("origen"));
+                vuelo.setDestino(rs.getString("destino"));
+                vuelo.setFecha(rs.getString("fecha"));
+                vuelo.setCapacidad(rs.getInt("capacidad"));
+                lista.add(vuelo);
+            }
         } catch (SQLException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
         return lista;
     }
-   
-    public Vuelos buscarXIDVuelos(String id_vuelo){
-        Vuelos vuelo= new Vuelos();
-        String sql= "SELECT * FROM Vuelos where id_vuelo like ?";
+
+    public Vuelos buscarXIDVuelos(String id_vuelo) {
+        Vuelos vuelo = new Vuelos();
+        String sql = "SELECT * FROM Vuelos where id_vuelo like ?";
         PreparedStatement ps;
         try {
             ps = con.prepareStatement(sql);
             ps.setString(1, id_vuelo);
-            ResultSet rs= ps.executeQuery();
+            ResultSet rs = ps.executeQuery();
             vuelo.setOrigen(rs.getString("origen"));
             vuelo.setDestino(rs.getString("destino"));
             vuelo.setFecha(rs.getString("fecha"));
@@ -129,7 +140,7 @@ public class Vuelos {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-      
+
         return vuelo;
     }
 }

@@ -48,9 +48,14 @@ public class Pasajeros {
         this.nombre_pasajero = nombre_pasajero;
     }
 
+    @Override
+    public String toString() {
+        return "id_pasajero: "+ id_pasajero+"\n Nombre: "+ nombre_pasajero+ "\n Pasaporte: "+ pasaporte;
+    }
+
     public void agregarPasajero() {
         try {
-            String sql = "INSERT INTO pasajeros(pasaporte, nombre_pasajero)values(?,?)";
+            String sql = "INSERT INTO Pasajeros(pasaporte, nombre)values(?,?)";
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, pasaporte);
             ps.setString(2, nombre_pasajero);

@@ -8,7 +8,7 @@ public class Conexion {
 
     static String url = "jdbc:mysql://127.0.0.1:33006/Reservas";
     static String user = "root";
-    static String password = "Paquito2024---";
+    static String password = "Paquito2024----";
     private static Conexion conec = null;
 
     Conexion() {

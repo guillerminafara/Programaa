@@ -2,6 +2,8 @@ package Reserva;
 
 import java.util.Scanner;
 
+import javax.swing.JOptionPane;
+
 /**
  * VuelosMain
  */
@@ -19,6 +21,7 @@ public class VuelosMain {
 
             switch (resp) {
                 case 1:
+
                     System.out.println("Id Vuelo: ");
                     String id_Vuelo = leer.nextLine();
                     System.out.println("Origen: ");
@@ -41,11 +44,13 @@ public class VuelosMain {
                     pasajero.agregarPasajero();
                     break;
                 case 3:
-                    System.out.println("Ingresa pasaporte");
-                    String pasp = leer.nextLine(); //busco a ver si existe en la base
-
                     Vuelo_Pasajeros reserva = new Vuelo_Pasajeros();
-                    reserva.corroboraAsiento();
+                    System.out.println("Ingresa pasaporte");
+                    String pasp = leer.nextLine(); // busco a ver si existe en la base
+                    reserva.reservarVuelo(pasp);
+                    System.out.println("Selecciona el número de asiento");
+                    int numAsiento = leer.nextInt();
+                    reserva.buscarAsientos(numAsiento);
 
                     break;
                 case 4:
