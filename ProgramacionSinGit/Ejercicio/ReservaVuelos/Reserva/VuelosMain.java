@@ -1,5 +1,7 @@
 package Reserva;
 
+import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import javax.swing.JOptionPane;
@@ -12,64 +14,127 @@ public class VuelosMain {
     public static void main(String[] args) {
         Scanner leer = new Scanner(System.in);
         int resp;
-        do {
+        Vuelo_Pasajeros reserva = null;
+        Vuelos vuelo = null;
+        Pasajeros pasajero = null;
+        try {
+            String respS;
+            int codigo;
 
-            System.out.println(
-                    "1. Alta Vuelo\n 2. Alta Pasajero\n 3. Reserva Vuelo\n 4. Modificar reserva\n 5. Baja reserva\n 6. Salir");
-            resp = leer.nextInt();
-            leer.nextLine();
+            do {
 
-            switch (resp) {
-                case 1:
+                System.out.println(
+                        " 1. Alta Vuelo\n 2. Alta Pasajero\n 3. Reserva Vuelo\n 4. Modificar reserva\n 5. Baja reserva\n 6. Salir");
+                resp = leer.nextInt(); leer.nextLine();
 
-                    System.out.println("Id Vuelo: ");
-                    String id_Vuelo = leer.nextLine();
-                    System.out.println("Origen: ");
-                    String origen = leer.nextLine();
-                    System.out.println("Destino: ");
-                    String destino = leer.nextLine();
-                    System.out.println("Fecha: ");
-                    String fecha = leer.nextLine();
-                    System.out.println("Capacidad: ");
-                    int capacidad = leer.nextInt();
-                    Vuelos vuelo = new Vuelos(id_Vuelo, origen, destino, fecha, capacidad);
-                    vuelo.agregarVuelo();
-                    break;
-                case 2:
-                    System.out.println("Ingresa el pasaporte");
-                    String pasaporte = leer.nextLine();
-                    System.out.println("nombre del pasajero");
-                    String nombre = leer.nextLine();
-                    Pasajeros pasajero = new Pasajeros(pasaporte, nombre);
-                    pasajero.agregarPasajero();
-                    break;
-                case 3:
-                    Vuelo_Pasajeros reserva = new Vuelo_Pasajeros();
-                    System.out.println("Ingresa pasaporte");
-                    String pasp = leer.nextLine(); // busco a ver si existe en la base
-                    reserva.reservarVuelo(pasp);
-                    System.out.println("Selecciona el número de asiento");
-                    int numAsiento = leer.nextInt();
-                    reserva.buscarAsientos(numAsiento);
+                switch (resp) {
+                    case 1:
+                        //Para crear un vuelo solicitaremos un codigo de 6 caracteres, origen, destino, fecha (yyyy/mm/dd) y la capacidad
+                        System.out.println("Agregar un Vuelo");
+                        System.out.println("Id Vuelo: ");
+                        String id_Vuelo = leer.nextLine();
+                        System.out.println("Origen: ");
+                        String origen = leer.nextLine();
+                        System.out.println("Destino: ");
+                        String destino = leer.nextLine();
+                        System.out.println("Fecha: ");
+                        String fecha = leer.nextLine();
+                        System.out.println("Capacidad: ");
+                        int capacidad = leer.nextInt();
+                        vuelo = new Vuelos(id_Vuelo, origen, destino, fecha, capacidad);
+                        vuelo.agregarVuelo();
+                        break;
+                    case 2:
+                        //para crear un pasajero pediremos su pasaporte, nombre, el id se genera automaticamente
+                        System.out.println("Agregar un Pasajero");
+                        System.out.println("Ingresa el pasaporte");
+                        String pasaporte = leer.nextLine();
+                        System.out.println("nombre del pasajero");
+                        String nombre = leer.nextLine();
+                        pasajero = new Pasajeros(pasaporte, nombre);
+                        pasajero.agregarPasajero();
+                        break;
+                    case 3:
+                        //Crear reserva mostramos los vuelos disponible y solicitamos el codigo del vuelo
+                        System.out.println("Reservar vuelo");
+                        pasajero = new Pasajeros();
+                        vuelo = new Vuelos();
+                        reserva = new Vuelo_Pasajeros();
+                        ArrayList<Vuelos> lista = new ArrayList<>();
+                        lista.addAll(vuelo.mostrarVuelos());
+                        System.out.println(lista);
+                        try {
+                            System.out.println("Selecciona un vuelo");
+                            String idVuelo = leer.nextLine();
 
-                    break;
-                case 4:
+                            System.out.println("Ingresa pasaporte");
+                            String pasp = leer.nextLine(); // busco a ver si existe en la base
 
-                    break;
-                case 5:
+                            pasajero = pasajero.buscarPasajeros(pasp);
 
-                    break;
-                case 6:
+                            if (!pasajero.getNombre_pasajero().equals(null)) { //compruebo si existe el pasajero
 
-                    break;
+                                System.out.println("Selecciona el número de asiento");
+                                int numAsiento = leer.nextInt();leer.nextLine();
 
-                default:
-                    System.out.println("Opción no válida");
+                                if (!reserva.buscarAsientos(numAsiento, pasp)) { 
+                                    // pasajeros.getId_pasajero();
+                                    reserva.reservarViaje(idVuelo, pasajero.getId_pasajero(), numAsiento);
+                                }else{
+                                    System.out.println("pos nada ");
+                                }
+                            }
+                        } catch (NullPointerException e) {
+                            System.out.println("Debes crear al pasajero");
+                        }
 
-                    break;
-            }
+                        break;
+                    case 4:
+                        System.out.println("Modificar una reserva");
+                        reserva = new Vuelo_Pasajeros();
+                        System.out.println("Indique el código de la reserva");
+                        codigo = leer.nextInt();
+                        reserva= reserva.buscarReserva(codigo);
+                        reserva.setId_reserva(codigo);
+                        System.out.println(reserva);
+                        System.out.println("¿Qué asiento quieres?");
+                        resp = leer.nextInt(); leer.nextLine();
 
-        } while (resp != 6);
+                         //reserva.modificarReserva(resp, codigo);
+                         reserva.modificarReserva(reserva, resp);
+                        break;
+                    case 5:
+                        System.out.println("Eliminar una reserva");
+                        reserva = new Vuelo_Pasajeros();
+                        System.out.println("Ingrese el código de la reserva");
+                        codigo = leer.nextInt();
+                        leer.nextLine();
+                        reserva.buscarReserva(codigo);
+                        System.out.println("Estas serguro que deseas eliminar la reserva? y/n");
+                        respS = leer.nextLine();
+                        if (respS.equals("y")) {
+                            reserva.eliminarReserva(codigo);
+                        }
+                        break;
+                    case 7:
+                     //   reserva = new Vuelo_Pasajeros();
+                       // reserva.buscarAsientos(2, "QW3456");
+                      // pasajero = pasajero.buscarPasajerosPorId(2);
+                      pasajero= new Pasajeros();
+                       System.out.println(pasajero.buscarPasajerosPorId(2));
+                        break;
+                    default:
+                        System.out.println("Escoge una opción válida");
+
+                        break;
+                }
+
+            } while (resp != 6);
+            //} catch (NullPointerException e) {
+            //  System.out.println("Ingresa valores");
+        } catch (InputMismatchException e) {
+            System.out.println("Ingresa un número");
+        }
     }// fin main
 
 }// fin clase

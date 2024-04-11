@@ -80,7 +80,7 @@ public class Vuelos {
     }
 
     public void agregarVuelo() {
-        String sql = "INSERT INTO Vuelos(id_vuelo, origen, destino, fecha, capacidad)value(?,?,?,?,?)";
+        String sql = "INSERT INTO vuelos(id_vuelo, origen, destino, fecha, capacidad)value(?,?,?,?,?)";
         try {
             PreparedStatement ps = con.prepareStatement(sql);
             // Statement st= con.createStatement();
@@ -104,7 +104,7 @@ public class Vuelos {
     // mostramos vuelos con toda su información
     public ArrayList<Vuelos> mostrarVuelos() {
         ArrayList<Vuelos> lista = new ArrayList<>();
-        String sql = "SELECT * FROM Vuelos ";
+        String sql = "SELECT * FROM vuelos ";
         try {
             PreparedStatement ps = con.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
@@ -126,7 +126,7 @@ public class Vuelos {
 
     public Vuelos buscarXIDVuelos(String id_vuelo) {
         Vuelos vuelo = new Vuelos();
-        String sql = "SELECT * FROM Vuelos where id_vuelo like ?";
+        String sql = "SELECT * FROM vuelos where id_vuelo like ?";
         PreparedStatement ps;
         try {
             ps = con.prepareStatement(sql);
