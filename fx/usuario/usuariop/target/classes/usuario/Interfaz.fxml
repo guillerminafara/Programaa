@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="720.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="usuario.Control">
+   <children>
+      <Button fx:id="BValidar" layoutX="316.0" layoutY="399.0" mnemonicParsing="false" onAction="#Validar" text="Validar" />
+      <Label layoutX="316.0" layoutY="331.0" text="Contraseña" />
+      <TextField fx:id="TFPass" layoutX="275.0" layoutY="355.0" />
+      <TextField fx:id="TFUsuario" layoutX="275.0" layoutY="294.0" />
+      <Label layoutX="323.0" layoutY="258.0" text="Usuario" />
+      <ImageView fitHeight="263.0" fitWidth="269.0" layoutX="219.0" layoutY="20.0">
+         <image>
+            <Image url="@senia.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>
