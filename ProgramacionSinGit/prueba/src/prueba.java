@@ -5,11 +5,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-/**
- * prueba
- */
 public class prueba {
-    public static void main(String[] args)  {
+    public static void main(String[] args) throws Exception {
+        System.out.println("Hello, World!");
         String url = "jdbc:mysql://localhost:3306/reservas";
         String user = "root";
         String password = "";
@@ -18,7 +16,7 @@ public class prueba {
            // Class.forName("com.ibm.db2.jcc.DB2Driver");
             Connection con = DriverManager.getConnection(url, user, password);
             Statement st = con.createStatement();
-            // ResultSet rs= st.executeQuery("select * from ACTOR");
+          
             ResultSet rs = st.executeQuery("Select * from vuelos");
       
             
@@ -38,7 +36,5 @@ public class prueba {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-
     }
-
 }

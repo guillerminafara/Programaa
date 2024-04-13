@@ -1,10 +1,11 @@
-package Reserva;
+
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.InputMismatchException;
 
 import com.mysql.cj.x.protobuf.MysqlxNotice.Warning.Level;
 
@@ -63,7 +64,7 @@ public class Vuelo_Pasajeros {
         return " Codigo vuelo: " + id_vuelo + "\n Nombre: " + pasajero.getNombre_pasajero() + "\n Pasaporte: "
                 + pasajero.getPasaporte() + "\n Número de asiento: " + n_asiento;
     }
-
+// METODO PARA BUSCAR ASIENTOS LIBRES DEVUELVE BOOLEANO 
     // true= asiento ocupado false= asiento disponible
     public boolean buscarAsientos(int numAsiento, String id_Vuelo) {
         String sql = "SELECT * FROM vuelos_pasajeros where n_asiento=? and id_Vuelo=?";
@@ -87,7 +88,7 @@ public class Vuelo_Pasajeros {
         }
         return ocupado;
     }
-
+// METODO PARA RESERVAR EL VUELO 
     public void reservarViaje(String id_vuelo, int id_Pasajero, int n_asiento) {
         try {
             Vuelo_Pasajeros reserva = new Vuelo_Pasajeros();
@@ -106,20 +107,20 @@ public class Vuelo_Pasajeros {
             }
 
         } catch (SQLException ex) {
-            System.out.println("error en datos en la tabla" + ex);
+            System.out.println("error en datos ingresados. No hemos podido crear la reserva");
         }
     }
+// METODO PARA 
+    // public Vuelo_Pasajeros reservarVuelo(String pasaporte) {
+    //     Vuelo_Pasajeros reserva = new Vuelo_Pasajeros();
+    //     pasajero = pasajero.buscarPasajeros(pasaporte);
+    //     if (pasajero != null) {
 
-    public Vuelo_Pasajeros reservarVuelo(String pasaporte) {
-        Vuelo_Pasajeros reserva = new Vuelo_Pasajeros();
-        pasajero = pasajero.buscarPasajeros(pasaporte);
-        if (pasajero != null) {
-
-            System.out.println("pasajero existe" + pasajero);
-        }
-        return reserva;
-    }
-
+    //         System.out.println("pasajero existe" + pasajero);
+    //     }
+    //     return reserva;
+    // }
+// METODO PARA BUSCAR LAS RESERVAS EXISTENTES . DEVUELVE LA RESERVA BUSCADA POR ID. 
     public Vuelo_Pasajeros buscarReserva(int id) {
         Vuelo_Pasajeros reserva = null;
         try {
@@ -135,12 +136,12 @@ public class Vuelo_Pasajeros {
                 reserva.setN_asiento(rs.getInt("n_asiento"));
             }
         } catch (SQLException ex) {
-            System.out.println(ex);
+            System.out.println("error en datos en la tabla Reserva");
           //  System.out.println("error al ingresar a la tabla ");
         }
         return reserva;
     }
-
+// METODO PARA MODIFICAR LA RESERVA SOLO ADMITE MODIFICA EL ASIENTO Y SI EL NUEVO ESTÁ DISPONIBLE
     public void modificarReserva(Vuelo_Pasajeros reserva, int num_asientoo) {
         try {
             String sql = "UPDATE vuelos_pasajeros set n_asiento=? where id_reserva=?";
@@ -173,7 +174,7 @@ public class Vuelo_Pasajeros {
           // }
 
     }
-
+// METODO PARA ELIMINAR RESERVAS
     public void eliminarReserva(int id_reserva) {
         try {
             String sql = "DELETE from vuelos_pasajeros where id_reserva=?";
@@ -183,10 +184,13 @@ public class Vuelo_Pasajeros {
             // int exito = ps.executeUpdate();
             if (ps.executeUpdate() == 1) {
                 System.out.println("Eliminado con éxito");
+            }else{
+                System.out.println("No hemos encontrado una reserva con ese id");
             }
         } catch (SQLException ex) {
 
             System.out.println("Error al eliminar la reserva");
         }
+
     }
 }

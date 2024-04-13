@@ -14,17 +14,27 @@ import java.io.IOException;
  */
 public class Usuario extends Application {
 
-   private static Scene scene;
+    private static Scene scene;
+
+    @Override
+    public void init()  {
+
+    }
 
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader loadFXML= new FXMLLoader(Usuario.class.getResource("Interfaz.fxml"));
+        FXMLLoader loadFXML = new FXMLLoader(Usuario.class.getResource("Interfaz.fxml"));
         scene = new Scene(loadFXML.load());
-        stage.getIcons().add(new Image(getClass().getResource("/usuario/sapoo.png").toExternalForm()));
         stage.setScene(scene);
+        stage.getIcons().add(new Image(getClass().getResource("/usuario/sapoo.png").toExternalForm()));
+        // stage.setScene(scene);
         stage.show();
     }
 
+    @Override
+    public void stop()  {
+
+    }
 
     public static void main(String[] args) {
         launch();
