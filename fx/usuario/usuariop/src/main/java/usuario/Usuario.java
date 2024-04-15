@@ -7,6 +7,8 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 
 /**
@@ -18,7 +20,8 @@ public class Usuario extends Application {
 
     @Override
     public void init()  {
-
+        //throws FileNotFoundException
+        //FileReader fr = new FileReader("C:\\Users\\Fran-PC\\Desktop\\Willy\\DAM\\Programacion\\Unidad9\\Programaa\\fx\\usuario\\usuariop\\src\\main\\java\\usuario\\user-pass.txt");
     }
 
     @Override
