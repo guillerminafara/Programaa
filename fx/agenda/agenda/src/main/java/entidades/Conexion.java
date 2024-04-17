@@ -1,8 +1,10 @@
 package entidades;
 import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 public class Conexion {
     
-        private static final String URL = "jdbc:mysql://localhost/restaurante68";
+        private static final String URL = "jdbc:mysql://localhost/empresaa";
         private static final String USUARIO = "root";
         private static final String PASSWORD = "";
 
@@ -17,6 +19,7 @@ public class Conexion {
                 System.out.println("ta roto");
 
             }
+            return conectar;
 
         }
 }
