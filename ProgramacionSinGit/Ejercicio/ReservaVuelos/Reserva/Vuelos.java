@@ -90,9 +90,15 @@ public class Vuelos {
             ps.setString(4, fecha);
             ps.setInt(5, capacidad);
 
-            ps.executeUpdate();
-           
-        
+            int exito= ps.executeUpdate();
+
+            
+            if (exito==1) {
+                System.out.println("Agregado correctamente!");
+                // this.setId_pasajero(rs.getInt(1));
+            } else {
+                System.out.println("hubo un error");
+            }
             /// vuelo.setId_vuelo(rs.getInt(1));// verificar que no se repita
         } catch (SQLException e) {
 

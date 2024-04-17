@@ -3,16 +3,8 @@ package agenda;
 import java.io.IOException;
 import javafx.fxml.FXML;
 
-public class PrimaryController {
-
-    @FXML
-    private void switchToSecondary() throws IOException {
-        App.setRoot("secondary");
-    }
-    import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
-
-public class PleaseProvideControllerClassName {
+public class PrimaryController {
 
     @FXML
     private TextField TFApellido;
@@ -32,6 +24,6 @@ public class PleaseProvideControllerClassName {
     @FXML
     private TextField TFidEmpleado;
 
-}
+
 
 }

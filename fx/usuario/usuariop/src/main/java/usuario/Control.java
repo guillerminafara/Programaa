@@ -39,20 +39,27 @@ public class Control {
     }
 
     public void valida() {
+
+        String[] userPass=null;
         boolean entrar = false;
         int i = 0;
         try {
-            FileReader fr = new FileReader(
-                    "C:\\Users\\Fran-PC\\Desktop\\Willy\\DAM\\Programacion\\Unidad9\\Programaa\\fx\\usuario\\usuariop\\src\\main\\java\\usuario\\user-pass.txt");
-            // FileReader fr = new
-            // FileReader("/home/dam/Escritorio/Asignaturas/Programacion/gluon/usuario/usuariop/src/main/java/usuario/user-pass.txt");
+         
+            // FileReader("C:\\Users\\Fran-PC\\Desktop\\Willy\\DAM\\Programacion\\Unidad9\\Programaa\\fx\\usuario\\usuariop\\src\\main\\java\\usuario\\user-pass.txt");
+     
+
+            FileReader fr = new FileReader("src/main/java/usuario/user-pass.txt");
             BufferedReader br = new BufferedReader(fr);
             String linea = br.readLine();
-            String[] userPass = new String[2];
-            userPass = linea.split(":");
+      
+           if(linea != null) {
+                
+                userPass = linea.split(":");
+          
+                
+            }
+                if (userPass[0].equals(TFUsuario.getText())) {
 
-            if (userPass[0].equals(TFUsuario.getText())) {
-                do {
                     if (userPass[1].equals(TFPass.getText())) {
                         entrar = true;
                         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -66,16 +73,16 @@ public class Control {
                         alert.setContentText("Formato incorrectoooo");
                         alert.showAndWait();
                     }
-                } while (i < 3 && !entrar);
-            } else {
-                i++;
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("ERROR");
-                alert.setContentText("Formatopincorrecto");
-                alert.showAndWait();
-            }
 
-            System.out.println("contador" + i);
+                } else {
+                    i++;
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("ERROR");
+                    alert.setContentText("Formatopincorrecto");
+                    alert.showAndWait();
+                }
+            
+         
 
         } catch (FileNotFoundException e) {
             // TODO Auto-generated catch block
