@@ -4,6 +4,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+
+import agenda.PrimaryController;
 
 public class Empleados {
     private int idEmpleado;
@@ -13,7 +16,7 @@ public class Empleados {
     private String fechaNac;
     private String cargo;
 
-    private Connection con = null;
+    Connection con = Conexion.getConexion();
 
     public Empleados() {
         con = Conexion.getConexion();
@@ -80,6 +83,7 @@ public class Empleados {
     public void mostrar(int i) {
         Empleados empleado = new Empleados();
         String sql = "Select * from empleados where idempleados=?";
+
         try {
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, i);
@@ -99,14 +103,65 @@ public class Empleados {
 
     }
 
+    PrimaryController control = new PrimaryController();
+
+    public Empleados primero() {
+        con = Conexion.getConexion();
+        Empleados empleado = new Empleados();
+        int i = 1;
+        String sql = "Select * from empleados ";
+
+        Statement ps;
+        try {
+            ps = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+
+            // ps.setInt(1, i);
+            ResultSet rs = ps.executeQuery(sql);
+            rs.first();
+            
+            empleado.setIdEmpleado(i);
+            empleado.setNombre(rs.getString("nombre"));
+            empleado.setApellido(rs.getString("apellido"));
+            empleado.setTelefono(rs.getString("telefono"));
+            empleado.setFechaNac(rs.getString("fechaNac"));
+            empleado.setCargo(rs.getString("cargo"));
+
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } // con.prepareStatement(sql);
+        return empleado;
+    }
+    // public ResultSet mostrara(int i) {
+    // Empleados empleado = new Empleados();
+
+    // try {
+    // // PreparedStatement ps = con.prepareStatement(sql);
+    // ps.setInt(1, i);
+    // ResultSet rs = ps.executeQuery();
+    // if (rs != null) {
+    // empleado.setIdEmpleado(i);
+    // empleado.setNombre(rs.getString("nombre"));
+    // empleado.setApellido(rs.getString("apellido"));
+    // empleado.setTelefono(rs.getString("teléfono"));
+    // empleado.setFechaNac(rs.getString("fechanac"));
+    // empleado.setCargo(rs.getString("cargo"));
+    // }
+    // } catch (SQLException e) {
+    // // TODO Auto-generated catch block
+    // e.printStackTrace();
+    // }
+
+    // }
+
     public int Totalidad() {
         String sql = "SELECT * FROM empleados ORDER BY idEmpleados DESC LIMIT 1";
-        int i=0;
+        int i = 0;
         try {
-            PreparedStatement ps= con.prepareStatement(sql);
-            ResultSet rs= ps.executeQuery();
-            if(rs!=null){
-               i= rs.getInt(sql);
+            PreparedStatement ps = con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            if (rs != null) {
+                i = rs.getInt(sql);
 
             }
         } catch (SQLException e) {

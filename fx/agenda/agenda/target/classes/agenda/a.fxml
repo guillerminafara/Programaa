@@ -25,9 +25,9 @@
       <TextField fx:id="TFTelefono" layoutX="216.0" layoutY="237.0" />
       <TextField fx:id="TFFechaNac" layoutX="216.0" layoutY="277.0" />
       <TextField fx:id="TFCargo" layoutX="216.0" layoutY="317.0" />
-      <Button layoutX="75.0" layoutY="377.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="53.0" text="ini" />
-      <Button layoutX="163.0" layoutY="377.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="53.0" text="&lt;" />
-      <Button layoutX="246.0" layoutY="377.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="53.0" text="&gt;" />
-      <Button layoutX="336.0" layoutY="376.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="53.0" text="fin" />
+      <Button fx:id="BIni" layoutX="75.0" layoutY="377.0" mnemonicParsing="false" onAction="#initialize" prefHeight="25.0" prefWidth="53.0" text="ini" />
+      <Button fx:id="BAnterior" layoutX="163.0" layoutY="377.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="53.0" text="&lt;" />
+      <Button fx:id="BSiguiente" layoutX="246.0" layoutY="377.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="53.0" text="&gt;" />
+      <Button fx:id="BUltimo" layoutX="336.0" layoutY="376.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="53.0" text="fin" />
    </children>
 </AnchorPane>
