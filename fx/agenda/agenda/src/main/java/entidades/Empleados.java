@@ -187,17 +187,25 @@ public class Empleados {
         try {
             Statement ps = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
             ResultSet rs = ps.executeQuery(sql);
-            
-            
-            rs.absolute(i);
-            rs.next();
-            empleado.setIdEmpleado(rs.getInt("idempleados"));
-            empleado.setNombre(rs.getString("nombre"));
-            empleado.setApellido(rs.getString("apellido"));
-            empleado.setTelefono(rs.getString("telefono"));
-            empleado.setFechaNac(rs.getString("fechaNac"));
-            empleado.setCargo(rs.getString("cargo"));
-        } catch (SQLException e) {
+
+            // System.out.println("totalidad "+ totalidad());
+            // System.out.println(rs.getInt("idempleados"));
+
+            // System.out.println(" ha llegado");
+            if (rs.next()) {
+
+                rs.absolute(i);
+                rs.next();
+                empleado.setIdEmpleado(rs.getInt("idempleados"));
+                empleado.setNombre(rs.getString("nombre"));
+                empleado.setApellido(rs.getString("apellido"));
+                empleado.setTelefono(rs.getString("telefono"));
+                empleado.setFechaNac(rs.getString("fechaNac"));
+                empleado.setCargo(rs.getString("cargo"));
+            }
+        } catch (
+
+        SQLException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
@@ -212,8 +220,8 @@ public class Empleados {
         try {
             Statement ps = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
             ResultSet rs = ps.executeQuery(sql);
-            
-            
+
+            i--;
             rs.absolute(i);
             rs.previous();
             empleado.setIdEmpleado(rs.getInt("idempleados"));
@@ -229,19 +237,20 @@ public class Empleados {
         return empleado;
 
     }
-    public int Totalidad() {
-        String sql = "SELECT * FROM empleados ORDER BY idEmpleados DESC LIMIT 1";
+
+    public int totalidad() {
+        String sql = "SELECT * FROM empleados ORDER BY idempleados DESC LIMIT 1";
         int i = 0;
         try {
             PreparedStatement ps = con.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
-            if (rs != null) {
-                i = rs.getInt(sql);
+            if (rs.next()) {
+                i = rs.getInt("idempleados");
 
             }
         } catch (SQLException e) {
             // TODO Auto-generated catch block
-            e.printStackTrace();
+            System.out.println("error en metodo totalidad");
         }
         return i;
     }

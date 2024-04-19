@@ -17,6 +17,7 @@ import javafx.scene.control.TextField;
 
 public class PrimaryController {
     static int i = 1;
+   
     @FXML
     private Button BAnterior;
 
@@ -46,25 +47,40 @@ public class PrimaryController {
 
     @FXML
     private TextField TFidEmpleado;
+    @FXML
+    private Button BModificar;
 
+    @FXML
+    void modificar(ActionEvent event) {
+
+    }
     @FXML
     void initialize(ActionEvent event) {
         ultimo();
-
+     
     }
 
     @FXML
     void siguiente(ActionEvent event) {
-
+        
         siguientes(i);
         System.out.println(i);
+       
         i++;
     }
 
     @FXML
     void anterior(ActionEvent event) {
-        anterior(i);
-        i--;
+        if(i<=1){
+            i=1;
+            primero();
+        }
+            i--;
+            System.out.println(i);
+            anterior(i);
+        
+        
+        
     }
 
     Connection con = null;
@@ -103,7 +119,7 @@ public class PrimaryController {
         TFFechaNac.setText(empleado.getFechaNac());
         TFCargo.setText(empleado.getCargo());
         deshabilitarIni(false);
-        if (empleado.getIdEmpleado() == empleado.Totalidad()) {
+        if (empleado.getIdEmpleado() == empleado.totalidad()) {
             deshabilitarUltimo(true);
         }
 
@@ -112,9 +128,9 @@ public class PrimaryController {
     public void siguientes(int i) {
         Empleados empleado = new Empleados();
         empleado = empleado.siguiente(i);
-        if (empleado.getIdEmpleado() == empleado.Totalidad()) {
-            deshabilitarUltimo(true);
-
+        if (empleado.getIdEmpleado() == empleado.totalidad()) {
+           // deshabilitarUltimo(true);
+            ultimo();
         } else {
             TFidEmpleado.setText(String.valueOf(empleado.getIdEmpleado()));
             TFNombre.setText(empleado.getNombre());
@@ -136,9 +152,9 @@ public class PrimaryController {
         TFTelefono.setText(empleado.getTelefono());
         TFFechaNac.setText(empleado.getFechaNac());
         TFCargo.setText(empleado.getCargo());
-        if (empleado.getIdEmpleado() == 1) {
+        if (empleado.getIdEmpleado() <= 1) {
             deshabilitarIni(true);
-        } else {
+        }else{
             deshabilitarIni(false);
         }
     }
@@ -156,5 +172,10 @@ public class PrimaryController {
         BUltimo.setDisable(estado);
         BSiguiente.setDisable(estado);
 
+    }
+
+    public void modificarDatos(){
+
+        
     }
 }
