@@ -16,7 +16,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 
 public class PrimaryController {
-
+    static int i = 1;
     @FXML
     private Button BAnterior;
 
@@ -49,7 +49,22 @@ public class PrimaryController {
 
     @FXML
     void initialize(ActionEvent event) {
+        ultimo();
 
+    }
+
+    @FXML
+    void siguiente(ActionEvent event) {
+
+        siguientes(i);
+        System.out.println(i);
+        i++;
+    }
+
+    @FXML
+    void anterior(ActionEvent event) {
+        anterior(i);
+        i--;
     }
 
     Connection con = null;
@@ -58,13 +73,12 @@ public class PrimaryController {
 
         con = Conexion.getConexion();
         primero();
-        
-        
+
     }
 
-    public void primero(){
+    public void primero() {
         Empleados empleado = new Empleados();
-        int i = 1;
+
         empleado = empleado.primero();
 
         TFidEmpleado.setText(String.valueOf(empleado.getIdEmpleado()));
@@ -73,22 +87,74 @@ public class PrimaryController {
         TFTelefono.setText(empleado.getTelefono());
         TFFechaNac.setText(empleado.getFechaNac());
         TFCargo.setText(empleado.getCargo());
-
+        deshabilitarIni(true);
 
     }
-    public void deshabilitarIni(int i) {
+
+    public void ultimo() {
+        Empleados empleado = new Empleados();
+
+        empleado = empleado.ultimo();
+
+        TFidEmpleado.setText(String.valueOf(empleado.getIdEmpleado()));
+        TFNombre.setText(empleado.getNombre());
+        TFApellido.setText(empleado.getApellido());
+        TFTelefono.setText(empleado.getTelefono());
+        TFFechaNac.setText(empleado.getFechaNac());
+        TFCargo.setText(empleado.getCargo());
+        deshabilitarIni(false);
+        if (empleado.getIdEmpleado() == empleado.Totalidad()) {
+            deshabilitarUltimo(true);
+        }
+
+    }
+
+    public void siguientes(int i) {
+        Empleados empleado = new Empleados();
+        empleado = empleado.siguiente(i);
+        if (empleado.getIdEmpleado() == empleado.Totalidad()) {
+            deshabilitarUltimo(true);
+
+        } else {
+            TFidEmpleado.setText(String.valueOf(empleado.getIdEmpleado()));
+            TFNombre.setText(empleado.getNombre());
+            TFApellido.setText(empleado.getApellido());
+            TFTelefono.setText(empleado.getTelefono());
+            TFFechaNac.setText(empleado.getFechaNac());
+            TFCargo.setText(empleado.getCargo());
+            deshabilitarIni(false);
+        }
+
+    }
+
+    public void anterior(int i) {
+        Empleados empleado = new Empleados();
+        empleado = empleado.siguiente(i);
+        TFidEmpleado.setText(String.valueOf(empleado.getIdEmpleado()));
+        TFNombre.setText(empleado.getNombre());
+        TFApellido.setText(empleado.getApellido());
+        TFTelefono.setText(empleado.getTelefono());
+        TFFechaNac.setText(empleado.getFechaNac());
+        TFCargo.setText(empleado.getCargo());
+        if (empleado.getIdEmpleado() == 1) {
+            deshabilitarIni(true);
+        } else {
+            deshabilitarIni(false);
+        }
+    }
+
+    public void deshabilitarIni(boolean estado) {
         // Empleados empleados = new Empleados();
         // empleados.setIdEmpleado(i);
-        if (i == 1) {
-            BIni.setDisable(true);
-            BAnterior.setDisable(true);
-        }
+
+        BIni.setDisable(estado);
+        BAnterior.setDisable(estado);
+
     }
 
-    public void deshabilitarUltimo(int i) {
-        Empleados empleados = new Empleados();
-        if (empleados.getIdEmpleado() == 1) {
-            // BIni.setDisable(true);
-        }
+    public void deshabilitarUltimo(boolean estado) {
+        BUltimo.setDisable(estado);
+        BSiguiente.setDisable(estado);
+
     }
 }
