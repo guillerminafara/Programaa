@@ -193,9 +193,9 @@ public class Empleados {
 
             // System.out.println(" ha llegado");
             if (rs.next()) {
-
+               
                 rs.absolute(i);
-                rs.next();
+               // rs.next();
                 empleado.setIdEmpleado(rs.getInt("idempleados"));
                 empleado.setNombre(rs.getString("nombre"));
                 empleado.setApellido(rs.getString("apellido"));
@@ -218,11 +218,13 @@ public class Empleados {
         String sql = "Select * from empleados ";
 
         try {
-            Statement ps = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
-            ResultSet rs = ps.executeQuery(sql);
+            Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            ResultSet rs = stmt.executeQuery(sql);
 
-            i--;
+            
             rs.absolute(i);
+            System.out.println("i-"+rs.absolute(i));
+        //    i--;
             rs.previous();
             empleado.setIdEmpleado(rs.getInt("idempleados"));
             empleado.setNombre(rs.getString("nombre"));

@@ -16,10 +16,20 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 
 public class PrimaryController {
-    static int i = 1;
-   
+    static int i = 0;
+    int j = 0;
+
+    @FXML
+    private Button BAgregar;
+    
     @FXML
     private Button BAnterior;
+
+    @FXML
+    private Button Bcancel;
+
+    @FXML
+    private Button BEliminar;
 
     @FXML
     private Button BIni;
@@ -51,43 +61,85 @@ public class PrimaryController {
     private Button BModificar;
 
     @FXML
-    void modificar(ActionEvent event) {
+    void agregar(ActionEvent event) {
+
+    }
+    
+    @FXML
+    void cancelar(ActionEvent event) {
 
     }
     @FXML
-    void initialize(ActionEvent event) {
+    void eliminar(ActionEvent event) {
+
+    }
+    @FXML
+    void modificar(ActionEvent event) {
+        j++;
+
+        if (j % 2 != 0) {
+            System.out.println("aprtado");
+            BModificar.setText("Guardar");
+            desactivarTF(true);
+            deshabilitarUltimo(true);
+            deshabilitarIni(true);
+        } else {
+            BModificar.setText("Modificar");
+            // true event.ACTION.equals(false)
+            modificarDatos2();
+            System.out.println("desactivado");
+            // desactivarTF(false);
+            // deshabilitarIni(false);
+            // deshabilitarUltimo(false);
+        }
+
+    }
+
+    @FXML
+    void ultimoo(ActionEvent event) {
         ultimo();
-     
+        desactivarTF(false);
+        deshabilitarIni(false);
+        deshabilitarUltimo(true);
     }
 
     @FXML
     void siguiente(ActionEvent event) {
-        
-        siguientes(i);
-        System.out.println(i);
-       
-        i++;
+        desactivarTF(false);
+
+        Empleados empleados = new Empleados();
+        if (i >= empleados.totalidad()) {
+            i = empleados.totalidad();
+        } else {
+            i++;
+            siguientes(i);
+            System.out.println(i);
+        }
+
     }
 
     @FXML
     void anterior(ActionEvent event) {
-        if(i<=1){
-            i=1;
+        desactivarTF(false);
+
+        if (i <= 1) {
+            i = 1;
             primero();
-        }
+        } else {
             i--;
-            System.out.println(i);
             anterior(i);
-        
-        
-        
+            System.out.println("i: " + i);
+        }
+
     }
 
     Connection con = null;
-
+    
     public void initialize() {
 
         con = Conexion.getConexion();
+        desactivarTF(false);
+
         primero();
 
     }
@@ -103,7 +155,13 @@ public class PrimaryController {
         TFTelefono.setText(empleado.getTelefono());
         TFFechaNac.setText(empleado.getFechaNac());
         TFCargo.setText(empleado.getCargo());
-        deshabilitarIni(true);
+        if (empleado.getIdEmpleado() <= 1) {
+            // deshabilitarIni(true);
+            i = 1;
+            deshabilitarIni(true);
+            deshabilitarUltimo(false);
+
+        }
 
     }
 
@@ -118,9 +176,12 @@ public class PrimaryController {
         TFTelefono.setText(empleado.getTelefono());
         TFFechaNac.setText(empleado.getFechaNac());
         TFCargo.setText(empleado.getCargo());
-        deshabilitarIni(false);
         if (empleado.getIdEmpleado() == empleado.totalidad()) {
             deshabilitarUltimo(true);
+        } else {
+            deshabilitarIni(false);
+            deshabilitarUltimo(false);
+
         }
 
     }
@@ -129,7 +190,7 @@ public class PrimaryController {
         Empleados empleado = new Empleados();
         empleado = empleado.siguiente(i);
         if (empleado.getIdEmpleado() == empleado.totalidad()) {
-           // deshabilitarUltimo(true);
+            // deshabilitarUltimo(true);
             ultimo();
         } else {
             TFidEmpleado.setText(String.valueOf(empleado.getIdEmpleado()));
@@ -139,6 +200,7 @@ public class PrimaryController {
             TFFechaNac.setText(empleado.getFechaNac());
             TFCargo.setText(empleado.getCargo());
             deshabilitarIni(false);
+            deshabilitarUltimo(false);
         }
 
     }
@@ -153,8 +215,11 @@ public class PrimaryController {
         TFFechaNac.setText(empleado.getFechaNac());
         TFCargo.setText(empleado.getCargo());
         if (empleado.getIdEmpleado() <= 1) {
-            deshabilitarIni(true);
-        }else{
+            // deshabilitarIni(true);
+            i = 1;
+            primero();
+        } else {
+            deshabilitarUltimo(false);
             deshabilitarIni(false);
         }
     }
@@ -174,8 +239,65 @@ public class PrimaryController {
 
     }
 
-    public void modificarDatos(){
+    public void desactivarTF(boolean desactivado) {
+        TFidEmpleado.setEditable(false);
+        TFNombre.setEditable(desactivado);
+        TFApellido.setEditable(desactivado);
+        TFTelefono.setEditable(desactivado);
+        TFFechaNac.setEditable(desactivado);
+        TFCargo.setEditable(desactivado);
+    }
 
-        
+    public void modificarDatos() {
+        deshabilitarIni(true);// false=no puedo modificarlos
+        deshabilitarUltimo(true);
+        desactivarTF(true);
+        // String sql="Select * from empleados where idempleado=? ";
+
+        try {
+            String sql = "SELECT * FROM empleados WHERE idempleados=?";
+
+            PreparedStatement ps = con.prepareStatement(sql, ResultSet.TYPE_SCROLL_SENSITIVE,
+                    ResultSet.CONCUR_UPDATABLE);
+            ResultSet rs = ps.executeQuery(sql);
+            ps.setString(1, "idempleados");
+
+            rs.updateString("nombre", TFNombre.getText());
+            rs.updateString("apellido", TFApellido.getText());
+            rs.updateString("telefono", TFTelefono.getText());
+            rs.updateString("fechaNac", TFFechaNac.getText());
+            rs.updateString("cargo", TFCargo.getText());
+            rs.updateRow();
+
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
+
+    public void modificarDatos2() {
+        // deshabilitarIni(true); // false no puedo modificarlos
+        // deshabilitarUltimo(true);
+        // desactivarTF(false);
+
+        String sql = "UPDATE empleados SET nombre=?, apellido=?, telefono=?, fechaNac=?, cargo=? where idempleados=?";
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(6, Integer.parseInt(TFidEmpleado.getText()));
+            ps.setString(1, TFNombre.getText());
+            ps.setString(2, TFApellido.getText());
+            ps.setString(3, TFTelefono.getText());
+            ps.setString(4, TFFechaNac.getText());
+            ps.setString(5, TFCargo.getText());
+
+            if (ps.executeUpdate() == 1) {
+                System.out.println("modificado");
+            }
+
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        ;
     }
 }
