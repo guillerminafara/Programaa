@@ -16,12 +16,15 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 
 public class PrimaryController {
-    static int i = 0;
+     int i = 0;
     int j = 0;
-
+    PreparedStatement ps;
+    ResultSet rs;
+    Statement stmt;
+    Empleados em;
     @FXML
     private Button BAgregar;
-    
+
     @FXML
     private Button BAnterior;
 
@@ -64,15 +67,17 @@ public class PrimaryController {
     void agregar(ActionEvent event) {
 
     }
-    
+
     @FXML
     void cancelar(ActionEvent event) {
 
     }
+
     @FXML
     void eliminar(ActionEvent event) {
 
     }
+
     @FXML
     void modificar(ActionEvent event) {
         j++;
@@ -86,11 +91,11 @@ public class PrimaryController {
         } else {
             BModificar.setText("Modificar");
             // true event.ACTION.equals(false)
-            modificarDatos2();
+            modificarDatos();
             System.out.println("desactivado");
-            // desactivarTF(false);
-            // deshabilitarIni(false);
-            // deshabilitarUltimo(false);
+            desactivarTF(false);
+            deshabilitarIni(false);
+            deshabilitarUltimo(false);
         }
 
     }
@@ -101,6 +106,8 @@ public class PrimaryController {
         desactivarTF(false);
         deshabilitarIni(false);
         deshabilitarUltimo(true);
+       // i=em.totalidad();
+        System.out.println("totalidad: "+ i);
     }
 
     @FXML
@@ -126,15 +133,16 @@ public class PrimaryController {
             i = 1;
             primero();
         } else {
-            i--;
+         //
             anterior(i);
-            System.out.println("i: " + i);
+            System.out.println("i anterior: " + i);
+            i--;
         }
 
     }
 
     Connection con = null;
-    
+
     public void initialize() {
 
         con = Conexion.getConexion();
@@ -146,8 +154,25 @@ public class PrimaryController {
 
     public void primero() {
         Empleados empleado = new Empleados();
+        String sql = "Select * from empleados ";
 
-        empleado = empleado.primero();
+        try {
+            stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+
+            // ps.setInt(1, i);
+            rs = stmt.executeQuery(sql);
+            rs.first();
+
+            empleado.setIdEmpleado(rs.getInt("idEmpleados"));
+            empleado.setNombre(rs.getString("nombre"));
+            empleado.setApellido(rs.getString("apellido"));
+            empleado.setTelefono(rs.getString("telefono"));
+            empleado.setFechaNac(rs.getString("fechaNac"));
+            empleado.setCargo(rs.getString("cargo"));
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
 
         TFidEmpleado.setText(String.valueOf(empleado.getIdEmpleado()));
         TFNombre.setText(empleado.getNombre());
@@ -168,7 +193,27 @@ public class PrimaryController {
     public void ultimo() {
         Empleados empleado = new Empleados();
 
-        empleado = empleado.ultimo();
+       
+        String sql = "Select * from empleados ";
+
+        try {
+            stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+
+            // ps.setInt(1, i);
+            rs = stmt.executeQuery(sql);
+            rs.last();
+
+            empleado.setIdEmpleado(rs.getInt("idempleados"));
+            empleado.setNombre(rs.getString("nombre"));
+            empleado.setApellido(rs.getString("apellido"));
+            empleado.setTelefono(rs.getString("telefono"));
+            empleado.setFechaNac(rs.getString("fechaNac"));
+            empleado.setCargo(rs.getString("cargo"));
+            
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } // con.prepareStatement(sql);
 
         TFidEmpleado.setText(String.valueOf(empleado.getIdEmpleado()));
         TFNombre.setText(empleado.getNombre());
@@ -183,31 +228,79 @@ public class PrimaryController {
             deshabilitarUltimo(false);
 
         }
-
+        i=empleado.getIdEmpleado();
     }
 
     public void siguientes(int i) {
         Empleados empleado = new Empleados();
-        empleado = empleado.siguiente(i);
-        if (empleado.getIdEmpleado() == empleado.totalidad()) {
-            // deshabilitarUltimo(true);
-            ultimo();
-        } else {
-            TFidEmpleado.setText(String.valueOf(empleado.getIdEmpleado()));
-            TFNombre.setText(empleado.getNombre());
-            TFApellido.setText(empleado.getApellido());
-            TFTelefono.setText(empleado.getTelefono());
-            TFFechaNac.setText(empleado.getFechaNac());
-            TFCargo.setText(empleado.getCargo());
-            deshabilitarIni(false);
-            deshabilitarUltimo(false);
+        String sql = "Select * from empleados ";
+
+        try {
+            stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            rs = stmt.executeQuery(sql);
+
+            // System.out.println("totalidad "+ totalidad());
+            // System.out.println(rs.getInt("idempleados"));
+
+            // System.out.println(" ha llegado");
+           // if (rs.next()) {
+
+                rs.absolute(i);
+                 ///rs.next();
+                empleado.setIdEmpleado(rs.getInt("idempleados"));
+                empleado.setNombre(rs.getString("nombre"));
+                empleado.setApellido(rs.getString("apellido"));
+                empleado.setTelefono(rs.getString("telefono"));
+                empleado.setFechaNac(rs.getString("fechaNac"));
+                empleado.setCargo(rs.getString("cargo"));
+
+
+                TFidEmpleado.setText(String.valueOf(empleado.getIdEmpleado()));
+                TFNombre.setText(empleado.getNombre());
+                TFApellido.setText(empleado.getApellido());
+                TFTelefono.setText(empleado.getTelefono());
+                TFFechaNac.setText(empleado.getFechaNac());
+                TFCargo.setText(empleado.getCargo());
+                deshabilitarIni(false);
+                deshabilitarUltimo(false);
+            if(!rs.next()){
+                ultimo();
+          
+            }
+        } catch (
+
+        SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
         }
 
     }
 
     public void anterior(int i) {
         Empleados empleado = new Empleados();
-        empleado = empleado.siguiente(i);
+
+        String sql = "Select * from empleados ";
+
+        try {
+            stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            rs = stmt.executeQuery(sql);
+
+            rs.absolute(i);
+           System.out.println("i-"+ i );
+           //   i--;
+            rs.previous();
+          
+            empleado.setIdEmpleado(rs.getInt("idempleados"));
+            empleado.setNombre(rs.getString("nombre"));
+            empleado.setApellido(rs.getString("apellido"));
+            empleado.setTelefono(rs.getString("telefono"));
+            empleado.setFechaNac(rs.getString("fechaNac"));
+            empleado.setCargo(rs.getString("cargo"));
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
         TFidEmpleado.setText(String.valueOf(empleado.getIdEmpleado()));
         TFNombre.setText(empleado.getNombre());
         TFApellido.setText(empleado.getApellido());
@@ -249,19 +342,22 @@ public class PrimaryController {
     }
 
     public void modificarDatos() {
-        deshabilitarIni(true);// false=no puedo modificarlos
-        deshabilitarUltimo(true);
-        desactivarTF(true);
+        // deshabilitarIni(true);// false=no puedo modificarlos
+        // deshabilitarUltimo(true);
+        // desactivarTF(true);
         // String sql="Select * from empleados where idempleado=? ";
 
         try {
-            String sql = "SELECT * FROM empleados WHERE idempleados=?";
+            String sql = "SELECT * FROM empleados";
 
-            PreparedStatement ps = con.prepareStatement(sql, ResultSet.TYPE_SCROLL_SENSITIVE,
-                    ResultSet.CONCUR_UPDATABLE);
+            // PreparedStatement ps = con.prepareStatement(sql,
+            // ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            Statement ps = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+
             ResultSet rs = ps.executeQuery(sql);
-            ps.setString(1, "idempleados");
-
+            // ps.setString(1, "idempleados");
+            rs.next();
+            rs.absolute(Integer.parseInt(TFidEmpleado.getText()));
             rs.updateString("nombre", TFNombre.getText());
             rs.updateString("apellido", TFApellido.getText());
             rs.updateString("telefono", TFTelefono.getText());
@@ -295,9 +391,17 @@ public class PrimaryController {
             }
 
         } catch (SQLException e) {
-            // TODO Auto-generated catch block
+            // TODO Auto-generated catch block //alert
             e.printStackTrace();
         }
-        ;
+
+    }
+
+    public void agregarEmpleado() {
+
+    }
+
+    public void eliminarEmpleado() {
+
     }
 }
