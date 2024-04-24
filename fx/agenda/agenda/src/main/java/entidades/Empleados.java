@@ -98,7 +98,8 @@ public class Empleados {
             }
         } catch (SQLException e) {
             // TODO Auto-generated catch block
-            e.printStackTrace();
+            //e.printStackTrace();
+            System.out.println("esta nullo");
         }
 
     }
@@ -115,7 +116,7 @@ public class Empleados {
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
                 i = rs.getInt("idempleados");
-
+                System.out.println("esta bien");
             }
         } catch (SQLException e) {
             // TODO Auto-generated catch block
