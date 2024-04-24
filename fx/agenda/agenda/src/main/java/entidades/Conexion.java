@@ -4,12 +4,12 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 public class Conexion {
     
-        private static final String URL = "jdbc:mysql://localhost/empresaa";
-        private static final String USUARIO = "root";
-        private static final String PASSWORD = "";
-        // private static final String URL = "jdbc:mysql://localhost:33006/empresaa";
+        // private static final String URL = "jdbc:mysql://localhost/empresaa";
         // private static final String USUARIO = "root";
-        // private static final String PASSWORD = "Paquito2024----";
+        // private static final String PASSWORD = "";
+        private static final String URL = "jdbc:mysql://localhost:33006/empresaa";
+        private static final String USUARIO = "root";
+        private static final String PASSWORD = "Paquito2024----";
 
         public Conexion() {
         }
