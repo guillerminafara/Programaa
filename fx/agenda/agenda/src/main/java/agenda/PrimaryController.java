@@ -7,6 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.format.DateTimeFormatter;
 
 
 //import com.mysql.cj.jdbc.exceptions.MysqlDataTruncation;
@@ -30,6 +31,7 @@ public class PrimaryController {
     Empleados em;
     Alert alert;
     Connection con = null;
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
     @FXML
     private Button BAgregar;
 
@@ -142,6 +144,8 @@ public class PrimaryController {
             deshabilitarIni(true);
             BAgregar.setDisable(true);
             BEliminar.setDisable(true);
+    
+            TFFechaNac.setPromptText("aaaa-mm-dd");
         } else { // par para guardar los cambios
             BModificar.setText("Modificar");
              modificarDatos();
@@ -215,7 +219,7 @@ public class PrimaryController {
             empleado.setCargo(rs.getString("cargo"));
         } catch (SQLException e) {
             alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error al ingresar a la tabla ");
+            alert.setContentText("Error al ingresar a la tabla ");
             alert.show();
         }
 
@@ -249,7 +253,7 @@ public class PrimaryController {
 
         } catch (SQLException e) {
             alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error al ingresar a la tabla ");
+            alert.setContentText("Error al ingresar a la tabla ");
             alert.show();
         } // con.prepareStatement(sql);
 
@@ -305,7 +309,7 @@ public class PrimaryController {
             }
         } catch (SQLException e) {
             alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error al ingresar a la tabla ");
+            alert.setContentText("Error al ingresar a la tabla ");
             alert.show();
         }
 
@@ -328,7 +332,7 @@ public class PrimaryController {
             empleado.setCargo(rs.getString("cargo"));
         } catch (SQLException e) {
             alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error al ingresar a la tabla ");
+            alert.setContentText("Error al ingresar a la tabla ");
             alert.show();
         }
 
@@ -368,10 +372,12 @@ public class PrimaryController {
     }
 
     public void limpiarCampos() {
-        TFidEmpleado.setText("-");
+        TFidEmpleado.setText("");
+        TFidEmpleado.setPromptText("-");
         TFNombre.setText("");
         TFApellido.setText("");
         TFFechaNac.setText("");
+        TFFechaNac.setPromptText("aaaa-mm-dd");
         TFTelefono.setText("");
         TFCargo.setText("");
     }
@@ -385,6 +391,8 @@ public class PrimaryController {
                 alert = new Alert(Alert.AlertType.ERROR);
                 alert.setContentText("Número inválido.");
                 alert.showAndWait();
+                BModificar.setText("Modificar");
+                j=0;
             } else {
                 rs.absolute(Integer.parseInt(TFidEmpleado.getText()));
                 rs.updateString("nombre", TFNombre.getText());
@@ -393,13 +401,17 @@ public class PrimaryController {
                 rs.updateString("fechaNac", TFFechaNac.getText());
                 rs.updateString("cargo", TFCargo.getText());
                 rs.updateRow();
-                alert = new Alert(AlertType.CONFIRMATION);
+                alert = new Alert(AlertType.INFORMATION);
                 alert.setContentText("Modificado correctamente");
                 alert.show();
             }
         } catch (SQLException e) {
             alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error al ingresar a la tabla ");
+            alert.setContentText("Error al ingresar a la tabla ");
+            alert.show();
+        }catch(NullPointerException e){
+            alert = new Alert(Alert.AlertType.ERROR);
+            alert.setContentText("Debe completar todos los campos");
             alert.show();
         }
     }
@@ -429,7 +441,7 @@ public class PrimaryController {
 
         } catch (SQLException e) {
             alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error al ingresar a la tabla ");
+            alert.setContentText("Error al ingresar a la tabla ");
             alert.show();
         }
 
@@ -438,21 +450,37 @@ public class PrimaryController {
     public void agregarEmpleado() {
         String sql = "INSERT INTO empleados(nombre, apellido, telefono, fechaNac, cargo) values(?,?,?,?,?)";
         try {
+           // String text = date.format(formatter);
             PreparedStatement ps = con.prepareStatement(sql);
-            ps.setString(1, TFNombre.getText());
-            ps.setString(2, TFApellido.getText());
-            ps.setString(3, TFTelefono.getText());
-            ps.setString(4, TFFechaNac.getText());
-            ps.setString(5, TFCargo.getText());
-            if (ps.executeUpdate() == 1) {
-                alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("Empleado Agregado");
+            if(TFFechaNac.getText().length()<10 ||TFFechaNac.getText().length()>10){
+                
+                alert = new Alert(Alert.AlertType.ERROR);
+                alert.setContentText("Formato válido aaaa-mm-dd o aaaa/mm/dd");
                 alert.show();
+                BAgregar.setText("Agregar");
+                j=0;
+            }else{
+                ps.setString(1, TFNombre.getText());
+                ps.setString(2, TFApellido.getText());
+                ps.setString(3, TFTelefono.getText());
+                ps.setString(4, TFFechaNac.getText());
+                ps.setString(5, TFCargo.getText());
+                if (ps.executeUpdate() == 1) {
+                    alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setContentText("Empleado Agregado");
+                    alert.show();
+                }
             }
+            
+         
         } catch (SQLException e) {
             alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Error al ingresar a la tabla ");
+                alert.setContentText("Error al ingresar a la tabla");
                 alert.show();
+        }catch(NullPointerException e){
+            alert = new Alert(Alert.AlertType.ERROR);
+            alert.setContentText("Debe completar todos los campos");
+            alert.show();
         }
     }
 
@@ -472,7 +500,7 @@ public class PrimaryController {
             }
         } catch (SQLException e) {
             alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error al ingresar a la tabla ");
+            alert.setContentText("Error al ingresar a la tabla ");
             alert.show();
         }
 

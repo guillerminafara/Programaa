@@ -1,5 +1,3 @@
-CREATE DATABASE  IF NOT EXISTS `empresaa` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
-USE `empresaa`;
 -- MySQL dump 10.13  Distrib 8.0.36, for Linux (x86_64)
 --
 -- Host: 127.0.0.1    Database: empresaa
@@ -32,7 +30,7 @@ CREATE TABLE `empleados` (
   `fechaNac` date NOT NULL,
   `cargo` varchar(45) NOT NULL,
   PRIMARY KEY (`idempleados`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -41,7 +39,7 @@ CREATE TABLE `empleados` (
 
 LOCK TABLES `empleados` WRITE;
 /*!40000 ALTER TABLE `empleados` DISABLE KEYS */;
-INSERT INTO `empleados` VALUES (1,'Paquito','Fara','+5493878995','1990-02-22','Manager'),(2,'Tuqui','Fara','+5493878995','1992-08-22','Manager');
+INSERT INTO `empleados` VALUES (1,'Paquito','Faraa','+54938784229','1990-10-20','Administrativo'),(2,'Tuqui','Fara','+5493878995','1992-08-22','Manager'),(3,'Suru','Bi','+54938786555','1982-10-20','Director de ventas'),(4,'Gatencia','Fara','+6565','1986-10-20','Comercial'),(5,'Iñaki','Sante','+5656','1999-05-18','Administrativo');
 /*!40000 ALTER TABLE `empleados` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -54,4 +52,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-04-17 20:25:23
+-- Dump completed on 2024-04-25 16:04:47
