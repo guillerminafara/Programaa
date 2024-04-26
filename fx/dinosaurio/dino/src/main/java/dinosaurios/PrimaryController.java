@@ -1,5 +1,6 @@
 package dinosaurios;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.net.URL;
@@ -29,15 +30,27 @@ public class PrimaryController implements Initializable{
     @FXML
     private AnchorPane LDino;
 
+    @FXML
+    private ImageView imageview;
+
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
-     
-        try {
-            JBSalir.setGraphic(new ImageView(new Image(new FileInputStream("salir.png"))));
-        } catch (FileNotFoundException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
+     try {
+      
+        //Image image = new Image(new FileInputStream("/resources/dinosaurios/dino.jpg"));
+        Image image = new Image(getClass().getResource("/resources/dinosaurios/dino.jpg"));
+
+        imageview.setImage(image);
+    } catch (FileNotFoundException e) {
+        // TODO Auto-generated catch block
+        e.printStackTrace();
+    }
+        // try {
+        //     JBSalir.setGraphic(new ImageView(new Image(new FileInputStream("salir.png"))));
+        // } catch (FileNotFoundException e) {
+        //     // TODO Auto-generated catch block
+        //     e.printStackTrace();
+        // }
     }
 
 
