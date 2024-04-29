@@ -52,7 +52,14 @@
             <Insets />
          </opaqueInsets>
       </Button>
-      <Button fx:id="JBSalir" alignment="TOP_RIGHT" contentDisplay="GRAPHIC_ONLY" layoutX="322.0" layoutY="302.0" lineSpacing="4.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="89.0" style="-fx-background-image: 20;" textAlignment="CENTER" />
+      <Button fx:id="JBSalir" alignment="TOP_RIGHT" graphicTextGap="0.0" layoutX="393.0" layoutY="302.0" lineSpacing="4.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="37.0" style="-fx-background-image: 20;" textAlignment="CENTER">
+         <graphic>
+            <ImageView fitHeight="30.0" fitWidth="41.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@salir.png" />
+               </image>
+            </ImageView>
+         </graphic></Button>
       <ImageView fx:id="imageview" fitHeight="150.0" fitWidth="200.0" layoutX="300.0" layoutY="125.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@dino.jpg" />
