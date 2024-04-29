@@ -25,24 +25,20 @@ public class App extends Application {
         FXMLLoader loadFXML = new FXMLLoader(App.class.getResource("disenio.fxml"));
        // VBox root = new VBox();
 
-       
-   
-
-
 
         scene = new Scene(loadFXML.load());
         stage.setScene(scene);
         stage.show();
 
       
-        // FXMLLoader loadFXML2 = new FXMLLoader(App.class.getResource("scene2.fxml"));
-        // scene2 = new Scene(loadFXML2.load());
-        // stage.setScene(scene2);
+         FXMLLoader loadFXML2 = new FXMLLoader(App.class.getResource("scene2.fxml"));
+         scene2 = new Scene(loadFXML2.load());
+       stage.setScene(scene2);
     }
-    // public static void cambioScena(){
-    // stage.setScene(scene2);
+    public static void cambioScena(){
+     stage.setScene(scene2);
 
-    // }
+    }
 
     // static void setRoot(String fxml) throws IOException {
     // scene.setRoot(loadFXML(fxml));

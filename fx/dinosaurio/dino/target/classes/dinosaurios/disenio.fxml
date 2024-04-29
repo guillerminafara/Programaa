@@ -34,7 +34,7 @@
             <Font size="24.0" />
          </font>
       </Label>
-      <Button fx:id="JBCrear" layoutX="52.0" layoutY="132.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="143.0" text="Crear una Atracción" textAlignment="CENTER">
+      <Button fx:id="JBCrear" layoutX="52.0" layoutY="132.0" mnemonicParsing="false" onAction="#Crear" prefHeight="30.0" prefWidth="143.0" text="Crear una Atracción" textAlignment="CENTER">
          <font>
             <Font size="12.0" />
          </font>
@@ -60,9 +60,9 @@
                </image>
             </ImageView>
          </graphic></Button>
-      <ImageView fx:id="imageview" fitHeight="150.0" fitWidth="200.0" layoutX="300.0" layoutY="125.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="imagen" fitHeight="141.0" fitWidth="263.0" layoutX="278.0" layoutY="130.0" preserveRatio="true">
          <image>
-            <Image url="@dino.jpg" />
+            <Image url="@destacada-dinosaurios-mexicanos-1024x605.png" />
          </image>
       </ImageView>
    </children>
