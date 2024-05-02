@@ -1,24 +1,49 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="319.0" prefWidth="511.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dinosaurios.PrimaryController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="432.0" prefWidth="511.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dinosaurios.Escena2">
    <children>
-      <Label layoutX="71.0" layoutY="74.0" text="Zona:" textFill="#a80000">
+      <Label layoutX="71.0" layoutY="252.0" text="Zona:" textFill="#a80000">
          <font>
             <Font size="19.0" />
          </font>
       </Label>
-      <Label layoutX="71.0" layoutY="176.0" text="Dinosaurio:" textFill="#a80000">
+      <Label layoutX="71.0" layoutY="300.0" text="Dinosaurio:" textFill="#a80000">
          <font>
             <Font size="19.0" />
          </font>
       </Label>
-      <ComboBox fx:id="CBZona" layoutX="253.0" layoutY="78.0" onAction="#AsignaZona" prefWidth="150.0" />
-      <ComboBox fx:id="CBDino" layoutX="253.0" layoutY="180.0" onAction="#AsignaDino" prefWidth="150.0" />
+      <ComboBox fx:id="CBZona" layoutX="221.0" layoutY="256.0" onAction="#AsignaZona" prefHeight="26.0" prefWidth="182.0" />
+      <ComboBox fx:id="CBDino" layoutX="221.0" layoutY="298.0" onAction="#AsignaDino" prefHeight="26.0" prefWidth="182.0" />
+      <Label layoutX="68.0" layoutY="92.0" text="Nombre:" textFill="#a60000">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Label>
+      <Label layoutX="68.0" layoutY="143.0" text="Capacidad:" textFill="#a80000">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Label>
+      <Label layoutX="69.0" layoutY="200.0" text="Edad Mínima:" textFill="#a80000">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Label>
+      <Label layoutX="135.0" layoutY="38.0" prefHeight="34.0" prefWidth="199.0" text="Nueva atracción " textFill="#a80000">
+         <font>
+            <Font size="23.0" />
+         </font>
+      </Label>
+      <TextField fx:id="TFNombre" layoutX="219.0" layoutY="86.0" />
+      <TextField fx:id="TFCapacidad" layoutX="219.0" layoutY="142.0" />
+      <TextField fx:id="TFEdadMinima" layoutX="219.0" layoutY="197.0" />
+      <Button fx:id="BAgregar" layoutX="219.0" layoutY="368.0" mnemonicParsing="false" onAction="#AgregarAtraccion" text="Agregar" />
    </children>
 </AnchorPane>

@@ -5,10 +5,11 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="489.0" prefWidth="736.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="489.0" prefWidth="736.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"fx:controller="dinosaurios.PrimaryController">
    <children>
       <ComboBox fx:id="CBTamanio" layoutX="150.0" layoutY="91.0" prefWidth="150.0" />
       <ComboBox fx:id="CBAlimentacion" layoutX="150.0" layoutY="183.0" prefWidth="150.0" />
@@ -25,5 +26,10 @@
       <Label layoutX="46.0" layoutY="95.0" text="Tamaño:" textFill="#a80000" />
       <Label layoutX="46.0" layoutY="185.0" text="Alimentación:" textFill="#a80000" />
       <Label layoutX="46.0" layoutY="289.0" text="Tipo: " textFill="#a80000" />
+      <ImageView fitHeight="40.0" fitWidth="37.0" layoutX="132.0" layoutY="382.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images-removebg-preview%20(1).png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

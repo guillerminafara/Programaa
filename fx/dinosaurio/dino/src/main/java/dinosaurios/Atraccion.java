@@ -13,6 +13,9 @@ public class Atraccion {
     int edad; 
     Zona zona;
 
+    public Atraccion() {
+
+    }
 
     public Atraccion(String nombre, Dinosaurio dinosaurio, int capacidad, int edad, Zona zona) {
         this.nombre = nombre;

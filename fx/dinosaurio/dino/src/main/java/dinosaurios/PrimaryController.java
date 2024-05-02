@@ -3,6 +3,7 @@ package dinosaurios;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -20,11 +21,6 @@ public class PrimaryController implements Initializable{
     @FXML
     private Button JBCrear;
 
-    @FXML
-    private Button JBListarD;
-
-    @FXML
-    private Button JBListarZ;
 
     @FXML
     private Button JBSalir;
@@ -36,17 +32,13 @@ public class PrimaryController implements Initializable{
     private ImageView imagen;
 
     @FXML
-    public void Crear(ActionEvent actionEvent) {
-
+    public void Crear(ActionEvent actionEvent) throws IOException {
+       App.cambioScena();
     }
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
 
-    
-
-
     }
-
 
 
 }

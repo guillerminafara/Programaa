@@ -16,27 +16,36 @@ import java.io.IOException;
  */
 public class App extends Application {
 
-    private static Scene scene, scene2;
+    private static Scene scene, scene2, scene3;
     private static Stage stage;
 
     @Override
     public void start(Stage stage) throws IOException {
         this.stage = stage;
         FXMLLoader loadFXML = new FXMLLoader(App.class.getResource("disenio.fxml"));
-       // VBox root = new VBox();
-
+        // VBox root = new VBox();
 
         scene = new Scene(loadFXML.load());
         stage.setScene(scene);
         stage.show();
 
-      
-         FXMLLoader loadFXML2 = new FXMLLoader(App.class.getResource("scene2.fxml"));
-         scene2 = new Scene(loadFXML2.load());
-       stage.setScene(scene2);
+        FXMLLoader loadFXML2 = new FXMLLoader(App.class.getResource("scene2.fxml"));
+        scene2 = new Scene(loadFXML2.load());
+
+
+        FXMLLoader loadFXML3 = new FXMLLoader(App.class.getResource("scene2.fxml"));
+        scene3 = new Scene(loadFXML3.load());
+
     }
-    public static void cambioScena(){
-     stage.setScene(scene2);
+
+    public static void cambioScena() {
+
+        stage.setScene(scene2);
+
+    }
+    public static void cambioScena3() {
+
+        stage.setScene(scene3);
 
     }
 

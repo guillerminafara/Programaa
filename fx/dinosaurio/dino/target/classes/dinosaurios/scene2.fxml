@@ -2,23 +2,44 @@
 
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="319.0" prefWidth="511.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dinosaurios.PrimaryController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="402.0" prefWidth="511.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dinosaurios.Escena2">
    <children>
-      <Label layoutX="71.0" layoutY="74.0" text="Zona:" textFill="#a80000">
+      <Label layoutX="71.0" layoutY="289.0" text="Zona:" textFill="#a80000">
          <font>
             <Font size="19.0" />
          </font>
       </Label>
-      <Label layoutX="71.0" layoutY="176.0" text="Dinosaurio:" textFill="#a80000">
+      <Label layoutX="71.0" layoutY="331.0" text="Dinosaurio:" textFill="#a80000">
          <font>
             <Font size="19.0" />
          </font>
       </Label>
-      <ComboBox fx:id="CBZona" layoutX="253.0" layoutY="78.0" onAction="#AsignaZona" prefWidth="150.0" />
-      <ComboBox fx:id="CBDino" layoutX="253.0" layoutY="180.0" onAction="#AsignaDino" prefWidth="150.0" />
+      <ComboBox fx:id="CBZona" layoutX="253.0" layoutY="293.0" onAction="#AsignaZona" prefWidth="150.0" />
+      <ComboBox fx:id="CBDino" layoutX="253.0" layoutY="335.0" onAction="#AsignaDino" prefWidth="150.0" />
+      <Label layoutX="68.0" layoutY="129.0" text="Nombre:" textFill="#a60000">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Label>
+      <Label layoutX="68.0" layoutY="168.0" text="Capacidad:" textFill="#a80000">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Label>
+      <Label layoutX="69.0" layoutY="221.0" text="Edad Mínima:" textFill="#a80000">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Label>
+      <Label layoutX="135.0" layoutY="40.0" prefHeight="34.0" prefWidth="199.0" text="Nueva atracción " textFill="#a80000">
+         <font>
+            <Font size="23.0" />
+         </font>
+      </Label>
+      <TextField fx:id="TFNombre" layoutX="219.0" layoutY="129.0" />
    </children>
 </AnchorPane>
