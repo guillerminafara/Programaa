@@ -5,19 +5,31 @@ package dinosaurios;
 
 
 public class Dinosaurio {
-
+int idDino;
     String nombre;
     String tamanyo;
     String alimentacion;
     String tipo;
 
-    
+    public Dinosaurio() {
+
+    }
+
     public Dinosaurio(String nombre, String tamanyo, String alimentacion, String tipo) {
         this.nombre = nombre;
         this.tamanyo = tamanyo;
         this.alimentacion = alimentacion;
         this.tipo = tipo;
     }
+
+    public int getIdDino() {
+        return idDino;
+    }
+
+    public void setIdDino(int idDino) {
+        this.idDino = idDino;
+    }
+
     public String getNombre() {
         return nombre;
     }
@@ -42,6 +54,9 @@ public class Dinosaurio {
     public void setTipo(String tipo) {
         this.tipo = tipo;
     }
-    
-    
+
+    @Override
+    public String toString() {
+        return   nombre + " de "+ tipo;
+    }
 }

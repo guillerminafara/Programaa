@@ -3,6 +3,7 @@ package dinosaurios;
 // num_atracciones.
 
 public class Zona {
+    int idZona;
     String nombre;
     String ubicacion;
     int num_atracciones;
@@ -10,6 +11,8 @@ public class Zona {
         this.nombre = nombre;
         this.ubicacion = ubicacion;
         this.num_atracciones = num_atracciones;
+    }
+    public Zona() {
     }
     public String getNombre() {
         return nombre;
@@ -30,5 +33,17 @@ public class Zona {
         this.num_atracciones = num_atracciones;
     }
 
-    
+    public int getIdZona() {
+        return idZona;
+    }
+
+    public void setIdZona(int idZona) {
+        this.idZona = idZona;
+    }
+
+    @Override
+    public String toString() {
+        return
+                "Zona: " + nombre ;
+    }
 }
