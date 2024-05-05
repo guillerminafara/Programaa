@@ -1,6 +1,7 @@
 package dinosaurios;
 
 import javafx.application.Application;
+import javafx.css.converter.StringConverter;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -8,6 +9,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import modelo.DinoEnum;
 
 import java.io.IOException;
 
@@ -26,6 +28,7 @@ public class App extends Application {
         // VBox root = new VBox();
 
         scene = new Scene(loadFXML.load());
+        scene.getStylesheets().add(getClass().getResource("dise.css").toExternalForm());
         stage.setScene(scene);
         stage.show();
 
@@ -33,12 +36,14 @@ public class App extends Application {
         scene2 = new Scene(loadFXML2.load());
 
 
-        FXMLLoader loadFXML3 = new FXMLLoader(App.class.getResource("scene2.fxml"));
+        FXMLLoader loadFXML3 = new FXMLLoader(App.class.getResource("scene3.fxml"));
         scene3 = new Scene(loadFXML3.load());
 
     }
-
-    public static void cambioScena() {
+    public static void cambioScena1(){
+        stage.setScene(scene);
+    }
+    public static void cambioScena2() {
 
         stage.setScene(scene2);
 
@@ -61,5 +66,16 @@ public class App extends Application {
     public static void main(String[] args) {
         launch();
     }
+        CBTamanio.setConverter(new StringConverter<DinoEnum>() {
+        @Override
+        public String toString(DinoEnum dinoEnum) {
+            return dinoEnum != null ? dinoEnum.getTamanyo() : null;
+        }
+    
+        @Override
+        public DinoEnum fromString(String s) {
+            return null;
+        }
+    });
 
 }

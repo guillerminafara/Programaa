@@ -19,24 +19,39 @@ import javafx.scene.layout.StackPane;
 public class PrimaryController implements Initializable{
 
     @FXML
+    private AnchorPane AnchorDino;
+
+    @FXML
     private Button JBCrear;
 
+    @FXML
+    private Button JBListarD;
+
+    @FXML
+    private Button JBListarZ;
 
     @FXML
     private Button JBSalir;
 
     @FXML
-    private AnchorPane LDino;
-
-    @FXML
     private ImageView imagen;
 
     @FXML
-    public void Crear(ActionEvent actionEvent) throws IOException {
-       App.cambioScena();
+    public void Crear(ActionEvent actionEvent)  {
+       App.cambioScena2();
     }
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
+
+    }
+
+    @FXML
+    void ListarDinos(ActionEvent event) {
+        App.cambioScena3();
+    }
+
+    @FXML
+    void listarZonas(ActionEvent event) {
 
     }
 

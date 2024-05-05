@@ -6,10 +6,13 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class Conexion {
-    static String url = "jdbc:mysql://127.0.0.1:33006/JurassicPark";
-    static String user = "root";
-    static String password = "Paquito2024----";
+    // static String url = "jdbc:mysql://127.0.0.1:33006/JurassicPark";
+    // static String user = "root";
+    // static String password = "Paquito2024----";
 
+    static String url = "jdbc:mysql://localhost/jurassicpark";
+    static String user = "root";
+    static String password = "";
     Conexion() {
 
     }

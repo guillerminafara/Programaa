@@ -11,20 +11,20 @@
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="LDino" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dinosaurios.PrimaryController">
+<AnchorPane fx:id="AnchorDino" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #96AC61; -fx-background-radius: 10px;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dinosaurios.PrimaryController">
    <children>
       <Label layoutX="192.0" layoutY="67.0" text="DinoDAM Park">
          <textFill>
-            <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
+            <RadialGradient centerX="0.4723756906077348" centerY="0.5" radius="0.5">
                <stops>
                   <Stop>
                      <color>
-                        <Color red="0.009399999864399433" green="0.25686848163604736" blue="0.9399999976158142" />
+                        <Color red="0.04842836409807205" green="0.05263157933950424" blue="0.0416666679084301" />
                      </color>
                   </Stop>
                   <Stop offset="1.0">
                      <color>
-                        <Color red="0.9300000071525574" green="0.3083809018135071" blue="0.00930000003427267" opacity="0.9900000095367432" />
+                        <Color red="1.0" green="0.43529412150382996" opacity="0.9900000095367432" />
                      </color>
                   </Stop>
                </stops>
@@ -34,17 +34,17 @@
             <Font size="24.0" />
          </font>
       </Label>
-      <Button fx:id="JBCrear" layoutX="52.0" layoutY="132.0" mnemonicParsing="false" onAction="#Crear" prefHeight="30.0" prefWidth="143.0" text="Crear una Atracción" textAlignment="CENTER">
+      <Button fx:id="JBCrear" layoutX="52.0" layoutY="132.0" mnemonicParsing="false" onAction="#Crear" prefHeight="30.0" prefWidth="143.0" style="-fx-background-color: #EA5B0A; -fx-border-color: #FFFFFF; -fx-border-radius: 10px; -fx-background-radius: 15px; -fx-border-width: 2px;" text="Crear una Atracción" textAlignment="CENTER" textFill="WHITE">
          <font>
             <Font size="12.0" />
          </font>
       </Button>
-      <Button fx:id="JBListarD" layoutX="52.0" layoutY="197.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="143.0" text="Listar dinosaurios" textAlignment="CENTER">
+      <Button fx:id="JBListarD" layoutX="52.0" layoutY="197.0" mnemonicParsing="false" onAction="#ListarDinos" prefHeight="30.0" prefWidth="143.0" style="-fx-background-color: #EA5B0A; -fx-border-color: #ffffff; -fx-border-width: 2px; -fx-border-radius: 10px; -fx-background-radius: 15px;" text="Listar dinosaurios" textAlignment="CENTER" textFill="WHITE">
          <font>
             <Font size="12.0" />
          </font>
       </Button>
-      <Button fx:id="JBListarZ" layoutX="52.0" layoutY="262.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="143.0" text="Listar zonas" textAlignment="CENTER" AnchorPane.bottomAnchor="108.0" AnchorPane.leftAnchor="52.0" AnchorPane.rightAnchor="405.0" AnchorPane.topAnchor="262.0">
+      <Button fx:id="JBListarZ" layoutX="52.0" layoutY="256.0" mnemonicParsing="false" onAction="#listarZonas" prefHeight="30.0" prefWidth="143.0" style="-fx-background-color: #EA5B0A; -fx-border-radius: 10px; -fx-background-radius: 15px; -fx-border-width: 2px; -fx-border-color: #FFFFFF;" text="Listar zonas" textAlignment="CENTER" textFill="WHITE" AnchorPane.bottomAnchor="114.0" AnchorPane.leftAnchor="52.0" AnchorPane.rightAnchor="405.0" AnchorPane.topAnchor="256.0">
          <font>
             <Font size="12.0" />
          </font>

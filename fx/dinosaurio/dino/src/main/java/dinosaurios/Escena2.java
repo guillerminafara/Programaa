@@ -3,9 +3,12 @@ package dinosaurios;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
+import javafx.scene.control.Alert.AlertType;
 
 import java.net.URL;
 import java.sql.*;
@@ -15,16 +18,24 @@ import java.util.ResourceBundle;
 public class Escena2 implements Initializable {
 
     Connection con= null;
-    String url = "jdbc:mysql://127.0.0.1:33006/JurassicPark";
+    // String url = "jdbc:mysql://127.0.0.1:33006/JurassicPark";
+    //  String user = "root";
+    //  String password = "Paquito2024----";
+     String url = "jdbc:mysql://localhost/JurassicPark";
      String user = "root";
-     String password = "Paquito2024----";
+     String password = "";
 public Connection conectar() throws SQLException {
     con= DriverManager.getConnection(url,user,password);
     return con;
 }
 
-
     Atraccion atraccion=null;
+    @FXML
+    private Button BAtras;
+
+    @FXML
+    private Button BSalir;
+
     @FXML
     private ComboBox CBDino;
 
@@ -38,15 +49,34 @@ public Connection conectar() throws SQLException {
     private TextField TFCapacidad;
     @FXML
     private Button BAgregar;
+    @FXML
+    private ImageView imgatras;
 
     @FXML
     void AsignaDino(ActionEvent event) {
+        System.out.println(CBDino.getValue().toString());
 
-        App.cambioScena3();
+        //App.cambioScena3();
     }
 
     @FXML
     void AsignaZona(ActionEvent event) {
+        System.out.println(CBZona.getValue().toString());
+
+    }
+    @FXML
+    public void AgregarAtraccion(ActionEvent actionEvent) {
+        agregaAtraccion();
+
+
+    }
+    @FXML
+    void Atras2(ActionEvent event) {
+        atras2();
+    }
+
+    @FXML
+    void Salir2(ActionEvent event) {
 
     }
 
@@ -55,18 +85,16 @@ public Connection conectar() throws SQLException {
         cargarCombo();
     }
 
-    @FXML
-    public void AgregarAtraccion(ActionEvent actionEvent) {
 
-
-
-    }
 
 //    String nombre;
 //    String tamanyo;
 //    String alimentacion;
 //    String tipo;
 
+    public void atras2(){
+        App.cambioScena1();
+    }
     public ArrayList listaDinos(){
         ArrayList<Dinosaurio> listaDino= new ArrayList<>();
         String sql = "SELECT * FROM Dinosaurio";
@@ -95,9 +123,9 @@ public Connection conectar() throws SQLException {
 
     public void cargarCombo(){
 
-        CBDino.setValue("selecciona");
+       // CBDino.setValue("selecciona");
         CBDino.getItems().addAll(listaDinos());
-        CBZona.setValue("selecciona");
+       // CBZona.setValue("selecciona");
         CBZona.getItems().addAll(listarZonas());
     }
 
@@ -106,10 +134,10 @@ public Connection conectar() throws SQLException {
         String sql = "SELECT * FROM Zona";
         Zona zona=null;
         try {
-            PreparedStatement ps= conectar().prepareStatement(sql);
-            ResultSet rs= ps.executeQuery();
-//            Statement stmt= con.createStatement();
-//            ResultSet rs= stmt.executeQuery(sql);
+           // PreparedStatement ps= conectar().prepareStatement(sql);
+           // ResultSet rs= ps.executeQuery();
+           Statement stmt= con.createStatement();
+            ResultSet rs= stmt.executeQuery(sql);
             while(rs.next()){
                 zona=new Zona();
                 zona.setIdZona(rs.getInt("id_zona"));
@@ -127,7 +155,7 @@ public Connection conectar() throws SQLException {
     }
 
     public void agregaAtraccion(){
-        String sql="Insert into Atraccion(id_zona, id_dino, nombre, capacidad, edad_minima) values (?,?,?,?,?)";
+        String sql="Insert into atraccion(id_zona, id_dino, nombre, capacidad, edad_minima) values (?,?,?,?,?)";
         atraccion= new Atraccion();
         atraccion.setDinosaurio((Dinosaurio)CBDino.getValue());
         atraccion.setZona((Zona)CBZona.getValue());
@@ -135,15 +163,27 @@ public Connection conectar() throws SQLException {
         atraccion.setCapacidad(Integer.parseInt(TFCapacidad.getText()));
         atraccion.setEdad(Integer.parseInt(TFEdadMinima.getText()));
         try {
-            PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-          ps.setInt(1, Integer.parseInt(CBZona.getValue().toString()));
+            PreparedStatement ps = con.prepareStatement(sql);
+            
+          //ps.setInt(1, Integer.parseInt(CBZona.getValue().toString()));
+          ps.setInt(1, atraccion.getZona().getIdZona());
+          ps.setInt(2, atraccion.getDinosaurio().getIdDino());
 
-           ps.setInt(2,Integer.parseInt(CBDino.getValue().toString()));
+          // ps.setInt(2,Integer.parseInt(CBDino.getValue().toString()));
             ps.setString(3,atraccion.getNombre() );
             ps.setInt(4, atraccion.getCapacidad());
             ps.setInt(5, atraccion.getEdad());
+            if(ps.executeUpdate()==1){
+                Alert alert= new Alert(AlertType.CONFIRMATION);
+                alert.setContentText("agregado con exito");
+                alert.show();
+            }
+            
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            System.out.println(e);
+            Alert alert= new Alert(AlertType.ERROR);
+            alert.setContentText("Error a la hora de agregar la atracción");
+            alert.show();
         }
     }
 }
