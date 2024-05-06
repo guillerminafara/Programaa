@@ -52,8 +52,11 @@ public class PrimaryController implements Initializable{
 
     @FXML
     void listarZonas(ActionEvent event) {
-
+        App.cambioScena4();
     }
-
+    @FXML
+    void salir1(ActionEvent event) {
+        System.exit(0);
+    }
 
 }

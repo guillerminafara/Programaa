@@ -18,7 +18,7 @@ import java.io.IOException;
  */
 public class App extends Application {
 
-    private static Scene scene, scene2, scene3;
+    private static Scene scene, scene2, scene3,scene4;
     private static Stage stage;
 
     @Override
@@ -38,6 +38,8 @@ public class App extends Application {
 
         FXMLLoader loadFXML3 = new FXMLLoader(App.class.getResource("scene3.fxml"));
         scene3 = new Scene(loadFXML3.load());
+        FXMLLoader loadFXML4 = new FXMLLoader(App.class.getResource("scene4.fxml"));
+        scene4 = new Scene(loadFXML4.load());
 
     }
     public static void cambioScena1(){
@@ -53,6 +55,11 @@ public class App extends Application {
         stage.setScene(scene3);
 
     }
+    public static void cambioScena4() {
+
+        stage.setScene(scene4);
+
+    }
 
     // static void setRoot(String fxml) throws IOException {
     // scene.setRoot(loadFXML(fxml));
@@ -66,16 +73,7 @@ public class App extends Application {
     public static void main(String[] args) {
         launch();
     }
-        CBTamanio.setConverter(new StringConverter<DinoEnum>() {
-        @Override
-        public String toString(DinoEnum dinoEnum) {
-            return dinoEnum != null ? dinoEnum.getTamanyo() : null;
-        }
+
     
-        @Override
-        public DinoEnum fromString(String s) {
-            return null;
-        }
-    });
 
 }

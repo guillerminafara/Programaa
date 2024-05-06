@@ -77,7 +77,7 @@ public Connection conectar() throws SQLException {
 
     @FXML
     void Salir2(ActionEvent event) {
-
+        System.exit(0);
     }
 
     @Override
@@ -100,10 +100,10 @@ public Connection conectar() throws SQLException {
         String sql = "SELECT * FROM Dinosaurio";
         Dinosaurio dino=null;
         try {
-            PreparedStatement ps= conectar().prepareStatement(sql);
-            ResultSet rs= ps.executeQuery();
-//            Statement stmt= con.createStatement();
-//            ResultSet rs= stmt.executeQuery(sql);
+         //   PreparedStatement ps= conectar().prepareStatement(sql);
+           // ResultSet rs= ps.executeQuery();
+           Statement stmt= conectar().createStatement();
+           ResultSet rs= stmt.executeQuery(sql);
             while(rs.next()){
                  dino=new Dinosaurio();
                  dino.setIdDino(rs.getInt("id_dino"));
@@ -147,6 +147,7 @@ public Connection conectar() throws SQLException {
 
                 listaZona.add(zona);
             }
+
 
         } catch (SQLException e) {
             throw new RuntimeException(e);

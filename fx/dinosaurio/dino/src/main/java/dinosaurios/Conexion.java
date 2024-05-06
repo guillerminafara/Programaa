@@ -10,15 +10,17 @@ public class Conexion {
     // static String user = "root";
     // static String password = "Paquito2024----";
 
-    static String url = "jdbc:mysql://localhost/jurassicpark";
+    static String url = "jdbc:mysql://localhost/JurassicPark";
     static String user = "root";
     static String password = "";
+    static Connection conectar = null;
+
     Conexion() {
 
     }
 
     public static Connection gConexion() {
-        Connection conectar = null;
+      
 
         try {
             conectar = DriverManager.getConnection(url, user, password);

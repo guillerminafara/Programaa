@@ -52,7 +52,7 @@
             <Insets />
          </opaqueInsets>
       </Button>
-      <Button fx:id="JBSalir" alignment="TOP_RIGHT" graphicTextGap="0.0" layoutX="393.0" layoutY="302.0" lineSpacing="4.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="37.0" style="-fx-background-image: 20;" textAlignment="CENTER">
+      <Button fx:id="JBSalir" alignment="TOP_RIGHT" graphicTextGap="0.0" layoutX="393.0" layoutY="302.0" lineSpacing="4.0" mnemonicParsing="false" onAction="#salir1" prefHeight="38.0" prefWidth="37.0" style="-fx-background-image: 20;" textAlignment="CENTER">
          <graphic>
             <ImageView fitHeight="30.0" fitWidth="41.0" pickOnBounds="true" preserveRatio="true">
                <image>

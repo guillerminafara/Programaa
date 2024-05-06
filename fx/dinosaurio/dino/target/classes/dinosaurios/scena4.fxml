@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dinosaurios.scena4.fxml">
+   <children>
+      <ImageView fx:id="imagenMapa" fitHeight="268.0" fitWidth="405.0" layoutX="142.0" layoutY="59.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@mapa.png" />
+         </image>
+      </ImageView>
+      <Button fx:id="BSAlir4" layoutX="524.0" layoutY="25.0" mnemonicParsing="false" onAction="#Salir4" text="x" />
+      <Button fx:id="BAtras4" layoutX="14.0" layoutY="13.0" mnemonicParsing="false" onAction="#Atras4">
+         <graphic>
+            <ImageView fitHeight="25.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true" />
+         </graphic>
+      </Button>
+   </children>
+</AnchorPane>
