@@ -38,7 +38,7 @@ public class App extends Application {
 
         FXMLLoader loadFXML3 = new FXMLLoader(App.class.getResource("scene3.fxml"));
         scene3 = new Scene(loadFXML3.load());
-        FXMLLoader loadFXML4 = new FXMLLoader(App.class.getResource("scene4.fxml"));
+        FXMLLoader loadFXML4 = new FXMLLoader(App.class.getResource("scena4.fxml"));
         scene4 = new Scene(loadFXML4.load());
 
     }
