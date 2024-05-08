@@ -77,13 +77,13 @@ public class Dinosaurio {
     }
 
     static Connection con = null;
-    // static String url = "jdbc:mysql://localhost/JurassicPark";
-    // static String user = "root";
-    // static String password = "";
+    static String url = "jdbc:mysql://localhost/JurassicPark";
+    static String user = "root";
+    static String password = "";
     
-   static String url = "jdbc:mysql://127.0.0.1:33006/JurassicPark";
-   static String user = "root";
-   static String password = "Paquito2024----";
+//    static String url = "jdbc:mysql://127.0.0.1:33006/JurassicPark";
+//    static String user = "root";
+//    static String password = "Paquito2024----";
 
     public static Connection conectar() throws SQLException {
         con = DriverManager.getConnection(url, user, password);

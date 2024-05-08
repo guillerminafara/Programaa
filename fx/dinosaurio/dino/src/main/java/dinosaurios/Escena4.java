@@ -18,9 +18,12 @@ import javafx.scene.shape.Polygon;
 
 public class Escena4 {
     Connection con = null;
-    String url = "jdbc:mysql://127.0.0.1:33006/JurassicPark";
+    // String url = "jdbc:mysql://127.0.0.1:33006/JurassicPark";
+    // String user = "root";
+    // String password = "Paquito2024----";
+    String url = "jdbc:mysql://localhost/JurassicPark";
     String user = "root";
-    String password = "Paquito2024----";
+    String password = "";
 
     public Connection conectar() throws SQLException {
         con = DriverManager.getConnection(url, user, password);
@@ -59,10 +62,7 @@ public class Escena4 {
 
     @FXML
     void Seleccion(MouseEvent event) {
-        Alert alert = new Alert(AlertType.CONFIRMATION);
-        alert.setContentText("adentro");
 
-        alert.show();
     }
 
     @FXML
@@ -72,7 +72,13 @@ public class Escena4 {
 
     @FXML
     void Norte4(MouseEvent event) {
-
+        Atraccion atrac = null;
+        atrac = buscarAtracciones(buscarPorZona(1));
+        Alert alert = new Alert(AlertType.CONFIRMATION);
+        alert.setTitle(atrac.getZona() + " - " + atrac.getNombre());
+        alert.setContentText("Capacidad: " + atrac.getCapacidad() + "Edad Mínima: " + atrac.getEdad() + "Dinosaurios: "
+                + atrac.getDinosaurio().getNombre());
+        alert.show();
     }
 
     @FXML
@@ -107,19 +113,79 @@ public class Escena4 {
         return devolver;
     }
 
-    public void buscarPorZonas(int zona) {
-        String sql = "Select * from Atracciones where id_zona=?";
+    public Atraccion buscarAtracciones(Zona zona) {
+        Atraccion atraccion = null;
+        String sql = "Select * from Atraccion where id_zona=?";
         PreparedStatement ps;
         try {
             ps = conectar().prepareStatement(sql);
-            ps.setInt(1, zona);
+            ps.setInt(1, zona.getIdZona());
             ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                atraccion = new Atraccion();
+                atraccion.setIdAtraccion(rs.getInt("id_atraccion"));
+                atraccion.setZona(zona);
+                atraccion.setDinosaurio(buscarDino(rs.getInt("id_dino")));
+                atraccion.setNombre(rs.getString("nombre"));
+                atraccion.setCapacidad(rs.getInt("capacidad"));
+                atraccion.setEdad(rs.getInt("edad_minima"));
+                System.out.println("Entra en buscarporAtrac id: " + rs.getInt("id_dino"));
+                System.out.println(zona);
+            }
+            // Alert alert= new Alert(Alert.AlertType.INFORMATION);
+            // alert.setTitle(zonaa.getNombre());
+            // alert.setContentText();
 
         } catch (SQLException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-
+        return atraccion;
     }
 
+    public Dinosaurio buscarDino(int idDino) {
+        Dinosaurio dino = null;
+        String sql = "SELECT * from Dinosaurio where id_dino=?";
+        try {
+            PreparedStatement ps = conectar().prepareStatement(sql);
+            ps.setInt(1, idDino);
+            ResultSet rs = ps.executeQuery();
+            if(rs.next()){
+            dino = new Dinosaurio();
+            dino.setIdDino(idDino);
+            dino.setNombre(rs.getString("nombre"));
+            dino.setAlimentacion(rs.getString("alimentacion"));
+            dino.setTamanyo(rs.getString("tamanyo"));
+            dino.setTipo(rs.getString("tipo"));
+            System.out.println(dino);
+            }
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
+        return dino;
+    }
+
+    public Zona buscarPorZona(int IdZona) {
+        Zona zona = null;
+        String sql = "SELECT * from Zona where id_zona=?";
+       
+        try {
+            PreparedStatement ps = conectar().prepareStatement(sql);
+            ps.setInt(1, IdZona);
+            ResultSet rs = ps.executeQuery();
+            if(rs.next()){
+            zona = new Zona();
+            zona.setIdZona(IdZona);
+            zona.setNombre(rs.getString("nombre"));
+            zona.setUbicacion(rs.getString("ubicacion"));
+            System.out.println("Entra en buscarporzona");
+            }
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return zona;
+    }
 }

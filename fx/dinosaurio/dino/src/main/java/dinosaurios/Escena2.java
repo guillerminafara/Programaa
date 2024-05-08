@@ -18,12 +18,12 @@ import java.util.ResourceBundle;
 public class Escena2 implements Initializable {
 
     Connection con= null;
-    String url = "jdbc:mysql://127.0.0.1:33006/JurassicPark";
-     String user = "root";
-     String password = "Paquito2024----";
-    //  String url = "jdbc:mysql://localhost/JurassicPark";
+    // String url = "jdbc:mysql://127.0.0.1:33006/JurassicPark";
     //  String user = "root";
-    //  String password = "";
+    //  String password = "Paquito2024----";
+     String url = "jdbc:mysql://localhost/JurassicPark";
+     String user = "root";
+     String password = "";
 public Connection conectar() throws SQLException {
     con= DriverManager.getConnection(url,user,password);
     return con;

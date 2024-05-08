@@ -7,6 +7,7 @@ package dinosaurios;
 // asignar una atracción a una zona.
 
 public class Atraccion {
+   int idAtraccion;
     String nombre;
     Dinosaurio dinosaurio;
     int capacidad;
@@ -70,5 +71,13 @@ public class Atraccion {
     }
     public void asignarZona(){
         
+    }
+
+    public int getIdAtraccion() {
+        return idAtraccion;
+    }
+
+    public void setIdAtraccion(int idAtraccion) {
+        this.idAtraccion = idAtraccion;
     }
 }
