@@ -62,12 +62,25 @@ public class Escena4 {
 
     @FXML
     void Seleccion(MouseEvent event) {
+Atraccion atrac = null;
+        atrac = buscarAtracciones(buscarPorZona(2));
+        Alert alert = new Alert(AlertType.CONFIRMATION);
+        alert.setTitle(atrac.getZona() + " - " + atrac.getNombre());
+        alert.setContentText("Capacidad: " + atrac.getCapacidad() + "\nEdad Mínima: " + atrac.getEdad() + "\nDinosaurios: "
+                + atrac.getDinosaurio().getNombre());
+        alert.show();
 
     }
 
     @FXML
     void Oeste4(MouseEvent event) {
-
+Atraccion atrac = null;
+        atrac = buscarAtracciones(buscarPorZona(4));
+        Alert alert = new Alert(AlertType.CONFIRMATION);
+        alert.setTitle(atrac.getZona() + " - " + atrac.getNombre());
+        alert.setContentText("Capacidad: " + atrac.getCapacidad() + "\nEdad Mínima: " + atrac.getEdad() + "\nDinosaurios: "
+                + atrac.getDinosaurio().getNombre());
+        alert.show();
     }
 
     @FXML
@@ -76,7 +89,7 @@ public class Escena4 {
         atrac = buscarAtracciones(buscarPorZona(1));
         Alert alert = new Alert(AlertType.CONFIRMATION);
         alert.setTitle(atrac.getZona() + " - " + atrac.getNombre());
-        alert.setContentText("Capacidad: " + atrac.getCapacidad() + "Edad Mínima: " + atrac.getEdad() + "Dinosaurios: "
+        alert.setContentText("Capacidad: " + atrac.getCapacidad() + "\nEdad Mínima: " + atrac.getEdad() + "\nDinosaurios: "
                 + atrac.getDinosaurio().getNombre());
         alert.show();
     }
@@ -86,6 +99,13 @@ public class Escena4 {
         Alert alert = new Alert(AlertType.INFORMATION);
         alert.setTitle("Zona Sur");
         alert.setContentText("");
+        alert.show();
+Atraccion atrac = null;
+        atrac = buscarAtracciones(buscarPorZona(3));
+        Alert alert = new Alert(AlertType.CONFIRMATION);
+        alert.setTitle(atrac.getZona() + " - " + atrac.getNombre());
+        alert.setContentText("Capacidad: " + atrac.getCapacidad() + "\nEdad Mínima: " + atrac.getEdad() + "\nDinosaurios: "
+                + atrac.getDinosaurio().getNombre());
         alert.show();
     }
 
