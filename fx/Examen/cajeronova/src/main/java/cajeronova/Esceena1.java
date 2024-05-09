@@ -28,12 +28,10 @@ public class Esceena1 implements Initializable {
     static Cliente cliente = null;
      Escena2 escena2 = new Escena2();
     Connection con = null;
-    // String url = "jdbc:mysql://127.0.0.1:33006/JurassicPark";
-    // String user = "root";
-    // String password = "Paquito2024----";
-    String url = "jdbc:mysql://localhost/CajeroNOVA";
+    String url = "jdbc:mysql://127.0.0.1:33006/CajeroNOVA";
     String user = "root";
-    String password = "";
+    String password = "Paquito2024----";
+
 
     public Esceena1() { // mi constructor
 
@@ -100,9 +98,12 @@ public class Esceena1 implements Initializable {
             alert.setTitle("Bienvenido");
             alert.setHeaderText("Ingreso Correcto");
             // alert.setContentText("Bienvenido");
-            alert.show();
+            //alert.show();
           //  enviarObje();
             App.cambioScena2();
+            alert.show();
+            TFNif.clear();
+            PFPAss.clear();
 
         } else {
             Alert alert = new Alert(AlertType.ERROR);

@@ -34,8 +34,7 @@ public class Factura {
     }
     @Override
     public String toString() {
-        return "Factura [num_fra=" + num_fra + ", cliente=" + cliente + ", num_habitacion=" + num_habitacion
-                + ", importe=" + importe + "]";
+        return  num_fra +"";
     }
 
     
