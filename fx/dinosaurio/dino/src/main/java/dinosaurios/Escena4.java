@@ -96,10 +96,10 @@ Atraccion atrac = null;
 
     @FXML
     void sur4(MouseEvent event) {
-        Alert alert = new Alert(AlertType.INFORMATION);
-        alert.setTitle("Zona Sur");
-        alert.setContentText("");
-        alert.show();
+        // Alert alert = new Alert(AlertType.INFORMATION);
+        // alert.setTitle("Zona Sur");
+        // alert.setContentText("");
+        // alert.show();
 Atraccion atrac = null;
         atrac = buscarAtracciones(buscarPorZona(3));
         Alert alert = new Alert(AlertType.CONFIRMATION);
