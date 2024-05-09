@@ -1,6 +1,7 @@
 
 package cajeronova;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -11,12 +12,16 @@ import java.util.ResourceBundle;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.SwipeEvent;
+import javafx.stage.Stage;
 import modelo.Cliente;
 import modelo.Cuenta;
 
@@ -31,7 +36,7 @@ public class Escena2 implements Initializable {
     String url = "jdbc:mysql://localhost/CajeroNOVA";
     String user = "root";
     String password = "";
-    // Esceena1 escena1=new Esceena1();
+    //Esceena1 escena1=new Esceena1();
     // private Cliente cliente =escena1.devuelvoCliente();
     static Cliente cliente;
 
@@ -60,21 +65,37 @@ public class Escena2 implements Initializable {
 
     @FXML
     void prueba(ActionEvent event) {
-
-
+        cargalabel();
+        cargarCombo();
     }
 
-    @FXML
-    void mostraCombo(MouseEvent event) {
-        //cargarCombo();
-    }
+    // @FXML
+    // void mostraCombo(MouseEvent event) {
+      
+    //     // cargarCombo();
+    // }
+
+    // public void enviarAEsc1(ActionEvent Event) throws IOException {
+
+    //     FXMLLoader loader = new FXMLLoader(App.class.getResource("Esceena1.fxml"));
+    //     Parent root = loader.load();
+    //    // escena1.enviarObje();
+    //     // scene2 = new Scene(loadFXML2.load());
+    //     //cargalabel();
+    //     Stage stage = new Stage();
+    //     stage.setScene(new Scene(root));
+    //     stage.show();
+    // }
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
         // TODO Auto-generated method stub
         boolean si = false;
-        // cargalabel();
+    //    cliente =cargarCliente(cliente);
         cambiarColorBoton();
+        cargalabel();
+        cargarCombo();
+     
         // CCuentas.getItems().add(buscarCuenta());
         // cargarCliente(cliente);
 
@@ -108,8 +129,9 @@ public class Escena2 implements Initializable {
     }
 
     public void cargalabel() {
-
+        System.out.println(cliente);
         LFulano.setText(cliente.getApellidos() + ", " + cliente.getNombre());
+       // LFulano.setText(cliente.getApellidos() + ", " + cliente.getNombre());
     }
 
     public Cuenta buscarCuenta() {
@@ -139,15 +161,13 @@ public class Escena2 implements Initializable {
 
     public void cargarCombo() {
         // BCerrarSesion.setOnMouseEntered(MouseEvent -> {
-        //     BCerrarSesion.setStyle("-fx-background-color: #6599CA;");
+        // BCerrarSesion.setStyle("-fx-background-color: #6599CA;");
         // });
         // BCerrarSesion.setOnMouseExited(MouseEvent -> {
-        //     BCerrarSesion.setStyle("-fx-background-color: #E3E3E3;");
+        // BCerrarSesion.setStyle("-fx-background-color: #E3E3E3;");
         // });
-       // CCuentas.setOnMou;
+         CCuentas.getItems().add(buscarCuenta());
 
-
-        
     }
 
 }

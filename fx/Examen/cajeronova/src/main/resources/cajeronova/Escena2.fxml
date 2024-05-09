@@ -17,7 +17,7 @@
             <Font size="33.0" />
          </font></Label>
       <Label fx:id="LFulano" layoutX="269.0" layoutY="45.0" text="FULANO" textFill="WHITE" />
-      <ComboBox fx:id="CCuentas" layoutX="221.0" layoutY="172.0" onMouseClicked="#mostraCombo" onShowing="#mostraCombo" prefWidth="150.0" />
+      <ComboBox fx:id="CCuentas" layoutX="221.0" layoutY="172.0" prefWidth="150.0" />
       <Label layoutX="265.0" layoutY="142.0" text="Cuentas" textFill="WHITE" />
       <TextField layoutY="93.0" prefHeight="45.0" prefWidth="575.0" style="-fx-background-color: #0073EB;" />
    </children>
