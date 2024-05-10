@@ -1,16 +1,9 @@
 package dinosaurios;
 
 import javafx.application.Application;
-import javafx.css.converter.StringConverter;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
-import modelo.DinoEnum;
-
 import java.io.IOException;
 
 /**
@@ -18,7 +11,7 @@ import java.io.IOException;
  */
 public class App extends Application {
 
-    private static Scene scene, scene2, scene3,scene4;
+    private static Scene scene, scene2, scene3, scene4;
     private static Stage stage;
 
     @Override
@@ -28,35 +21,50 @@ public class App extends Application {
         // VBox root = new VBox();
 
         scene = new Scene(loadFXML.load());
-        scene.getStylesheets().add(getClass().getResource("dise.css").toExternalForm());
+        //scene.getStylesheets().add(getClass().getResource("dise.css").toExternalForm());
         stage.setScene(scene);
         stage.show();
 
-        FXMLLoader loadFXML2 = new FXMLLoader(App.class.getResource("scene2.fxml"));
-        scene2 = new Scene(loadFXML2.load());
-
-
-        FXMLLoader loadFXML3 = new FXMLLoader(App.class.getResource("scene3.fxml"));
-        scene3 = new Scene(loadFXML3.load());
-        FXMLLoader loadFXML4 = new FXMLLoader(App.class.getResource("scena4.fxml"));
-        scene4 = new Scene(loadFXML4.load());
 
     }
-    public static void cambioScena1(){
+
+    public static void cambioScena1() {
+        
         stage.setScene(scene);
     }
-    public static void cambioScena2() {
 
+    public static void cambioScena2()  {
+        FXMLLoader loadFXML2 = new FXMLLoader(App.class.getResource("scene2.fxml"));
+        try {
+            scene2 = new Scene(loadFXML2.load());
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
         stage.setScene(scene2);
 
     }
-    public static void cambioScena3() {
 
+    public static void cambioScena3() {
+        FXMLLoader loadFXML3 = new FXMLLoader(App.class.getResource("scene3.fxml"));
+        try {
+            scene3 = new Scene(loadFXML3.load());
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
         stage.setScene(scene3);
 
     }
-    public static void cambioScena4() {
 
+    public static void cambioScena4() {
+        FXMLLoader loadFXML4 = new FXMLLoader(App.class.getResource("scena4.fxml"));
+        try {
+            scene4 = new Scene(loadFXML4.load());
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
         stage.setScene(scene4);
 
     }
@@ -73,7 +81,5 @@ public class App extends Application {
     public static void main(String[] args) {
         launch();
     }
-
-    
 
 }

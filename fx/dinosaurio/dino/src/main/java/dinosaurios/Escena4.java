@@ -12,9 +12,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.shape.CubicCurve;
-import javafx.scene.shape.Polygon;
+
 
 public class Escena4 {
     Connection con = null;
@@ -31,8 +29,6 @@ public class Escena4 {
     }
 
     @FXML
-    private CubicCurve CurveEste;
-    @FXML
     private Button BAtras4;
 
     @FXML
@@ -40,15 +36,17 @@ public class Escena4 {
 
     @FXML
     private ImageView imagenMapa;
+    @FXML
+    private Button BEste;
 
     @FXML
-    private CubicCurve COeste4;
+    private Button BNorte;
 
     @FXML
-    private CubicCurve Cnorte;
+    private Button BOeste;
 
     @FXML
-    private Polygon Csur4;
+    private Button BSur;
 
     @FXML
     void Atras4(ActionEvent event) {
@@ -61,76 +59,89 @@ public class Escena4 {
     }
 
     @FXML
-    void Seleccion(MouseEvent event) {
-Atraccion atrac = null;
-        atrac = buscarAtracciones(buscarPorZona(2));
-        Alert alert = new Alert(AlertType.CONFIRMATION);
-        alert.setTitle(atrac.getZona() + " - " + atrac.getNombre());
-        alert.setContentText("Capacidad: " + atrac.getCapacidad() + "\nEdad Mínima: " + atrac.getEdad() + "\nDinosaurios: "
-                + atrac.getDinosaurio().getNombre());
-        alert.show();
-
-    }
-
-    @FXML
-    void Oeste4(MouseEvent event) {
-Atraccion atrac = null;
-        atrac = buscarAtracciones(buscarPorZona(4));
-        Alert alert = new Alert(AlertType.CONFIRMATION);
-        alert.setTitle(atrac.getZona() + " - " + atrac.getNombre());
-        alert.setContentText("Capacidad: " + atrac.getCapacidad() + "\nEdad Mínima: " + atrac.getEdad() + "\nDinosaurios: "
-                + atrac.getDinosaurio().getNombre());
-        alert.show();
-    }
-
-    @FXML
-    void Norte4(MouseEvent event) {
+    void Norte4(ActionEvent event) {
         Atraccion atrac = null;
         atrac = buscarAtracciones(buscarPorZona(1));
-        Alert alert = new Alert(AlertType.CONFIRMATION);
-        alert.setTitle(atrac.getZona() + " - " + atrac.getNombre());
-        alert.setContentText("Capacidad: " + atrac.getCapacidad() + "\nEdad Mínima: " + atrac.getEdad() + "\nDinosaurios: "
-                + atrac.getDinosaurio().getNombre());
-        alert.show();
+        if (atrac != null) {
+            Alert alert = new Alert(AlertType.INFORMATION);
+            alert.setTitle("Ver Atracciones");
+            alert.setHeaderText(atrac.getZona() + " - " + atrac.getNombre());
+            alert.setContentText(
+                    "Capacidad: " + atrac.getCapacidad() + "\nEdad Mínima: " + atrac.getEdad() + "\nDinosaurios: "
+                            + atrac.getDinosaurio().getNombre());
+            alert.show();
+        } else {
+            Alert alert = new Alert(AlertType.WARNING);
+            alert.setTitle("Ver Atracciones");
+            alert.setHeaderText("White-Mont");
+            alert.setContentText("Lo sentimos, aún no tenemos atracciones en la Zona");
+            alert.show();
+        }
+
     }
 
     @FXML
-    void sur4(MouseEvent event) {
-        // Alert alert = new Alert(AlertType.INFORMATION);
-        // alert.setTitle("Zona Sur");
-        // alert.setContentText("");
-        // alert.show();
-Atraccion atrac = null;
-        atrac = buscarAtracciones(buscarPorZona(3));
-        Alert alert = new Alert(AlertType.CONFIRMATION);
-        alert.setTitle(atrac.getZona() + " - " + atrac.getNombre());
-        alert.setContentText("Capacidad: " + atrac.getCapacidad() + "\nEdad Mínima: " + atrac.getEdad() + "\nDinosaurios: "
-                + atrac.getDinosaurio().getNombre());
-        alert.show();
+    void OEste4(ActionEvent event) {
+        Atraccion atrac = null;
+        atrac = buscarAtracciones(buscarPorZona(4));
+        if (atrac != null) {
+            Alert alert = new Alert(AlertType.INFORMATION);
+            alert.setTitle("Ver Atracciones");
+            alert.setHeaderText(atrac.getZona() + " - " + atrac.getNombre());
+            alert.setContentText(
+                    "Capacidad: " + atrac.getCapacidad() + "\nEdad Mínima: " + atrac.getEdad() + "\nDinosaurios: "
+                            + atrac.getDinosaurio().getNombre());
+            alert.show();
+
+        } else {
+            Alert alert = new Alert(AlertType.WARNING);
+            alert.setTitle("Ver Atracciones");
+            alert.setHeaderText("Sun-Beach");
+            alert.setContentText("Lo sentimos, aún no tenemos atracciones en la Zona");
+            alert.show();
+        }
     }
 
-    public int zonas(String zona) {
-        int devolver = 0;
-        switch (zona) {
-            case "norte":
-                devolver = 1;
-                break;
-            case "este":
-                devolver = 2;
-
-                break;
-            case "sur":
-                devolver = 3;
-
-                break;
-            case "oeste":
-                devolver = 4;
-
-                break;
-
+    @FXML
+    void Seleccion(ActionEvent event) {
+        Atraccion atrac = null;
+        atrac = buscarAtracciones(buscarPorZona(2));
+        if (atrac != null) {
+            Alert alert = new Alert(AlertType.INFORMATION);
+            alert.setTitle("Ver Atracciones");
+            alert.setHeaderText(atrac.getZona() + " - " + atrac.getNombre());
+            alert.setContentText(
+                    "Capacidad: " + atrac.getCapacidad() + "\nEdad Mínima: " + atrac.getEdad() + "\nDinosaurios: "
+                            + atrac.getDinosaurio().getNombre());
+            alert.show();
+        } else {
+            Alert alert = new Alert(AlertType.WARNING);
+            alert.setTitle("Ver Atracciones");
+            alert.setHeaderText("Sun-Beach");
+            alert.setContentText("Lo sentimos, aún no tenemos atracciones en la Zona");
+            alert.show();
         }
+    }
 
-        return devolver;
+    @FXML
+    void sur4(ActionEvent event) {
+        Atraccion atrac = null;
+        atrac = buscarAtracciones(buscarPorZona(3));
+        if (atrac != null) {
+            Alert alert = new Alert(AlertType.INFORMATION);
+            alert.setTitle("Ver Atracciones");
+            alert.setHeaderText(atrac.getZona() + " - " + atrac.getNombre());
+            alert.setContentText(
+                    "Capacidad: " + atrac.getCapacidad() + "\nEdad Mínima: " + atrac.getEdad() + "\nDinosaurios: "
+                            + atrac.getDinosaurio().getNombre());
+            alert.show();
+        } else{
+            Alert alert = new Alert(AlertType.WARNING);
+            alert.setTitle("Ver Atracciones");
+            alert.setHeaderText("Sun-Beach");
+            alert.setContentText("Lo sentimos, aún no tenemos atracciones en la Zona");
+            alert.show();
+        }
     }
 
     public Atraccion buscarAtracciones(Zona zona) {
@@ -170,14 +181,14 @@ Atraccion atrac = null;
             PreparedStatement ps = conectar().prepareStatement(sql);
             ps.setInt(1, idDino);
             ResultSet rs = ps.executeQuery();
-            if(rs.next()){
-            dino = new Dinosaurio();
-            dino.setIdDino(idDino);
-            dino.setNombre(rs.getString("nombre"));
-            dino.setAlimentacion(rs.getString("alimentacion"));
-            dino.setTamanyo(rs.getString("tamanyo"));
-            dino.setTipo(rs.getString("tipo"));
-            System.out.println(dino);
+            if (rs.next()) {
+                dino = new Dinosaurio();
+                dino.setIdDino(idDino);
+                dino.setNombre(rs.getString("nombre"));
+                dino.setAlimentacion(rs.getString("alimentacion"));
+                dino.setTamanyo(rs.getString("tamanyo"));
+                dino.setTipo(rs.getString("tipo"));
+                System.out.println(dino);
             }
         } catch (SQLException e) {
             // TODO Auto-generated catch block
@@ -190,17 +201,17 @@ Atraccion atrac = null;
     public Zona buscarPorZona(int IdZona) {
         Zona zona = null;
         String sql = "SELECT * from Zona where id_zona=?";
-       
+
         try {
             PreparedStatement ps = conectar().prepareStatement(sql);
             ps.setInt(1, IdZona);
             ResultSet rs = ps.executeQuery();
-            if(rs.next()){
-            zona = new Zona();
-            zona.setIdZona(IdZona);
-            zona.setNombre(rs.getString("nombre"));
-            zona.setUbicacion(rs.getString("ubicacion"));
-            System.out.println("Entra en buscarporzona");
+            if (rs.next()) {
+                zona = new Zona();
+                zona.setIdZona(IdZona);
+                zona.setNombre(rs.getString("nombre"));
+                zona.setUbicacion(rs.getString("ubicacion"));
+                System.out.println("Entra en buscarporzona");
             }
         } catch (SQLException e) {
             // TODO Auto-generated catch block

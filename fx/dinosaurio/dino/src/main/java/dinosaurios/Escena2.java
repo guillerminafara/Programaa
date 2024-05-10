@@ -175,9 +175,13 @@ public Connection conectar() throws SQLException {
             ps.setInt(4, atraccion.getCapacidad());
             ps.setInt(5, atraccion.getEdad());
             if(ps.executeUpdate()==1){
-                Alert alert= new Alert(AlertType.CONFIRMATION);
+                Alert alert= new Alert(AlertType.INFORMATION);
                 alert.setContentText("agregado con exito");
                 alert.show();
+                TFNombre.clear(); 
+                TFCapacidad.clear();
+                TFEdadMinima.clear();
+                
             }
             
         } catch (SQLException e) {
