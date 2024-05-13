@@ -18,25 +18,25 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-       // this.stage= stage;
+        this.stage= stage;
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("Principal.fxml"));
         scene = new Scene(fxmlLoader.load());
         stage.setScene(scene);
         stage.show();
     }
 
-    // public void escena2() {
-    //     FXMLLoader fxmlLoader2 = new FXMLLoader(App.class.getResource("InicioSesion.fxml"));
-    //     try {
-    //         scene = new Scene(fxmlLoader2.load());
-    //         stage.setScene(scene2);
-    //       // stage.show();
-    //     } catch (IOException e) {
-    //         // TODO Auto-generated catch block
-    //         e.printStackTrace();
-    //     }
+    public void escena2() {
+        FXMLLoader fxmlLoader2 = new FXMLLoader(App.class.getResource("InicioSesion.fxml"));
+        try {
+            scene = new Scene(fxmlLoader2.load());
+            stage.setScene(scene2);
+          // stage.show();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
       
-    // }
+    }
     // static void setRoot(String fxml) throws IOException {
     // scene.setRoot(loadFXML(fxml));
     // }

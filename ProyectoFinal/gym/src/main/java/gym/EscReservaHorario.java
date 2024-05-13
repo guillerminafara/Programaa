@@ -2,11 +2,16 @@ package gym;
 
 import java.net.URL;
 import java.time.DayOfWeek;
+import javafx.util.Duration;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -18,57 +23,81 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 
 public class EscReservaHorario implements Initializable {
+  // Locale espa = new Locale("es", "es");
+  LocalDateTime ld = LocalDateTime.now();
+  // static DateTimeFormatter formater= DateTimeFormatter.ofPattern("dd-MM-aaaa");
+  DayOfWeek diaa = ld.getDayOfWeek();
 
-    LocalDate ld = new LocalDate();
-    static DateTimeFormatter fromater= DateTimeFormatter.ofPattern("dd-MM-aaaa");
-     DayOfWeek diaa = fecha.getDayOfWeek();   
+  @FXML
+  private TableColumn<?, ?> ColuViernes;
 
-    @FXML
-    private TableColumn<?, ?> ColuViernes;
+  @FXML
+  private DatePicker DatePickerB;
+  @FXML
+  private TableView<?> TablaHorarios;
 
-    @FXML
-    private DatePicker DatePickerB;
-    @FXML
-    private TableView<?> TablaHorarios;
+  @FXML
+  private TableColumn<?, ?> coluDomingo;
 
-    @FXML
-    private TableColumn<?, ?> coluDomingo;
+  @FXML
+  private TableColumn<?, ?> coluJuev;
 
-    @FXML
-    private TableColumn<?, ?> coluJuev;
+  @FXML
+  private TableColumn<?, ?> coluLunes;
 
-    @FXML
-    private TableColumn<?, ?> coluLunes;
+  @FXML
+  private TableColumn<?, ?> coluMartes;
 
-    @FXML
-    private TableColumn<?, ?> coluMartes;
+  @FXML
+  private TableColumn<?, ?> coluMierc;
 
-    @FXML
-    private TableColumn<?, ?> coluMierc;
+  @FXML
+  private TableColumn<?, ?> coluSabado;
 
-    @FXML
-    private TableColumn<?, ?> coluSabado;
+  @FXML
+  private ImageView imagenLogo;
+  @FXML
+  private Label label;
 
-    @FXML
-    private ImageView imagenLogo;
-    @FXML
-    private Label label;
+  @FXML
+  void DatePickerEvent(ActionEvent event) {
 
-    @FXML
-    void DatePickerEvent(ActionEvent event) {
+    // label.setText(DatePickerB.getValue().toString());
+    // label.setText(diaa.toString());
+    label.setText(ld.getHour() + ":" + ld.getMinute());
+    // System.out.println("dia "+ diaa);
+    System.out.println("hora " + ld.getHour() + ":" + ld.getMinute());
+  }
 
-        label.setText(DatePickerB.getValue().toString());
-    }
+  @FXML
+  void Selecciona(MouseEvent event) {
 
-    @FXML
-    void Selecciona(MouseEvent event) {
+  }
 
-    }
+  @Override
+  public void initialize(URL arg0, ResourceBundle arg1) {
+    // time.setText(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")))
+    // ),
+     
+    Timeline tl = new Timeline(new KeyFrame(Duration.ZERO, e -> label.setText(fechita())
+   
+    
+    
+    ),
+        new KeyFrame(Duration.seconds(1)));
 
-    @Override
-    public void initialize(URL arg0, ResourceBundle arg1) {
-        // TODO Auto-generated method stub
+    // label.setText(ld.getHour() + ":" + ld.getMinute());
 
-    }
+    // System.out.println("dia "+ diaa);
+    // System.out.println("hora "+ ld);
+    tl.setCycleCount(Animation.INDEFINITE);
+    tl.play();
+  }
+
+  private String fechita() {
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+    label.setText(LocalDateTime.now().format(formatter));
+      return LocalDateTime.now().format(formatter);
+  }
 
 }
