@@ -10,7 +10,7 @@
       <Button fx:id="BotonReserva" layoutX="263.0" layoutY="321.0" mnemonicParsing="false" prefHeight="24.0" prefWidth="145.0" text="Reserva Horario" />
       <Button fx:id="BotonSobreNosotros" layoutX="435.0" layoutY="321.0" mnemonicParsing="false" prefHeight="24.0" prefWidth="158.0" text="Sobre Nosotros" />
       <Button fx:id="BotonIngresa" layoutX="102.0" layoutY="321.0" mnemonicParsing="false" onAction="#InicioSesion" prefHeight="24.0" prefWidth="130.0" text="Ingresa" />
-      <Button fx:id="BotonDónde" layoutX="632.0" layoutY="321.0" mnemonicParsing="false" prefHeight="24.0" prefWidth="130.0" text="Localización" />
+      <Button fx:id="BotonDonde" layoutX="632.0" layoutY="321.0" mnemonicParsing="false" prefHeight="24.0" prefWidth="130.0" text="Localización" />
       <ImageView fx:id="ImagenLogo" fitHeight="203.0" fitWidth="299.0" layoutX="305.0" layoutY="63.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@mono.png" />

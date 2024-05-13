@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="750.0" style="-fx-background-color: #2F2F2F;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gym.EscReservaHorario">
+   <children>
+      <ImageView fx:id="imagenLogo" fitHeight="69.0" fitWidth="105.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
+      <TableView fx:id="TablaHorarios" layoutX="79.0" layoutY="196.0" onMouseClicked="#Selecciona" prefHeight="335.0" prefWidth="593.0">
+        <columns>
+          <TableColumn fx:id="coluLunes" prefWidth="84.0" text="Lunes" />
+          <TableColumn fx:id="coluMartes" prefWidth="71.0" text="Martes" />
+            <TableColumn fx:id="coluMierc" prefWidth="88.0" text="Miércoles" />
+            <TableColumn fx:id="coluJuev" prefWidth="87.0" text="Jueves" />
+            <TableColumn fx:id="ColuViernes" prefWidth="86.0" text="Viernes" />
+            <TableColumn fx:id="coluSabado" prefWidth="84.0" text="Sábado" />
+            <TableColumn fx:id="coluDomingo" prefWidth="92.0" text="Domingo" />
+        </columns>
+      </TableView>
+      <DatePicker fx:id="DatePickerB" layoutX="95.0" layoutY="62.0" onAction="#DatePickerEvent" />
+      <Label fx:id="label" layoutX="418.0" layoutY="79.0" text="----" textFill="#fffafa" />
+   </children>
+</AnchorPane>

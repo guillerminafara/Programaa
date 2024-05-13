@@ -1,7 +1,4 @@
-package proyecto;
-
-
-
+package gym;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -9,11 +6,10 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
-public class Principal implements Initializable{
-    
+public class Principal implements Initializable {
+
     @FXML
     private Button BotonDonde;
 
@@ -28,21 +24,19 @@ public class Principal implements Initializable{
 
     @FXML
     private ImageView ImagenLogo;
-        @FXML
+
+    @FXML
     void InicioSesion(ActionEvent event) {
-    
-
+        App.escena2();
     }
-
-   
+    @FXML
+    void DirigirReservaEvent(ActionEvent event) {
+        App.escena3();
+    }
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
         // TODO Auto-generated method stub
-        
-    //    Image image= new Image(getClass().getResource("mono.png").toExternalForm());
-    //     ImagenLogo.setImage(image);
+       
     }
-
-
 
 }
