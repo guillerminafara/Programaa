@@ -75,6 +75,7 @@ order by A.BirthDate desc limit 3;
 Muestra todas las facturas de los clientes berlineses. Deberán mostrarse las columnas:
 fecha de la factura, nombre completo del cliente, dirección de facturación,
 código postal, país, importe (en este orden).
+En esta ocasión tomaremos de las tablas factura en unión con cliebte dando la condición de que la ciudad del cliente deba ser Berlín. Es necesaria la unión de ambas tablas para encontrar los atributos como código postal, país, ciudad,  importe ya que esta información de encuentran en ambas tablas.
 ```sql
 select Invoice.InvoiceDate, Customer.FirstName, Customer.LastName, Invoice.BillingAddress, Customer.PostalCode, Customer.Country, Invoice.Total
 from Invoice join Customer 
@@ -82,6 +83,7 @@ on (Invoice.CustomerId= Customer.CustomerId)
 where Customer.City like "Berlin";
 ```
 ### Query 10
+En esta ocasión necesitaremos de la unión de de la tabla PlayList con PlayListTrack y está última conTrack mediante Join. dando la condición de que el nombre de la PlayList comience con letra c al resultado lo ordenaremos Album y por milisegundos de forma ascendente. de la tabla PlayList mostraremos 
 Muestra las listas de reproducción cuyo nombre comienza por C, junto a todas
 sus canciones, ordenadas por álbum y por duración.
 ```sql
@@ -93,6 +95,7 @@ where Playlist.Name like "c%" order by Track.AlbumId  and Track.Milliseconds asc
 ```
 
 ### Query 11
+Para esta query necesitamos también trabajar con lqs claves que coinciden en las tablas Customer y tabla Invoice. Buscaremos dentro de estás tablas aquellas totales que superen los 10 euros y los ordenaremos por el apellido de Customer de a-z.
 ```sql
 select Customer.CustomerId, Customer.LastName, Invoice.Total
 from Customer join Invoice on (Customer.CustomerId =Invoice.CustomerId)
@@ -101,16 +104,19 @@ order by Customer.LastName asc;
 ```
 ### Query 12
 ```sql
+Con la siguiente query estamos obteniendo el pago más bajo, el más alto y un promedio de pagos que se encuentran en la tabla Invoice. 
 
 SELECT min(total), max(total), avg(total) 
 FROM invoice;
 ```
 ### Query 13
+En la siguiente query hacemos un conteo de los artistas  que aparecen 
 ```sql
 select count(*)
 from Artist;
 ```
 ### Query 14
+
 ```sql
 select count(Track.Name)
 from Album join Track 
@@ -118,11 +124,13 @@ on(Album.AlbumId= Track.AlbumId)
 where Album.Title like "Out Of Time";
 ```
 ### Query 15
+Trabajando cona tabla Customer realizaremos un conteo evitando repeticiones de los países que en este caso son clientes. 
 ```sql
 select count( DISTINCT Country)
 from Customer 
 ```
 ### Query 16
+realizaremos un conteo de Nombre de Track 
 ```sql
 select count(Track.Name)
 from Track join Genre on (Track.GenreId=Genre.GenreId)
@@ -138,6 +146,7 @@ group by Title order by count(Track.TrackId) desc;
 ```
 
 ### Query 18
+
 ```sql
 select Genre.GenreId, Genre.Name, count(*)
 from Track join InvoiceLine
@@ -146,6 +155,7 @@ join Genre on (Track.GenreId=Genre.GenreId)
 group by Genre.Name, Genre.GenreId order by count( *) desc;
 ```
 ### Query 19
+
 ```sql
 select Album.AlbumId, Album.Title, Track.Composer, count(*)
 from Album join Track on(Album.AlbumId = Track.AlbumId)
@@ -160,6 +170,8 @@ group by Album.AlbumId, Album.Title, Artist.Name order by count(*) desc limit 6;
 
 ```
 ### Query 20
+Mostraremos 
+Haremos la unión en esta ocasión de las tablas Customer con la tabla Invoice y está última con la tabla InvoiceLine lo haremos mediante los idCustomer propio en Customer y foráneo en Invoice, así como idIvoice siendo primario en tabla Invoice y foráneo en InvoiceLine. De esta manera limitaremos el resultado obtenido a aquellos quienes coinciden los ID nombrados. Posteriormente agruparemos el resultado según los países que han comprado. Realizaremos además, un conteo del idCliente para saber cuántos clientes hay sin que se repitan. Finalmente los ordenaremos de forma descendente y limitaremos el resultado a 5 filas 
 ```sql
 SELECT Customer.Country, COUNT(DISTINCT Customer.CustomerId) AS "Número de clientes"
 FROM Customer 
