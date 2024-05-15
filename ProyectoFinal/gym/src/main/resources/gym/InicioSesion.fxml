@@ -10,7 +10,6 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="603.0" prefWidth="837.0" style="-fx-background-color: #2F2F2F;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gym.EscInitSes">
    <children>
       <Label layoutX="139.0" layoutY="275.0" text="MAIL:" textFill="WHITE">
@@ -32,5 +31,6 @@
       </ImageView>
       <CheckBox layoutX="303.0" layoutY="413.0" mnemonicParsing="false" text="Recordar Usuario" textFill="#fffafa" />
       <PasswordField layoutX="303.0" layoutY="353.0" prefHeight="34.0" prefWidth="255.0" promptText="Contraseña" />
+      <Button fx:id="botonAtras" layoutX="57.0" layoutY="43.0" mnemonicParsing="false" onAction="#atras" text="🠔" />
    </children>
 </AnchorPane>

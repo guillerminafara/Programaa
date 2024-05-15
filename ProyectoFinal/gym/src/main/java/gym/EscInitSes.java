@@ -18,7 +18,8 @@ public class EscInitSes implements Initializable{
     public EscInitSes() {
         con = Conexion.getConexion();
     }
-
+    @FXML
+    private Button botonAtras;
 
    
     @FXML
@@ -34,10 +35,13 @@ public class EscInitSes implements Initializable{
     void InicaSesion(ActionEvent event) {
 
     }
-
+    @FXML
+    void atras(ActionEvent event) {
+        App.escena1();
+    }
 
     public void login(){
-        String sql="Select * from cliente where idCliente= ?";
+        String sql="Select * from cliente where email= ?";
         PreparedStatement ps;
         try {
             ps = con.prepareStatement(sql);

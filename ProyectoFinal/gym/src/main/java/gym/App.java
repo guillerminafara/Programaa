@@ -23,7 +23,12 @@ public class App extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("Principal.fxml"));
         scene = new Scene(fxmlLoader.load());
         stage.setScene(scene);
+       // stage.setMaxWidth(1024);
         stage.show();
+    }
+    public static void escena1() {
+            stage.setScene(scene);
+    
     }
 
     public static void escena2() {
