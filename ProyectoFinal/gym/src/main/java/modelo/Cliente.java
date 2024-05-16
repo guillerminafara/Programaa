@@ -7,8 +7,20 @@ public class Cliente {
     String apellido;
     String mail;
     String pass;
+    boolean estado;
     public Cliente() {
     }
+
+    public Cliente(boolean estado, String pass, String mail, String apellido, String nombre, String nif, String idCliente) {
+        this.estado = estado;
+        this.pass = pass;
+        this.mail = mail;
+        this.apellido = apellido;
+        this.nombre = nombre;
+        this.nif = nif;
+        this.idCliente = idCliente;
+    }
+
     public String getIdCliente() {
         return idCliente;
     }
@@ -45,6 +57,15 @@ public class Cliente {
     public void setPass(String pass) {
         this.pass = pass;
     }
+
+    public boolean isEstado() {
+        return estado;
+    }
+
+    public void setEstado(boolean estado) {
+        this.estado = estado;
+    }
+
     @Override
     public String toString() {
         return "Cliente [idCliente=" + idCliente + ", nif=" + nif + ", nombre=" + nombre + ", apellido=" + apellido

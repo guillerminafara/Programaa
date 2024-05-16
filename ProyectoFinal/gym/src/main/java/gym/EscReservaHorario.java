@@ -2,10 +2,14 @@ package gym;
 
 import java.net.URL;
 import java.time.DayOfWeek;
+
+import javafx.beans.Observable;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
@@ -21,6 +25,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import modelo.Horario;
 
 public class EscReservaHorario implements Initializable {
   // Locale espa = new Locale("es", "es");
@@ -33,6 +38,7 @@ public class EscReservaHorario implements Initializable {
 
   @FXML
   private DatePicker DatePickerB;
+
   @FXML
   private TableView<?> TablaHorarios;
 
@@ -43,7 +49,7 @@ public class EscReservaHorario implements Initializable {
   private TableColumn<?, ?> coluJuev;
 
   @FXML
-  private TableColumn<?, ?> coluLunes;
+  private TableColumn<ArrayList<String>, String> coluLunes;
 
   @FXML
   private TableColumn<?, ?> coluMartes;
@@ -80,9 +86,6 @@ public class EscReservaHorario implements Initializable {
     // ),
      
     Timeline tl = new Timeline(new KeyFrame(Duration.ZERO, e -> label.setText(fechita())
-   
-    
-    
     ),
         new KeyFrame(Duration.seconds(1)));
 
@@ -92,6 +95,8 @@ public class EscReservaHorario implements Initializable {
     // System.out.println("hora "+ ld);
     tl.setCycleCount(Animation.INDEFINITE);
     tl.play();
+
+
   }
 
   private String fechita() {
@@ -99,5 +104,14 @@ public class EscReservaHorario implements Initializable {
     label.setText(LocalDateTime.now().format(formatter));
       return LocalDateTime.now().format(formatter);
   }
+  public void cargarTabla() {
+    ArrayList<String> lunes= new ArrayList();
+    String dias="";
+    for (int i = 8; i <21 ; i++) {
+      dias= i+"";
+      lunes.add(dias);
+    }
+   // coluLunes.setCellValueFactory(new PropertyValueFactory<lunes, String >("Lunes"));
 
+  }
 }
