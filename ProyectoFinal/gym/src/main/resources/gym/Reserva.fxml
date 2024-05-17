@@ -7,6 +7,10 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
 
 <AnchorPane fx:id="anchor" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="750.0" style="-fx-background-color: #2F2F2F;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gym.EscReservaHorario">
    <children>
@@ -18,26 +22,21 @@
         <columns>
           <TableColumn fx:id="coluLunes" prefWidth="104.0" text="Lunes" />
         </columns>
+         <columnResizePolicy>
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+         </columnResizePolicy>
       </TableView>
-      <TableView fx:id="tableMartes" layoutX="209.0" layoutY="175.0" prefHeight="386.0" prefWidth="105.0">
-        <columns>
-          <TableColumn fx:id="coluMartes" prefWidth="104.0" text="Martes" />
-        </columns>
-      </TableView>
-      <TableView fx:id="tableMiercoles" layoutX="314.0" layoutY="175.0" prefHeight="386.0" prefWidth="105.0">
-        <columns>
-          <TableColumn fx:id="coluMierc" prefWidth="104.0" text="Miércoles" />
-        </columns>
-      </TableView>
-      <TableView fx:id="tableJueves" layoutX="419.0" layoutY="175.0" prefHeight="386.0" prefWidth="105.0">
-        <columns>
-          <TableColumn fx:id="coluJuev" prefWidth="104.0" text="Jueves" />
-        </columns>
-      </TableView>
-      <TableView fx:id="tableViernes" layoutX="524.0" layoutY="175.0" prefHeight="386.0" prefWidth="105.0">
-        <columns>
-          <TableColumn fx:id="ColuViernes" prefWidth="104.0" text="Viernes" />
-        </columns>
-      </TableView>
+      <Pane layoutX="305.0" layoutY="127.0" prefHeight="424.0" prefWidth="198.0" />
+      <GridPane layoutX="528.0" layoutY="158.0" prefHeight="330.0" prefWidth="200.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+      </GridPane>
    </children>
 </AnchorPane>

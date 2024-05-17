@@ -5,13 +5,13 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class Conexion {
-     // static String url = "jdbc:mysql://127.0.0.1:33006/gimnasio";
-    // static String user = "root";
-    // static String password = "Paquito2024----";
-
-    static String url = "jdbc:mysql://localhost/gimnasio";
+     static String url = "jdbc:mysql://127.0.0.1:33006/Gimnasio";
     static String user = "root";
-    static String password = "";
+    static String password = "Paquito2024----";
+
+    // static String url = "jdbc:mysql://localhost/Gimnasio";
+    // static String user = "root";
+    // static String password = "";
     static Connection conectar = null;
 
     Conexion() {
@@ -20,11 +20,11 @@ public class Conexion {
 
     public static Connection getConexion() {
       
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-        } catch (ClassNotFoundException e) {
-          System.out.println("error en drivers");
-        }
+        // try {
+        //     Class.forName("com.mysql.cj.jdbc.Driver");
+        // } catch (ClassNotFoundException e) {
+        //   System.out.println("error en drivers");
+        // }
         try {
             conectar = DriverManager.getConnection(url, user, password);
         } catch (SQLException e) {

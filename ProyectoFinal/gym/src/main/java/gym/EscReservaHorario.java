@@ -161,7 +161,7 @@ public class EscReservaHorario implements Initializable {
     this.coluMierc.setCellValueFactory(c -> new SimpleStringProperty(c.getValue()));
     this.coluJuev.setCellValueFactory(c -> new SimpleStringProperty(c.getValue()));
     this.ColuViernes.setCellValueFactory(c -> new SimpleStringProperty(c.getValue()));
-
+ 
   }
 
  

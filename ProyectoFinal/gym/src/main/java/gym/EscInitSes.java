@@ -1,6 +1,7 @@
 package gym;
 import java.net.URL;
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -19,9 +20,18 @@ import modelo.Cliente;
 public class EscInitSes implements Initializable{
     private Connection con = null;
     Cliente cliente;
+    boolean entra=false;
+    // static String url = "jdbc:mysql://127.0.0.1:33006/Gimnasio";
+    // static String user = "root";
+    // static String password = "Paquito2024----";
     public EscInitSes() {
         con = Conexion.getConexion();
     }
+
+//    public Connection conectar() throws SQLException {
+//     con= DriverManager.getConnection(url,user,password);
+//     return con;
+// }
     @FXML
     private Button botonAtras;
 
@@ -40,27 +50,29 @@ public class EscInitSes implements Initializable{
 
     @FXML
     void InicaSesion(ActionEvent event) {
-        cliente=login(textFmail.getText(),TextContra.getText() );
-        if(cliente!=null){
-
-        }else{
-
-        }
+        //login(textFmail.getText(),TextContra.getText() )
+      
+       if(login(textFmail.getText(),TextContra.getText() )){
+            App.escena4();
+         }else{
+            throw new NullPointerException("No se ha podido iniciar sesión");
+         }
     }
     @FXML
     void atras(ActionEvent event) {
         App.escena1();
     }
 
-    public Cliente login(String log, String pass){
-        Cliente cliente=null;
+    public boolean login(String log, String pass){
         PreparedStatement ps;
         String sql;
 
         if(log.contains("@")){
-             sql="Select * from cliente where email= ?"; // verifiicar el metodo de ingreso
+             sql="Select * from cliente where mail= ?"; // verifiicar el metodo de ingreso
+             System.out.println("entra con mail");
         }else{
              sql="Select * from cliente where nif= ?";
+             System.out.println("entra con nif");
 
         }
         try {
@@ -68,19 +80,21 @@ public class EscInitSes implements Initializable{
             ps.setString(1, log);
             ResultSet rs= ps.executeQuery();
             if(rs.next()){
-
-                if(cliente.getPass().equals(pass)&& (cliente.getMail().equals(log)||cliente.getNif().equals(log) )){
-                    cliente= new Cliente();
-                    cliente.setIdCliente(rs.getString("idcliente"));
-                    cliente.setIdCliente(rs.getString("nif"));
-                    cliente.setApellido(rs.getString("apellido"));
-                    cliente.setNombre(rs.getString("nombre"));
-                    cliente.setMail(rs.getString("email"));
-                    cliente.setPass(rs.getString("pass"));
-                    cliente.setEstado(rs.getBoolean("estado"));
+                cliente= new Cliente();
+                cliente.setIdCliente(rs.getString("idcliente"));
+                cliente.setNif(rs.getString("nif"));
+                cliente.setApellido(rs.getString("apellido"));
+                cliente.setNombre(rs.getString("nombre"));
+                cliente.setMail(rs.getString("mail"));
+                cliente.setPass(rs.getString("pass"));
+                cliente.setEstado(rs.getBoolean("estado"));
+                if(cliente.getPass().equals(pass)&& (cliente.getMail().equals(log) )){
+                    System.out.println("entra al next");
+                    entra=true;
                 }else{
                    // cliente= new Cliente(false,"","","","","", "");
-
+                    System.out.println("no esta entrando ");
+                    
                 }
             }else{
                 Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -88,13 +102,14 @@ public class EscInitSes implements Initializable{
                 alert.setTitle("Inicio de Sesión ");
                 alert.show();
               //  cliente= new Cliente(false,"","","","","", "");
+           //   throw new NullPointerException("No se ha podido iniciar sesión");
 
             }
         } catch (SQLException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-        return cliente;
+        return entra;
    
     }
 
