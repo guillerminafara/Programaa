@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #2F2F2F;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <TextField layoutX="524.0" layoutY="100.0" prefHeight="25.0" prefWidth="87.0" style="-fx-background-color: #f1c411;" />
+      <TextField layoutX="617.0" layoutY="100.0" prefHeight="25.0" prefWidth="87.0" style="-fx-background-color: #f1c411;" />
+      <TextField layoutX="429.0" layoutY="101.0" prefHeight="25.0" prefWidth="87.0" style="-fx-background-color: #f1c411;" />
+      <Label layoutX="435.0" layoutY="100.0" prefHeight="27.0" prefWidth="81.0" text="Miércoles" textFill="#fcfcfc">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Label>
+      <TextField layoutX="334.0" layoutY="101.0" prefHeight="25.0" prefWidth="87.0" style="-fx-background-color: #f1c411;" />
+      <TextField layoutX="241.0" layoutY="101.0" prefHeight="25.0" prefWidth="87.0" style="-fx-background-color: #f1c411;" />
+      <Button fx:id="Lunes08" layoutX="241.0" layoutY="130.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="87.0" text="08:00" />
+      <Button fx:id="martes08" layoutX="334.0" layoutY="130.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="87.0" text="08:00" />
+      <Button fx:id="miercoles08" layoutX="429.0" layoutY="130.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="87.0" text="08:00" />
+      <Button fx:id="jueves08" layoutX="523.0" layoutY="130.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="87.0" text="08:00" />
+      <Button fx:id="viernes08" layoutX="617.0" layoutY="130.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="87.0" text="08:00" />
+      <Label layoutX="262.0" layoutY="100.0" prefHeight="17.0" prefWidth="52.0" text="Lunes" textFill="#f8f8f8">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Label>
+      <Label layoutX="349.0" layoutY="99.0" prefHeight="27.0" prefWidth="63.0" text="Martes" textFill="WHITE">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Label>
+      <Label layoutX="541.0" layoutY="99.0" prefHeight="27.0" prefWidth="52.0" text="Jueves" textFill="WHITE">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Label>
+      <Label layoutX="629.0" layoutY="99.0" prefHeight="27.0" prefWidth="63.0" text="Viernes" textFill="WHITE">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Label>
+      <Button fx:id="lunes09" layoutX="242.0" layoutY="159.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="87.0" text="09:00" />
+      <Button fx:id="martes09" layoutX="335.0" layoutY="159.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="87.0" text="09:00" />
+      <Button fx:id="miercoles09" layoutX="429.0" layoutY="159.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="87.0" text="09:00" />
+      <Button fx:id="jueves09" layoutX="524.0" layoutY="159.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="87.0" text="09:00" />
+      <Button fx:id="viernes09" layoutX="618.0" layoutY="159.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="87.0" text="09:00" />
+      <Button fx:id="lunes10" layoutX="242.0" layoutY="188.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="87.0" text="10:00" />
+      <Button fx:id="martes10" layoutX="335.0" layoutY="188.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="87.0" text="10:00" />
+      <Button fx:id="miercoles10" layoutX="429.0" layoutY="188.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="87.0" text="10:00" />
+      <Button fx:id="jueves10" layoutX="524.0" layoutY="188.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="87.0" text="10:00" />
+      <Button fx:id="viernes10" layoutX="618.0" layoutY="188.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="87.0" text="10:00" />
+      <Button fx:id="lunes11" layoutX="242.0" layoutY="218.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="87.0" text="11:00" />
+      <Button fx:id="martes11" layoutX="335.0" layoutY="218.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="87.0" text="11:00" />
+      <Button fx:id="miercoles11" layoutX="429.0" layoutY="218.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="87.0" text="11:00" />
+      <Button fx:id="jueves11" layoutX="524.0" layoutY="218.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="87.0" text="11:00" />
+      <Button fx:id="viernes11" layoutX="618.0" layoutY="218.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="87.0" text="11:00" />
+      <Button fx:id="lunes12" layoutX="242.0" layoutY="247.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="87.0" text="12:00" />
+      <Button fx:id="martes12" layoutX="335.0" layoutY="247.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="87.0" text="12:00" />
+      <Button fx:id="miercoles11" layoutX="429.0" layoutY="247.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="87.0" text="12:00" />
+      <Button fx:id="jueves12" layoutX="524.0" layoutY="247.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="87.0" text="12:00" />
+      <Button fx:id="viernes12" layoutX="618.0" layoutY="247.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="87.0" text="12:00" />
+      <Button fx:id="lunes13" layoutX="243.0" layoutY="276.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="87.0" text="13:00" />
+      <Button fx:id="martes13" layoutX="336.0" layoutY="276.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="87.0" text="13:00" />
+      <Button fx:id="miercoles12" layoutX="429.0" layoutY="276.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="87.0" text="13:00" />
+      <Button fx:id="jueves13" layoutX="524.0" layoutY="276.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="87.0" text="13:00" />
+      <Button fx:id="viernes13" layoutX="618.0" layoutY="276.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="87.0" text="13:00" />
+      <Button fx:id="lunes17" layoutX="243.0" layoutY="336.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="87.0" text="17:00" />
+      <Button fx:id="martes17" layoutX="337.0" layoutY="336.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="87.0" text="17:00" />
+      <Button fx:id="miercoles17" layoutX="431.0" layoutY="336.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="87.0" text="17:00" />
+      <Button fx:id="jueves17" layoutX="525.0" layoutY="336.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="87.0" text="17:00" />
+      <Button fx:id="viernes17" layoutX="618.0" layoutY="336.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="87.0" text="17:00" />
+      <Button fx:id="lunes16" layoutX="242.0" layoutY="306.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="87.0" text="16:00" />
+      <Button fx:id="martes16" layoutX="336.0" layoutY="306.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="87.0" text="16:00" />
+      <Button fx:id="miercoles16" layoutX="430.0" layoutY="306.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="87.0" text="16:00" />
+      <Button fx:id="jueves16" layoutX="524.0" layoutY="306.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="87.0" text="16:00" />
+      <Button fx:id="viernes16" layoutX="618.0" layoutY="306.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="87.0" text="16:00" />
+      <Button fx:id="lunes18" layoutX="243.0" layoutY="366.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="87.0" text="18:00" />
+      <Button fx:id="martes18" layoutX="336.0" layoutY="366.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="87.0" text="18:00" />
+      <Button fx:id="miercoles18" layoutX="431.0" layoutY="366.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="87.0" text="18:00" />
+      <Button fx:id="jueves18" layoutX="525.0" layoutY="366.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="87.0" text="18:00" />
+      <Button fx:id="viernes18" layoutX="618.0" layoutY="366.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="87.0" text="18:00" />
+      <Button fx:id="lunes19" layoutX="243.0" layoutY="396.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="87.0" text="19:00" />
+      <Button fx:id="martes19" layoutX="336.0" layoutY="396.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="87.0" text="19:00" />
+      <Button fx:id="miercoles19" layoutX="430.0" layoutY="396.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="87.0" text="19:00" />
+      <Button fx:id="jueves19" layoutX="525.0" layoutY="396.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="87.0" text="19:00" />
+      <Button fx:id="viernes19" layoutX="618.0" layoutY="396.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="87.0" text="19:00" />
+      <Button fx:id="lunes20" layoutX="243.0" layoutY="426.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="87.0" text="20:00" />
+      <Button fx:id="martes20" layoutX="336.0" layoutY="426.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="87.0" text="20:00" />
+      <Button fx:id="miercoles20" layoutX="431.0" layoutY="426.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="87.0" text="20:00" />
+      <Button fx:id="jueves20" layoutX="525.0" layoutY="426.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="87.0" text="20:00" />
+      <Button fx:id="viernes20" layoutX="618.0" layoutY="426.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="87.0" text="20:00" />
+      <Button fx:id="lunes21" layoutX="243.0" layoutY="456.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="87.0" text="21:00" />
+      <Button fx:id="martes21" layoutX="336.0" layoutY="456.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="87.0" text="21:00" />
+      <Button fx:id="miercoles21" layoutX="430.0" layoutY="456.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="87.0" text="21:00" />
+      <Button fx:id="jueves21" layoutX="525.0" layoutY="456.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="87.0" text="21:00" />
+      <Button fx:id="viernes21" layoutX="618.0" layoutY="456.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="87.0" text="21:00" />
+      <Button fx:id="botonAtras" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#atras" text="🠔" />
+      <Button fx:id="botonConfirmar" layoutX="87.0" layoutY="513.0" mnemonicParsing="false" onAction="#confirma" text="Confirmar" />
+   </children>
+</AnchorPane>

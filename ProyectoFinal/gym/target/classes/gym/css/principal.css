@@ -4,5 +4,19 @@
 }
 
 .button{
-    -fx-background-color: green;
+  -fx-background-color: green; 
+}
+
+.TableView .scroll-bar:vertical {
+  -fx-min-width: 0;
+  -fx-pref-width: 0;
+  -fx-pref-height: 0;
+  -fx-opacity: 0;
+
+}
+.TableColumn .scroll-bar:vertical{
+  -fx-min-width: 0;
+  -fx-pref-width: 0;
+  -fx-pref-height: 0;
+  -fx-opacity: 0;
 }

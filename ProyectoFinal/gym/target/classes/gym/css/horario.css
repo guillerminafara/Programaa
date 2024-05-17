@@ -1,0 +1,4 @@
+.TableView .scroll-bar:botom {
+    -fx-min-width: 0;
+    -fx-pref-width: 0;
+  }

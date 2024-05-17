@@ -9,6 +9,12 @@ public class Horario {
     boolean estado;
 
   
+    public Horario(String idHorario, LocalDate diaHora, int cant, boolean estado) {
+        this.idHorario = idHorario;
+        this.diaHora = diaHora;
+        this.cant = cant;
+        this.estado = estado;
+    }
     public Horario() {
     }
     public LocalDate getDiaHora() {

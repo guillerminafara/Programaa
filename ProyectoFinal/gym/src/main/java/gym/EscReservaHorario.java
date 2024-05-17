@@ -4,6 +4,10 @@ import java.net.URL;
 import java.time.DayOfWeek;
 
 import javafx.beans.Observable;
+import javafx.beans.property.ReadOnlyStringWrapper;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.Duration;
 import java.time.LocalDate;
@@ -19,12 +23,14 @@ import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import modelo.Horario;
 
 public class EscReservaHorario implements Initializable {
@@ -33,32 +39,57 @@ public class EscReservaHorario implements Initializable {
   // static DateTimeFormatter formater= DateTimeFormatter.ofPattern("dd-MM-aaaa");
   DayOfWeek diaa = ld.getDayOfWeek();
 
+  ObservableList<String> datos;
   @FXML
-  private TableColumn<?, ?> ColuViernes;
+  private AnchorPane anchor;
+  @FXML
+  private Button botonAtras;
+  @FXML
+  // private TableColumn<ArrayList, String> ColuViernes= new
+  // TableColumn<>("Viernes");
+  private TableColumn<String, String> ColuViernes;
 
   @FXML
   private DatePicker DatePickerB;
 
   @FXML
-  private TableView<?> TablaHorarios;
+  private TableView<String> tableJueves;
 
   @FXML
-  private TableColumn<?, ?> coluDomingo;
+  private TableView<String> tableLunes;
 
   @FXML
-  private TableColumn<?, ?> coluJuev;
+  private TableView<String> tableMartes;
 
   @FXML
-  private TableColumn<ArrayList<String>, String> coluLunes;
+  private TableView<String> tableMiercoles;
 
   @FXML
-  private TableColumn<?, ?> coluMartes;
+  private TableView<String> tableViernes;
 
   @FXML
-  private TableColumn<?, ?> coluMierc;
+  // private TableColumn<ArrayList, String> coluJuev = new
+  // TableColumn<>("Jueves");
+
+  private TableColumn<String, String> coluJuev;
 
   @FXML
-  private TableColumn<?, ?> coluSabado;
+  // private TableColumn<ArrayList, String> coluLunes = new
+  // TableColumn<>("Lunes");
+
+  private TableColumn<String, String> coluLunes;
+
+  @FXML
+  // private TableColumn<ArrayList, String> coluMartes = new
+  // TableColumn<>("Martes");
+
+  private TableColumn<String, String> coluMartes;
+
+  @FXML
+  private TableColumn<String, String> coluMierc;
+
+  // private TableColumn<ArrayList, String> coluMierc = new
+  // TableColumn<>("Miércoles");
 
   @FXML
   private ImageView imagenLogo;
@@ -80,38 +111,58 @@ public class EscReservaHorario implements Initializable {
 
   }
 
+  @FXML
+  void atras(ActionEvent event) {
+    App.escena1();
+  }
+
   @Override
   public void initialize(URL arg0, ResourceBundle arg1) {
-    // time.setText(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")))
+    // time.setText(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd
+    // HH:mm:ss")))
     // ),
-     
-    Timeline tl = new Timeline(new KeyFrame(Duration.ZERO, e -> label.setText(fechita())
-    ),
+    anchor.getStylesheets().add(getClass().getResource("css/principal.css").toExternalForm());
+    Timeline tl = new Timeline(new KeyFrame(Duration.ZERO, e -> label.setText(fechita())),
         new KeyFrame(Duration.seconds(1)));
-
-    // label.setText(ld.getHour() + ":" + ld.getMinute());
-
-    // System.out.println("dia "+ diaa);
-    // System.out.println("hora "+ ld);
     tl.setCycleCount(Animation.INDEFINITE);
     tl.play();
-
+    cargarTabla();
 
   }
 
   private String fechita() {
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
     label.setText(LocalDateTime.now().format(formatter));
-      return LocalDateTime.now().format(formatter);
+    return LocalDateTime.now().format(formatter);
   }
+
+  @SuppressWarnings("unchecked")
   public void cargarTabla() {
-    ArrayList<String> lunes= new ArrayList();
-    String dias="";
-    for (int i = 8; i <21 ; i++) {
-      dias= i+"";
-      lunes.add(dias);
+    ArrayList<String> horas = new ArrayList();
+    String dias = "";
+    for (int i = 8; i < 21; i++) {
+      dias = i + ":00";
+      horas.add(dias);
     }
-   // coluLunes.setCellValueFactory(new PropertyValueFactory<lunes, String >("Lunes"));
+
+    datos = FXCollections.observableArrayList();
+    datos.addAll(horas);
+
+    tableLunes.setItems(datos);
+    tableMartes.setItems(datos);
+    tableMiercoles.setItems(datos);
+    tableJueves.setItems(datos);
+    tableViernes.setItems(datos);
+
+    // SimpleStringProperty();
+    this.coluLunes.setCellValueFactory(c -> new SimpleStringProperty(c.getValue()));
+
+    this.coluMartes.setCellValueFactory(c -> new SimpleStringProperty(c.getValue()));
+    this.coluMierc.setCellValueFactory(c -> new SimpleStringProperty(c.getValue()));
+    this.coluJuev.setCellValueFactory(c -> new SimpleStringProperty(c.getValue()));
+    this.ColuViernes.setCellValueFactory(c -> new SimpleStringProperty(c.getValue()));
 
   }
+
+ 
 }

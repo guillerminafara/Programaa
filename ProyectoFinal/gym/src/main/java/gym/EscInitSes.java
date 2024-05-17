@@ -41,7 +41,7 @@ public class EscInitSes implements Initializable{
     @FXML
     void InicaSesion(ActionEvent event) {
         cliente=login(textFmail.getText(),TextContra.getText() );
-        if(cliente.isEstado()){
+        if(cliente!=null){
 
         }else{
 
@@ -69,7 +69,7 @@ public class EscInitSes implements Initializable{
             ResultSet rs= ps.executeQuery();
             if(rs.next()){
 
-                if(cliente.getPass().equals(pass)&& cliente.getMail().equals(log)){
+                if(cliente.getPass().equals(pass)&& (cliente.getMail().equals(log)||cliente.getNif().equals(log) )){
                     cliente= new Cliente();
                     cliente.setIdCliente(rs.getString("idcliente"));
                     cliente.setIdCliente(rs.getString("nif"));
@@ -79,7 +79,7 @@ public class EscInitSes implements Initializable{
                     cliente.setPass(rs.getString("pass"));
                     cliente.setEstado(rs.getBoolean("estado"));
                 }else{
-                    cliente= new Cliente(false,"","","","","", "");
+                   // cliente= new Cliente(false,"","","","","", "");
 
                 }
             }else{
@@ -87,7 +87,7 @@ public class EscInitSes implements Initializable{
                 alert.setContentText("El usuario no se encuentra registrado");
                 alert.setTitle("Inicio de Sesión ");
                 alert.show();
-                cliente= new Cliente(false,"","","","","", "");
+              //  cliente= new Cliente(false,"","","","","", "");
 
             }
         } catch (SQLException e) {
