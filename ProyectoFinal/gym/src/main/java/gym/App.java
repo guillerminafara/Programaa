@@ -13,7 +13,7 @@ import java.io.IOException;
  */
 public class App extends Application {
 
-    private static Scene scene, scene2, scene3, scene4;
+    private static Scene scene, scene2, scene3, scene4,scene5;
 
     private static Stage stage;
 
@@ -64,6 +64,19 @@ public class App extends Application {
         try {
             scene4 = new Scene(fxmlLoader4.load());
             stage.setScene(scene4);
+            // stage.show();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
+
+    public static void escena5() {
+        
+        FXMLLoader fxmlLoader5 = new FXMLLoader(App.class.getResource("Registrate.fxml"));
+        try {
+            scene5 = new Scene(fxmlLoader5.load());
+            stage.setScene(scene5);
             // stage.show();
         } catch (IOException e) {
             // TODO Auto-generated catch block

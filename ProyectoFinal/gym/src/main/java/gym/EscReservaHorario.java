@@ -43,58 +43,22 @@ public class EscReservaHorario implements Initializable {
   @FXML
   private AnchorPane anchor;
   @FXML
-  private Button botonAtras;
-  @FXML
-  // private TableColumn<ArrayList, String> ColuViernes= new
-  // TableColumn<>("Viernes");
-  private TableColumn<String, String> ColuViernes;
-
-  @FXML
   private DatePicker DatePickerB;
 
   @FXML
-  private TableView<String> tableJueves;
+  private Button botonAtras;
 
   @FXML
-  private TableView<String> tableLunes;
-
-  @FXML
-  private TableView<String> tableMartes;
-
-  @FXML
-  private TableView<String> tableMiercoles;
-
-  @FXML
-  private TableView<String> tableViernes;
-
-  @FXML
-  // private TableColumn<ArrayList, String> coluJuev = new
-  // TableColumn<>("Jueves");
-
-  private TableColumn<String, String> coluJuev;
-
-  @FXML
-  // private TableColumn<ArrayList, String> coluLunes = new
-  // TableColumn<>("Lunes");
-
-  private TableColumn<String, String> coluLunes;
-
-  @FXML
-  // private TableColumn<ArrayList, String> coluMartes = new
-  // TableColumn<>("Martes");
-
-  private TableColumn<String, String> coluMartes;
-
-  @FXML
-  private TableColumn<String, String> coluMierc;
-
-  // private TableColumn<ArrayList, String> coluMierc = new
-  // TableColumn<>("Miércoles");
+  private TableColumn<?, ?> coluLunes;
 
   @FXML
   private ImageView imagenLogo;
+
   @FXML
   private Label label;
+
+  @FXML
+  private TableView<?> tableLunes;
 
   @FXML
   void DatePickerEvent(ActionEvent event) {
@@ -122,11 +86,11 @@ public class EscReservaHorario implements Initializable {
     // HH:mm:ss")))
     // ),
     anchor.getStylesheets().add(getClass().getResource("css/principal.css").toExternalForm());
-    Timeline tl = new Timeline(new KeyFrame(Duration.ZERO, e -> label.setText(fechita())),
-        new KeyFrame(Duration.seconds(1)));
-    tl.setCycleCount(Animation.INDEFINITE);
-    tl.play();
-    cargarTabla();
+    // Timeline tl = new Timeline(new KeyFrame(Duration.ZERO, e -> label.setText(fechita())),
+    //     new KeyFrame(Duration.seconds(1)));
+    // tl.setCycleCount(Animation.INDEFINITE);
+    // tl.play();
+    // cargarTabla();
 
   }
 
@@ -136,33 +100,33 @@ public class EscReservaHorario implements Initializable {
     return LocalDateTime.now().format(formatter);
   }
 
-  @SuppressWarnings("unchecked")
-  public void cargarTabla() {
-    ArrayList<String> horas = new ArrayList();
-    String dias = "";
-    for (int i = 8; i < 21; i++) {
-      dias = i + ":00";
-      horas.add(dias);
-    }
+  // @SuppressWarnings("unchecked")
+  // public void cargarTabla() {
+  //   ArrayList<String> horas = new ArrayList();
+  //   String dias = "";
+  //   for (int i = 8; i < 21; i++) {
+  //     dias = i + ":00";
+  //     horas.add(dias);
+  //   }
 
-    datos = FXCollections.observableArrayList();
-    datos.addAll(horas);
+  //   datos = FXCollections.observableArrayList();
+  //   datos.addAll(horas);
 
-    tableLunes.setItems(datos);
-    tableMartes.setItems(datos);
-    tableMiercoles.setItems(datos);
-    tableJueves.setItems(datos);
-    tableViernes.setItems(datos);
+  //   tableLunes.setItems(datos);
+  //   tableMartes.setItems(datos);
+  //   tableMiercoles.setItems(datos);
+  //   tableJueves.setItems(datos);
+  //   tableViernes.setItems(datos);
 
-    // SimpleStringProperty();
-    this.coluLunes.setCellValueFactory(c -> new SimpleStringProperty(c.getValue()));
+  //   // SimpleStringProperty();
+  //   this.coluLunes.setCellValueFactory(c -> new SimpleStringProperty(c.getValue()));
 
-    this.coluMartes.setCellValueFactory(c -> new SimpleStringProperty(c.getValue()));
-    this.coluMierc.setCellValueFactory(c -> new SimpleStringProperty(c.getValue()));
-    this.coluJuev.setCellValueFactory(c -> new SimpleStringProperty(c.getValue()));
-    this.ColuViernes.setCellValueFactory(c -> new SimpleStringProperty(c.getValue()));
+  //   this.coluMartes.setCellValueFactory(c -> new SimpleStringProperty(c.getValue()));
+  //   this.coluMierc.setCellValueFactory(c -> new SimpleStringProperty(c.getValue()));
+  //   this.coluJuev.setCellValueFactory(c -> new SimpleStringProperty(c.getValue()));
+  //   this.ColuViernes.setCellValueFactory(c -> new SimpleStringProperty(c.getValue()));
  
-  }
+  // }
 
  
 }

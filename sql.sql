@@ -34,7 +34,7 @@ CREATE TABLE `cliente` (
   UNIQUE KEY `mail_UNIQUE` (`mail`),
   UNIQUE KEY `nif_UNIQUE` (`nif`),
   UNIQUE KEY `idcliente_UNIQUE` (`idcliente`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+)  ;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -60,7 +60,7 @@ CREATE TABLE `horario` (
   `cantidad` int NOT NULL,
   `estado` tinyint(1) NOT NULL,
   PRIMARY KEY (`idHorario`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+);
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -90,7 +90,7 @@ CREATE TABLE `inscripcion` (
   KEY `idclien_idx` (`idCliente`),
   CONSTRAINT `idclien` FOREIGN KEY (`idCliente`) REFERENCES `cliente` (`idcliente`),
   CONSTRAINT `idSuscr` FOREIGN KEY (`idSuscripcion`) REFERENCES `suscripcion` (`idSuscripcion`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -118,7 +118,7 @@ CREATE TABLE `reserva` (
   KEY `fk_reserva_1_idx` (`idCliente`),
   CONSTRAINT `cliente_horario` FOREIGN KEY (`idHorario`) REFERENCES `horario` (`idHorario`),
   CONSTRAINT `cliente_reserva` FOREIGN KEY (`idCliente`) REFERENCES `cliente` (`idcliente`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -143,7 +143,7 @@ CREATE TABLE `suscripcion` (
   `importe` varchar(45) NOT NULL,
   `estado` tinyint(1) NOT NULL,
   PRIMARY KEY (`idSuscripcion`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+);
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --

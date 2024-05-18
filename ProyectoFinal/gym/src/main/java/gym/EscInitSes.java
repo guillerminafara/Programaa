@@ -19,7 +19,7 @@ import modelo.Cliente;
 
 public class EscInitSes implements Initializable{
     private Connection con = null;
-    Cliente cliente;
+    static Cliente cliente;
     boolean entra=false;
     // static String url = "jdbc:mysql://127.0.0.1:33006/Gimnasio";
     // static String user = "root";
@@ -35,9 +35,12 @@ public class EscInitSes implements Initializable{
     @FXML
     private Button botonAtras;
 
-   
     @FXML
     private Button BotonIngresa;
+
+    @FXML
+    private Button botonRegistrate;
+
     @FXML
     private PasswordField TextContra;
 
@@ -47,6 +50,11 @@ public class EscInitSes implements Initializable{
 
     @FXML
     private TextField textFmail;
+    
+    @FXML
+    void accionRegistrate(ActionEvent event) {
+        App.escena5();
+    }
 
     @FXML
     void InicaSesion(ActionEvent event) {
@@ -55,7 +63,7 @@ public class EscInitSes implements Initializable{
        if(login(textFmail.getText(),TextContra.getText() )){
             App.escena4();
          }else{
-            throw new NullPointerException("No se ha podido iniciar sesión");
+          botonRegistrate.setStyle("-fx-background-color: #F7641D; ");
          }
     }
     @FXML
@@ -88,7 +96,7 @@ public class EscInitSes implements Initializable{
                 cliente.setMail(rs.getString("mail"));
                 cliente.setPass(rs.getString("pass"));
                 cliente.setEstado(rs.getBoolean("estado"));
-                if(cliente.getPass().equals(pass)&& (cliente.getMail().equals(log) )){
+                if(cliente.getPass().equals(pass)&& (cliente.getMail().equals(log) ||cliente.getNif().equals(log) )){
                     System.out.println("entra al next");
                     entra=true;
                 }else{
@@ -98,9 +106,11 @@ public class EscInitSes implements Initializable{
                 }
             }else{
                 Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setHeaderText("Regístrate!");
                 alert.setContentText("El usuario no se encuentra registrado");
                 alert.setTitle("Inicio de Sesión ");
                 alert.show();
+
               //  cliente= new Cliente(false,"","","","","", "");
            //   throw new NullPointerException("No se ha podido iniciar sesión");
 
@@ -127,5 +137,9 @@ public class EscInitSes implements Initializable{
         alert.setContentText("El mail no se encuentra registrado");
         alert.setTitle("Inicio de Sesión ");
         alert.show();
+    }
+
+    public static Cliente pasarUSer(){
+        return cliente;
     }
 }

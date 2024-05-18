@@ -14,6 +14,7 @@
       <Pane layoutY="1.0" prefHeight="657.0" prefWidth="323.0" style="-fx-background-color: #F1C411;">
          <children>
             <Label layoutX="67.0" layoutY="481.0" text="mi rutina" textFill="#2f2f2f" />
+            <Button fx:id="botonAtras" layoutX="22.0" layoutY="23.0" mnemonicParsing="false" onAction="#accionAtras" text="🠔" />
          </children>
       </Pane>
       <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="67.0" layoutY="52.0" pickOnBounds="true" preserveRatio="true">
