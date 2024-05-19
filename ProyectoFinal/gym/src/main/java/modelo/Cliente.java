@@ -8,6 +8,9 @@ public class Cliente {
     String mail;
     String pass;
     boolean estado;
+    Cuota cuota;
+    HorarioReserva reserva;
+
     public Cliente() {
     }
 
@@ -64,6 +67,22 @@ public class Cliente {
 
     public void setEstado(boolean estado) {
         this.estado = estado;
+    }
+
+    public Cuota getCuota() {
+        return cuota;
+    }
+
+    public void setCuota(Cuota cuota) {
+        this.cuota = cuota;
+    }
+
+    public HorarioReserva getReserva() {
+        return reserva;
+    }
+
+    public void setReserva(HorarioReserva reserva) {
+        this.reserva = reserva;
     }
 
     @Override

@@ -19,7 +19,7 @@ import modelo.Cliente;
 
 public class RegistrateEsc implements Initializable {
     Connection con = null;
-    static Cliente cliente=null;
+    static Cliente cliente;
 
     public RegistrateEsc() {
         con = Conexion.getConexion();
@@ -90,8 +90,10 @@ public class RegistrateEsc implements Initializable {
             ps.setBoolean(4, true);
             ps.setString(5, textFEmail.getText());
             ps.setString(6,textFPass.getText());
+         //   ps.executeUpdate();
 
-           if (ps.executeUpdate()==1) {
+        //     ResultSet rs = ps.getGeneratedKeys();
+        //  if (rs.next()) {
                 cliente= new Cliente();
                 System.out.println(textFApellido.getText());
                 cliente.setNombre(textFNombre.getText());
@@ -100,21 +102,19 @@ public class RegistrateEsc implements Initializable {
                 cliente.setNif(textFNif.getText());
                 cliente.setMail(textFEmail.getText());
                 cliente.setPass(textFPass.getText());
-                ResultSet rs = ps.getGeneratedKeys();
-                if(rs.next()){
+          
                     Alert alert = new Alert(AlertType.INFORMATION);
                     alert.setHeaderText("Bienvenido!");
                     alert.setContentText("Ya eres parte de nuestro equipo");
                     alert.setTitle("Registro de Usuario");
-                    App.escena4();
                     alert.show();
-                    
-                }
+                    App.escena4();
             
-            } else{
-                System.out.println("no pasa del execute");
-            }
-            ps.close();
+            
+            // } else{
+            //     System.out.println("else del rs.next");
+            // }
+           
         } catch (SQLException e) {
             Alert alert = new Alert(AlertType.WARNING);
             alert.setHeaderText("Alto!");
@@ -132,7 +132,8 @@ public class RegistrateEsc implements Initializable {
        // return cliente;
     }
 
-    public Cliente pasarUser(){
+    public static Cliente pasarUser(){
+        System.out.println(RegistrateEsc.cliente);
         return cliente;
     }
 
