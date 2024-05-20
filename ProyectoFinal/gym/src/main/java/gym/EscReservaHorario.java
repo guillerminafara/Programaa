@@ -28,12 +28,16 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.shape.Circle;
+import modelo.Cliente;
 import modelo.Horario;
 
 public class EscReservaHorario implements Initializable {
+  static Cliente cliente= null;
   // Locale espa = new Locale("es", "es");
   LocalDateTime ld = LocalDateTime.now();
   // static DateTimeFormatter formater= DateTimeFormatter.ofPattern("dd-MM-aaaa");
@@ -42,6 +46,42 @@ public class EscReservaHorario implements Initializable {
   ObservableList<String> datos;
   @FXML
   private AnchorPane anchor;
+  @FXML
+  private Button boton09;
+
+  @FXML
+  private Button boton10;
+
+  @FXML
+  private Button boton11;
+
+  @FXML
+  private Button boton12;
+
+  @FXML
+  private Button boton13;
+
+  @FXML
+  private Button boton16;
+
+  @FXML
+  private Button boton17;
+
+  @FXML
+  private Button boton18;
+
+  @FXML
+  private Button boton19;
+
+  @FXML
+  private Button boton20;
+
+  @FXML
+  private Button boton21;
+
+  @FXML
+  private Button boton8;
+
   @FXML
   private DatePicker DatePickerB;
 
@@ -55,7 +95,16 @@ public class EscReservaHorario implements Initializable {
   private ImageView imagenLogo;
 
   @FXML
+  private ImageView imagenUser;
+
+  @FXML
   private Label label;
+
+  @FXML
+  private Label labelNombre;
+
+  @FXML
+  private TextField textFFecha;
 
   @FXML
   private TableView<?> tableLunes;
@@ -86,8 +135,10 @@ public class EscReservaHorario implements Initializable {
     // HH:mm:ss")))
     // ),
     anchor.getStylesheets().add(getClass().getResource("css/principal.css").toExternalForm());
-    // Timeline tl = new Timeline(new KeyFrame(Duration.ZERO, e -> label.setText(fechita())),
-    //     new KeyFrame(Duration.seconds(1)));
+    circular();
+    // Timeline tl = new Timeline(new KeyFrame(Duration.ZERO, e ->
+    // label.setText(fechita())),
+    // new KeyFrame(Duration.seconds(1)));
     // tl.setCycleCount(Animation.INDEFINITE);
     // tl.play();
     // cargarTabla();
@@ -102,31 +153,52 @@ public class EscReservaHorario implements Initializable {
 
   // @SuppressWarnings("unchecked")
   // public void cargarTabla() {
-  //   ArrayList<String> horas = new ArrayList();
-  //   String dias = "";
-  //   for (int i = 8; i < 21; i++) {
-  //     dias = i + ":00";
-  //     horas.add(dias);
-  //   }
-
-  //   datos = FXCollections.observableArrayList();
-  //   datos.addAll(horas);
-
-  //   tableLunes.setItems(datos);
-  //   tableMartes.setItems(datos);
-  //   tableMiercoles.setItems(datos);
-  //   tableJueves.setItems(datos);
-  //   tableViernes.setItems(datos);
-
-  //   // SimpleStringProperty();
-  //   this.coluLunes.setCellValueFactory(c -> new SimpleStringProperty(c.getValue()));
-
-  //   this.coluMartes.setCellValueFactory(c -> new SimpleStringProperty(c.getValue()));
-  //   this.coluMierc.setCellValueFactory(c -> new SimpleStringProperty(c.getValue()));
-  //   this.coluJuev.setCellValueFactory(c -> new SimpleStringProperty(c.getValue()));
-  //   this.ColuViernes.setCellValueFactory(c -> new SimpleStringProperty(c.getValue()));
- 
+  // ArrayList<String> horas = new ArrayList();
+  // String dias = "";
+  // for (int i = 8; i < 21; i++) {
+  // dias = i + ":00";
+  // horas.add(dias);
   // }
 
- 
+  // datos = FXCollections.observableArrayList();
+  // datos.addAll(horas);
+
+  // tableLunes.setItems(datos);
+  // tableMartes.setItems(datos);
+  // tableMiercoles.setItems(datos);
+  // tableJueves.setItems(datos);
+  // tableViernes.setItems(datos);
+
+  // // SimpleStringProperty();
+  // this.coluLunes.setCellValueFactory(c -> new
+  // SimpleStringProperty(c.getValue()));
+
+  // this.coluMartes.setCellValueFactory(c -> new
+  // SimpleStringProperty(c.getValue()));
+  // this.coluMierc.setCellValueFactory(c -> new
+  // SimpleStringProperty(c.getValue()));
+  // this.coluJuev.setCellValueFactory(c -> new
+  // SimpleStringProperty(c.getValue()));
+  // this.ColuViernes.setCellValueFactory(c -> new
+  // SimpleStringProperty(c.getValue()));
+
+  // }
+  public void circular() {
+    double radio= 25;
+    Circle circulo = new Circle(radio, radio, radio);
+    imagenUser.setClip(circulo);
+    imagenUser.setFitWidth(2 * radio);
+    imagenUser.setFitHeight(2 * radio);
+
+  }
+
+  public void comprobarUser(){
+    if(cliente!=null){
+      labelNombre.setText(cliente.getNombre());
+
+    }else{
+      
+    }
+  }
+
 }

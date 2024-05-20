@@ -10,6 +10,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.shape.Circle;
 import modelo.Cliente;
 
 import java.lang.reflect.InvocationTargetException;
@@ -17,8 +18,8 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class EsceUser implements Initializable {
-    static Cliente cliente1=null;
-    static Cliente cliente=null;
+    static Cliente cliente1 = null;
+    static Cliente cliente = null;
     RegistrateEsc reg;
     EscInitSes init;
 
@@ -69,21 +70,22 @@ public class EsceUser implements Initializable {
         anchor4.getStylesheets().add(getClass().getResource("css/horario.css").toExternalForm());
         cargaUser();
         botonesEditables();
+        circular();
 
     }
 
     public void cargaUser() {
-        cliente=null;
-        cliente1= null;
+        cliente = null;
+        cliente1 = null;
         try {
             this.cliente1 = reg.pasarUser();
-            this.cliente=init.pasarUSer();
+            this.cliente = init.pasarUSer();
             System.out.println(cliente1);
 
         } catch (Exception e) {
             System.out.println("sigue siendo nulo");
         }
-        // 
+        //
         if (cliente != null) {
             // cliente = reg.pasarUser();
             cargarPagina(cliente);
@@ -125,5 +127,14 @@ public class EsceUser implements Initializable {
         textFApellido.setEditable(false);
         textFMail.setEditable(false);
         textFCuota.setEditable(false);
+    }
+
+    public void circular() {
+        double radio = 100;
+        Circle circulo = new Circle(radio, radio, radio);
+        imagenUser.setClip(circulo);
+        imagenUser.setFitWidth(2 * radio);
+        imagenUser.setFitHeight(2 * radio);
+
     }
 }

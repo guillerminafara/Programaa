@@ -6,6 +6,7 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -13,13 +14,13 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="anchor" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="600.0" prefWidth="750.0" style="-fx-background-color: #2F2F2F;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gym.EscReservaHorario">
+<AnchorPane fx:id="anchor" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #2F2F2F;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gym.EscReservaHorario">
    <children>
       <ImageView fx:id="imagenLogo" fitHeight="69.0" fitWidth="105.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
-      <DatePicker fx:id="DatePickerB" layoutX="235.0" layoutY="38.0" onAction="#DatePickerEvent" />
-      <Label fx:id="label" layoutX="631.0" layoutY="40.0" text="----" textFill="#fffafa" />
+      <DatePicker fx:id="DatePickerB" layoutX="235.0" layoutY="108.0" onAction="#DatePickerEvent" />
+      <Label fx:id="label" layoutX="631.0" layoutY="134.0" text="----" textFill="#fffafa" />
       <Button fx:id="botonAtras" layoutX="14.0" layoutY="24.0" mnemonicParsing="false" onAction="#atras" prefHeight="25.0" prefWidth="31.0" text="🠔" />
-      <TableView fx:id="tableLunes" layoutX="446.0" layoutY="484.0" prefHeight="95.0" prefWidth="280.0">
+      <TableView fx:id="tableLunes" layoutX="552.0" layoutY="320.0" prefHeight="95.0" prefWidth="200.0">
         <columns>
           <TableColumn fx:id="coluLunes" prefWidth="104.0" text="Lunes" />
         </columns>
@@ -27,12 +28,12 @@
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy>
       </TableView>
-      <Label layoutX="90.0" layoutY="40.0" prefHeight="21.0" prefWidth="145.0" style="-fx-font-weight: bold;" text="Selecciona el día:" textFill="#f1c411">
+      <Label layoutX="90.0" layoutY="110.0" prefHeight="21.0" prefWidth="145.0" style="-fx-font-weight: bold;" text="Selecciona el día:" textFill="#f1c411">
          <font>
             <Font size="15.0" />
          </font>
       </Label>
-      <GridPane alignment="TOP_CENTER" layoutX="74.0" layoutY="103.0" prefHeight="392.0" prefWidth="320.0">
+      <GridPane alignment="TOP_CENTER" layoutX="175.0" layoutY="150.0" prefHeight="392.0" prefWidth="320.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="208.0" minWidth="10.0" prefWidth="185.0" />
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="200.0" minWidth="10.0" prefWidth="150.0" />
@@ -53,20 +54,26 @@
             <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Button contentDisplay="CENTER" mnemonicParsing="false" prefHeight="25.0" prefWidth="120.0" text="Button" GridPane.rowIndex="1" />
-            <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="120.0" text="Button" GridPane.rowIndex="2" />
-            <Button alignment="TOP_CENTER" mnemonicParsing="false" prefHeight="25.0" prefWidth="120.0" text="Button" GridPane.rowIndex="3" />
-            <Button alignment="TOP_CENTER" mnemonicParsing="false" prefHeight="25.0" prefWidth="120.0" text="Button" GridPane.rowIndex="4" />
-            <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="120.0" text="Button" GridPane.rowIndex="5" />
-            <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="120.0" text="Button" GridPane.rowIndex="6" />
-            <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="120.0" text="Button" GridPane.rowIndex="7" />
-            <Button mnemonicParsing="false" prefWidth="120.0" text="Button" GridPane.rowIndex="8" />
-            <Button mnemonicParsing="false" prefWidth="120.0" text="Button" GridPane.rowIndex="9" />
-            <Button mnemonicParsing="false" prefWidth="120.0" text="Button" GridPane.rowIndex="10" />
-            <Button mnemonicParsing="false" prefWidth="120.0" text="Button" GridPane.rowIndex="11" />
-            <Button mnemonicParsing="false" prefWidth="120.0" text="Button" GridPane.rowIndex="12" />
-            <TextField style="-fx-background-color: #f1c411;" />
+            <Button fx:id="boton8" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="25.0" prefWidth="120.0" text="08:00" GridPane.rowIndex="1" />
+            <Button fx:id="boton09" mnemonicParsing="false" prefHeight="25.0" prefWidth="120.0" text="09:00" GridPane.rowIndex="2" />
+            <Button fx:id="boton10" alignment="TOP_CENTER" mnemonicParsing="false" prefHeight="25.0" prefWidth="120.0" text="10:00" GridPane.rowIndex="3" />
+            <Button fx:id="boton11" alignment="TOP_CENTER" mnemonicParsing="false" prefHeight="25.0" prefWidth="120.0" text="11:00" GridPane.rowIndex="4" />
+            <Button fx:id="boton12" mnemonicParsing="false" prefHeight="25.0" prefWidth="120.0" text="12:00" GridPane.rowIndex="5" />
+            <Button fx:id="boton13" mnemonicParsing="false" prefHeight="25.0" prefWidth="120.0" text="13:00" GridPane.rowIndex="6" />
+            <Button fx:id="boton16" mnemonicParsing="false" prefHeight="25.0" prefWidth="120.0" text="16:00" GridPane.rowIndex="7" />
+            <Button fx:id="boton17" mnemonicParsing="false" prefWidth="120.0" text="17:00" GridPane.rowIndex="8" />
+            <Button fx:id="boton18" mnemonicParsing="false" prefWidth="120.0" text="18:00" GridPane.rowIndex="9" />
+            <Button fx:id="boton19" mnemonicParsing="false" prefWidth="120.0" text="19:00" GridPane.rowIndex="10" />
+            <Button fx:id="boton20" mnemonicParsing="false" prefWidth="120.0" text="20:00" GridPane.rowIndex="11" />
+            <Button fx:id="boton21" mnemonicParsing="false" prefWidth="120.0" text="21:00" GridPane.rowIndex="12" />
+            <TextField fx:id="textFFecha" style="-fx-background-color: #f1c411;" />
          </children>
       </GridPane>
+      <ImageView fx:id="imagenUser" fitHeight="63.0" fitWidth="64.0" layoutX="670.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@iconouser.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="labelNombre" layoutX="656.0" layoutY="83.0" prefHeight="17.0" prefWidth="90.0" text="Nombre:" textFill="WHITE" />
    </children>
 </AnchorPane>
