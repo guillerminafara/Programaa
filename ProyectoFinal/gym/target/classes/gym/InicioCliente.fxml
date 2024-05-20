@@ -15,6 +15,7 @@
          <children>
             <Label layoutX="67.0" layoutY="481.0" text="mi rutina" textFill="#2f2f2f" />
             <Button fx:id="botonAtras" layoutX="22.0" layoutY="23.0" mnemonicParsing="false" onAction="#accionAtras" text="🠔" />
+            <Button fx:id="botonReserva" graphicTextGap="0.0" layoutX="58.0" layoutY="317.0" mnemonicParsing="false" onAction="#accionReserva" prefHeight="24.0" prefWidth="136.0" style="-fx-background-color: #F1C411;" text="Reserva" textFill="#2803f8" />
          </children>
       </Pane>
       <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="67.0" layoutY="52.0" pickOnBounds="true" preserveRatio="true">
@@ -24,7 +25,6 @@
       </ImageView>
     <Button layoutX="56.0" layoutY="360.0" mnemonicParsing="false" prefHeight="24.0" prefWidth="173.0" />
       <Label fx:id="labelFecha" layoutX="74.0" layoutY="262.0" text="Fecha" textFill="#2f2f2f" />
-      <Label layoutX="74.0" layoutY="329.0" text="Suscripcion" textFill="#2f2f2f" />
       <Label layoutX="68.0" layoutY="413.0" text="calendario" textFill="#2f2f2f" />
       <ImageView fx:id="imagenUser" fitHeight="136.0" fitWidth="163.0" layoutX="533.0" layoutY="63.0" pickOnBounds="true" preserveRatio="true">
          <image>

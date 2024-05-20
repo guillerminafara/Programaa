@@ -1,5 +1,8 @@
 package gym;
 
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -11,10 +14,13 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Circle;
+import javafx.util.Duration;
 import modelo.Cliente;
 
 import java.lang.reflect.InvocationTargetException;
 import java.net.URL;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
 public class EsceUser implements Initializable {
@@ -27,6 +33,8 @@ public class EsceUser implements Initializable {
     private AnchorPane anchor4;
     @FXML
     private Button botonAtras;
+    @FXML
+    private Button botonReserva;
     @FXML
     private ImageView imagenUser;
 
@@ -44,6 +52,11 @@ public class EsceUser implements Initializable {
 
     @FXML
     private TextField textFNombre;
+
+    @FXML
+    void accionReserva(ActionEvent event) {
+        App.escena3();
+    }
 
     @FXML
     void accionAtras(ActionEvent event) {
@@ -69,6 +82,11 @@ public class EsceUser implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         anchor4.getStylesheets().add(getClass().getResource("css/horario.css").toExternalForm());
         cargaUser();
+        Timeline tl = new Timeline(new KeyFrame(Duration.ZERO, e -> labelFecha.setText(fechita())),
+                new KeyFrame(Duration.seconds(1)));
+        tl.setCycleCount(Animation.INDEFINITE);
+        tl.play();
+        fechita();
         botonesEditables();
         circular();
 
@@ -136,5 +154,11 @@ public class EsceUser implements Initializable {
         imagenUser.setFitWidth(2 * radio);
         imagenUser.setFitHeight(2 * radio);
 
+    }
+
+    private String fechita() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+        labelFecha.setText(LocalDateTime.now().format(formatter));
+        return LocalDateTime.now().format(formatter);
     }
 }

@@ -8,12 +8,9 @@ import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.Duration;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
@@ -23,12 +20,14 @@ import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -37,8 +36,9 @@ import modelo.Cliente;
 import modelo.Horario;
 
 public class EscReservaHorario implements Initializable {
-  static Cliente cliente= null;
-  // Locale espa = new Locale("es", "es");
+  static Cliente cliente = null;
+  EscInitSes initSes = new EscInitSes();
+  Locale espa = new Locale("es", "es");
   LocalDateTime ld = LocalDateTime.now();
   // static DateTimeFormatter formater= DateTimeFormatter.ofPattern("dd-MM-aaaa");
   DayOfWeek diaa = ld.getDayOfWeek();
@@ -108,15 +108,20 @@ public class EscReservaHorario implements Initializable {
 
   @FXML
   private TableView<?> tableLunes;
+  @FXML
+  void cargaDia(ActionEvent event) {
+
+  }
 
   @FXML
   void DatePickerEvent(ActionEvent event) {
-
+   DatePickerB.getValue().getDayOfWeek().getDisplayName(null, espa);
+    textFFecha.setText();
     // label.setText(DatePickerB.getValue().toString());
     // label.setText(diaa.toString());
-    label.setText(ld.getHour() + ":" + ld.getMinute());
+    //label.setText(ld.getHour() + ":" + ld.getMinute());
     // System.out.println("dia "+ diaa);
-    System.out.println("hora " + ld.getHour() + ":" + ld.getMinute());
+   // System.out.println("hora " + ld.getHour() + ":" + ld.getMinute());
   }
 
   @FXML
@@ -136,11 +141,12 @@ public class EscReservaHorario implements Initializable {
     // ),
     anchor.getStylesheets().add(getClass().getResource("css/principal.css").toExternalForm());
     circular();
-    // Timeline tl = new Timeline(new KeyFrame(Duration.ZERO, e ->
-    // label.setText(fechita())),
-    // new KeyFrame(Duration.seconds(1)));
-    // tl.setCycleCount(Animation.INDEFINITE);
-    // tl.play();
+    cargarUser();
+    Timeline tl = new Timeline(new KeyFrame(Duration.ZERO, e -> label.setText(fechita())),
+        new KeyFrame(Duration.seconds(1)));
+    tl.setCycleCount(Animation.INDEFINITE);
+    tl.play();
+    textFFecha.setEditable(false);
     // cargarTabla();
 
   }
@@ -184,7 +190,7 @@ public class EscReservaHorario implements Initializable {
 
   // }
   public void circular() {
-    double radio= 25;
+    double radio = 25;
     Circle circulo = new Circle(radio, radio, radio);
     imagenUser.setClip(circulo);
     imagenUser.setFitWidth(2 * radio);
@@ -192,13 +198,17 @@ public class EscReservaHorario implements Initializable {
 
   }
 
-  public void comprobarUser(){
-    if(cliente!=null){
-      labelNombre.setText(cliente.getNombre());
+  // metodo que abre los horarios en caso de que tenga un user loggeado .. si no
+  // hay user loggeado redirecciona a ingresar
+  public void cargarUser() {
+    cliente = initSes.pasarUSer();
+    labelNombre.setText(cliente.getNombre());
 
-    }else{
-      
-    }
+  }
+
+  public void configuraHorario(){
+    
+   
   }
 
 }

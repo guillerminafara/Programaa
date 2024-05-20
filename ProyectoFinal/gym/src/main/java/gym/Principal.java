@@ -34,8 +34,8 @@ public class Principal implements Initializable {
         App.escena2();
     }
     @FXML
-    void DirigirReservaEvent(ActionEvent event) {
-        App.escena3();
+    void accionRegistrate(ActionEvent event)  {
+        App.escena5();
     }
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
