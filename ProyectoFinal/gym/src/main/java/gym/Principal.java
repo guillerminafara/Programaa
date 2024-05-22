@@ -8,9 +8,12 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import modelo.Cliente;
 
 public class Principal implements Initializable {
-
+//static boolean escenitas;
+EsceUser cuenta;
+static Cliente cliente;
     @FXML
     private Button BotonDonde;
 
@@ -31,10 +34,19 @@ public class Principal implements Initializable {
 
     @FXML
     void InicioSesion(ActionEvent event) {
+        cliente =cuenta.pasarUser();
+       // escenitas=true;
+       if(cliente!=null){
+        App.escena4();
+       }else{
+        
         App.escena2();
+
+       }
     }
     @FXML
     void accionRegistrate(ActionEvent event)  {
+       // escenitas= false;
         App.escena5();
     }
     @Override

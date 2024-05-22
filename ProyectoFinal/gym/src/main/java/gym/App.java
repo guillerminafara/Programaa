@@ -5,17 +5,20 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import modelo.Cliente;
 
 import java.io.IOException;
+import java.util.Stack;
 
 /**
  * JavaFX App
  */
 public class App extends Application {
+    static Cliente cliente; 
+     static Scene scene, scene2, scene3, scene4,scene5;
+     static Stage stage;
+   static Stack<Scene> pila= new Stack<>();
 
-    private static Scene scene, scene2, scene3, scene4,scene5;
-
-    private static Stage stage;
 
     @Override
     public void start(Stage stage) throws IOException {
@@ -27,6 +30,7 @@ public class App extends Application {
         stage.show();
     }
     public static void escena1() {
+        stackScenas(scene);
             stage.setScene(scene);
     
     }
@@ -36,6 +40,7 @@ public class App extends Application {
         FXMLLoader fxmlLoader2 = new FXMLLoader(App.class.getResource("InicioSesion.fxml"));
         try {
             scene2 = new Scene(fxmlLoader2.load());
+            stackScenas(scene2);
             stage.setScene(scene2);
             // stage.show();
         } catch (IOException e) {
@@ -50,6 +55,7 @@ public class App extends Application {
         FXMLLoader fxmlLoader3 = new FXMLLoader(App.class.getResource("Reserva.fxml"));
         try {
             scene3 = new Scene(fxmlLoader3.load());
+           
             stage.setScene(scene3);
              stage.show();
         } catch (IOException e) {
@@ -75,7 +81,9 @@ public class App extends Application {
         
         FXMLLoader fxmlLoader5 = new FXMLLoader(App.class.getResource("Registrate.fxml"));
         try {
+
             scene5 = new Scene(fxmlLoader5.load());
+            stackScenas(scene5);
             stage.setScene(scene5);
             // stage.show();
         } catch (IOException e) {
@@ -93,6 +101,19 @@ public class App extends Application {
     // return fxmlLoader.load();
     // }
 
+    //agrega escenaas a la pila
+    public static void stackScenas(Scene escena){
+        if (stage.getScene() != null) {
+            pila.push(stage.getScene());
+        }
+        stage.setScene(escena);
+    }
+    //elimina escenas de la pila 
+    public static void volver() {
+        if (!pila.isEmpty()) {
+            stage.setScene(pila.pop());
+        }
+    }
     public static void main(String[] args) {
         launch();
     }

@@ -47,7 +47,7 @@ public class RegistrateEsc implements Initializable {
 
     @FXML
     void accionAtras(ActionEvent event) {
-        App.escena2();
+        App.volver();
     }
 
     @FXML

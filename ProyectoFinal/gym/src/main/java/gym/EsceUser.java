@@ -24,6 +24,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
 public class EsceUser implements Initializable {
+    App app= new App();
     static Cliente cliente1 = null;
     static Cliente cliente = null;
     RegistrateEsc reg;
@@ -160,5 +161,9 @@ public class EsceUser implements Initializable {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
         labelFecha.setText(LocalDateTime.now().format(formatter));
         return LocalDateTime.now().format(formatter);
+    }
+    public static Cliente pasarUser(){
+        return cliente;
+
     }
 }

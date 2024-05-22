@@ -11,6 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.util.Duration;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.TextStyle;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
@@ -38,7 +39,7 @@ import modelo.Horario;
 public class EscReservaHorario implements Initializable {
   static Cliente cliente = null;
   EscInitSes initSes = new EscInitSes();
-  Locale espa = new Locale("es", "es");
+  Locale espa = new Locale("es", "ES");
   LocalDateTime ld = LocalDateTime.now();
   // static DateTimeFormatter formater= DateTimeFormatter.ofPattern("dd-MM-aaaa");
   DayOfWeek diaa = ld.getDayOfWeek();
@@ -115,8 +116,8 @@ public class EscReservaHorario implements Initializable {
 
   @FXML
   void DatePickerEvent(ActionEvent event) {
-   DatePickerB.getValue().getDayOfWeek().getDisplayName(null, espa);
-    textFFecha.setText();
+    String mayus= DatePickerB.getValue().getDayOfWeek().getDisplayName(TextStyle.FULL, espa);
+    textFFecha.setText(mayus.toUpperCase());
     // label.setText(DatePickerB.getValue().toString());
     // label.setText(diaa.toString());
     //label.setText(ld.getHour() + ":" + ld.getMinute());
@@ -131,7 +132,7 @@ public class EscReservaHorario implements Initializable {
 
   @FXML
   void atras(ActionEvent event) {
-    App.escena1();
+    App.escena4();
   }
 
   @Override
@@ -139,6 +140,7 @@ public class EscReservaHorario implements Initializable {
     // time.setText(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd
     // HH:mm:ss")))
     // ),
+    
     anchor.getStylesheets().add(getClass().getResource("css/principal.css").toExternalForm());
     circular();
     cargarUser();
