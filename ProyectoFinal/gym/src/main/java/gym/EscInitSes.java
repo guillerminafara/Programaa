@@ -92,7 +92,7 @@ public class EscInitSes implements Initializable{
             ResultSet rs= ps.executeQuery();
             if(rs.next()){
                 cliente= new Cliente();
-                cliente.setIdCliente(rs.getString("idcliente"));
+                cliente.setIdCliente(rs.getInt("idcliente"));
                 cliente.setNif(rs.getString("nif"));
                 cliente.setApellido(rs.getString("apellido"));
                 cliente.setNombre(rs.getString("nombre"));

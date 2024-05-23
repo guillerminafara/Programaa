@@ -4,6 +4,7 @@ public class HorarioReserva {
     int idReserva;
     int idCliente;
     String idHorario;
+    boolean estado;
     public HorarioReserva() {
     }
     public int getIdReserva() {
@@ -24,10 +25,17 @@ public class HorarioReserva {
     public void setIdHorario(String idHorario) {
         this.idHorario = idHorario;
     }
+    public boolean isEstado() {
+        return estado;
+    }
+    public void setEstado(boolean estado) {
+        this.estado = estado;
+    }
     @Override
     public String toString() {
         return "HorarioReserva [idReserva=" + idReserva + ", idCliente=" + idCliente + ", idHorario=" + idHorario + "]";
     }
+   
 
     
 }

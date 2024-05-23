@@ -7,6 +7,7 @@ import java.time.LocalDateTime;
  * Cuota
  */
 public class Cuota {
+    int idCuota;
     Planes plan;
     int idCliente;
     boolean estado;
@@ -17,6 +18,23 @@ public class Cuota {
         this.estado = estado;
         this.fechaVencimiento = fechaVencimiento;
     }
+    
+    public int getIdCuota() {
+        return idCuota;
+    }
+
+    public void setIdCuota(int idCuota) {
+        this.idCuota = idCuota;
+    }
+
+    public Planes getPlan() {
+        return plan;
+    }
+
+    public void setPlan(Planes plan) {
+        this.plan = plan;
+    }
+
     public Planes getplan() {
         return plan;
     }

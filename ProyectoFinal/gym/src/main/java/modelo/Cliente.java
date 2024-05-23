@@ -1,7 +1,9 @@
 package modelo;
 
+import java.util.Stack;
+
 public class Cliente {
-    String idCliente;
+    int idCliente;
     String nif;
     String nombre;
     String apellido;
@@ -10,11 +12,12 @@ public class Cliente {
     boolean estado;
     Cuota cuota;
     HorarioReserva reserva;
+    Stack <HorarioReserva>pilaReservas= new Stack<>();
 
     public Cliente() {
     }
 
-    public Cliente(boolean estado, String pass, String mail, String apellido, String nombre, String nif, String idCliente) {
+    public Cliente(boolean estado, String pass, String mail, String apellido, String nombre, String nif, int idCliente) {
         this.estado = estado;
         this.pass = pass;
         this.mail = mail;
@@ -24,10 +27,10 @@ public class Cliente {
         this.idCliente = idCliente;
     }
 
-    public String getIdCliente() {
+    public int getIdCliente() {
         return idCliente;
     }
-    public void setIdCliente(String idCliente) {
+    public void setIdCliente(int idCliente) {
         this.idCliente = idCliente;
     }
     public String getNif() {
@@ -89,6 +92,14 @@ public class Cliente {
     public String toString() {
         return "Cliente [idCliente=" + idCliente + ", nif=" + nif + ", nombre=" + nombre + ", apellido=" + apellido
                 + ", mail=" + mail + ", pass=" + pass + "]";
+    }
+
+    public Stack<HorarioReserva> getPilaReservas() {
+        return pilaReservas;
+    }
+
+    public void setPilaReservas(Stack<HorarioReserva> pilaReservas) {
+        this.pilaReservas = pilaReservas;
     }
     
 

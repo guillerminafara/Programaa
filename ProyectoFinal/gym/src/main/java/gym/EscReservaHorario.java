@@ -1,6 +1,10 @@
 package gym;
 
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.time.DayOfWeek;
 
 import javafx.beans.Observable;
@@ -10,8 +14,10 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.util.Duration;
 import java.time.LocalDateTime;
+import java.time.Month;
 import java.time.format.DateTimeFormatter;
 import java.time.format.TextStyle;
+import java.util.ArrayList;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
@@ -32,17 +38,26 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.shape.Circle;
 import modelo.Cliente;
 import modelo.Horario;
+import modelo.HorarioReserva;
 
 public class EscReservaHorario implements Initializable {
+  static Connection con;
   static Cliente cliente = null;
   EscInitSes initSes = new EscInitSes();
   Locale espa = new Locale("es", "ES");
   LocalDateTime ld = LocalDateTime.now();
   // static DateTimeFormatter formater= DateTimeFormatter.ofPattern("dd-MM-aaaa");
   DayOfWeek diaa = ld.getDayOfWeek();
+
+  // LocalDateTime diaHoy= LocalDateTime.
+  public EscReservaHorario() {
+    con = Conexion.getConexion();
+
+  }
 
   ObservableList<String> datos;
   @FXML
@@ -81,7 +96,9 @@ public class EscReservaHorario implements Initializable {
   private Button boton21;
 
   @FXML
-  private Button boton8;
+  private Button boton08;
+  @FXML
+  private Button botonReserva;
 
   @FXML
   private DatePicker DatePickerB;
@@ -92,6 +109,8 @@ public class EscReservaHorario implements Initializable {
   @FXML
   private TableColumn<?, ?> coluLunes;
 
+  @FXML
+  private GridPane gridPane;
   @FXML
   private ImageView imagenLogo;
 
@@ -109,20 +128,35 @@ public class EscReservaHorario implements Initializable {
 
   @FXML
   private TableView<?> tableLunes;
+
   @FXML
   void cargaDia(ActionEvent event) {
 
   }
 
   @FXML
+  void accionReservar(MouseEvent event) {
+
+  }
+
+  @FXML
+  void accionSeleccionaHora(MouseEvent event) {
+    // System.out.println(event.getPickResult());
+    String botonSeleccionado = event.getSource().toString();
+    botonSeleccionado = botonSeleccionado.substring(10, 17);
+    System.out.println(botonSeleccionado);
+
+  }
+
+  @FXML
   void DatePickerEvent(ActionEvent event) {
-    String mayus= DatePickerB.getValue().getDayOfWeek().getDisplayName(TextStyle.FULL, espa);
+    String mayus = DatePickerB.getValue().getDayOfWeek().getDisplayName(TextStyle.FULL, espa);
     textFFecha.setText(mayus.toUpperCase());
     // label.setText(DatePickerB.getValue().toString());
     // label.setText(diaa.toString());
-    //label.setText(ld.getHour() + ":" + ld.getMinute());
+    // label.setText(ld.getHour() + ":" + ld.getMinute());
     // System.out.println("dia "+ diaa);
-   // System.out.println("hora " + ld.getHour() + ":" + ld.getMinute());
+    // System.out.println("hora " + ld.getHour() + ":" + ld.getMinute());
   }
 
   @FXML
@@ -140,7 +174,7 @@ public class EscReservaHorario implements Initializable {
     // time.setText(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd
     // HH:mm:ss")))
     // ),
-    
+
     anchor.getStylesheets().add(getClass().getResource("css/principal.css").toExternalForm());
     circular();
     cargarUser();
@@ -208,9 +242,112 @@ public class EscReservaHorario implements Initializable {
 
   }
 
-  public void configuraHorario(){
-    
-   
+  public boolean verificaCuota() {
+    boolean puede = false;
+    String sql = "SELECT * FROM cliente where idCliente=?";
+    try {
+      PreparedStatement ps = con.prepareStatement(sql);
+      ps.setInt(1, cliente.getIdCliente());
+      // ResultSet rs= ps.executeQuery();
+      if (cliente.getCuota() == null) {
+        Alert alert = new Alert(AlertType.WARNING);
+        alert.setContentText("No tienes ningún plan contratado con nosotros. ");
+        alert.setTitle("Reserva de Horario");
+      } else {
+        puede = true;
+      }
+      // si el cliente ya tiene una reserva en el mismo dia no deberia poder reservar
+      // de nuevo
+
+    } catch (SQLException e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+    }
+    return puede;
+
+  }
+
+  public boolean verificaReserva() {
+    int dia = ld.getDayOfMonth();
+    Month mes = ld.getMonth();
+    String mayus = mes.getDisplayName(TextStyle.FULL, espa);
+    mayus = mayus.toUpperCase();
+    String clave = mayus.substring(0, 3);
+    clave += dia;
+    boolean puede = false;
+    if (cliente.getPilaReservas() != null) {
+      for (HorarioReserva reservaList : cliente.getPilaReservas()) {
+        if (reservaList.getIdHorario().contains(clave)) {
+          if (reservaList.isEstado()) {
+            Alert alert = new Alert(AlertType.ERROR);
+            alert.setContentText("Ya tienes una reserva activa para este día.");
+            alert.setHeaderText("Ya tienes una reserva");
+            alert.setTitle("Reserva de Horario ");
+
+          } else {
+            puede = true;
+          }
+        } else {
+          puede = true;
+        }
+      }
+    }
+    return puede;
+  }
+
+  public void reservaHorario() {
+    HorarioReserva reserva = new HorarioReserva();
+    String sql = "Insert into reserva(idCliente, idCuota, estado) values (?, ?, ?)";
+    if (verificaCuota() && verificaReserva()) {
+
+      try {
+        PreparedStatement ps = con.prepareStatement(sql);
+        ps.setInt(1, cliente.getIdCliente());
+        ps.setInt(2, cliente.getCuota().getIdCuota());
+        ps.setBoolean(3, true);
+
+        // reserva.setIdHorario();
+        reserva.setIdCliente(cliente.getIdCliente());
+        reserva.setEstado(true);
+
+        ps.executeUpdate();
+
+      } catch (SQLException e) {
+        // TODO Auto-generated catch block
+        e.printStackTrace();
+      }
+
+    }
+
+  }
+
+  public void deshabilitaBotones(ArrayList<Button> listaBotones, String boton) {
+    boton08.isPressed();
+    for (Button botons : listarBotones()) {
+        if(!botons.getId().toString().equals(boton)){
+          botons.setDisable(true);
+
+        }
+    }
+  }
+
+  public ArrayList<Button> listarBotones() {
+    ArrayList<Button> listaBotones = new ArrayList<>();
+    listaBotones.add(boton08);
+    listaBotones.add(boton09);
+    listaBotones.add(boton10);
+    listaBotones.add(boton11);
+    listaBotones.add(boton12);
+    listaBotones.add(boton13);
+    listaBotones.add(boton16);
+    listaBotones.add(boton17);
+    listaBotones.add(boton18);
+    listaBotones.add(boton19);
+    listaBotones.add(boton20);
+    listaBotones.add(boton21);
+
+
+    return listaBotones;
   }
 
 }
