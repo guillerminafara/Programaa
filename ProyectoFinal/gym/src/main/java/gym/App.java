@@ -117,5 +117,6 @@ public class App extends Application {
     public static void main(String[] args) {
         launch();
     }
-
+// Tooltip toolito= new Tooltip(cadena);
+//Tooltip.install(botono lo que sea, toolito);
 }

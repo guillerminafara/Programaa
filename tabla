@@ -1,0 +1,32 @@
+// @SuppressWarnings("unchecked")
+  // public void cargarTabla() {
+  // ArrayList<String> horas = new ArrayList();
+  // String dias = "";
+  // for (int i = 8; i < 21; i++) {
+  // dias = i + ":00";
+  // horas.add(dias);
+  // }
+
+  // datos = FXCollections.observableArrayList();
+  // datos.addAll(horas);
+
+  // tableLunes.setItems(datos);
+  // tableMartes.setItems(datos);
+  // tableMiercoles.setItems(datos);
+  // tableJueves.setItems(datos);
+  // tableViernes.setItems(datos);
+
+  // // SimpleStringProperty();
+  // this.coluLunes.setCellValueFactory(c -> new
+  // SimpleStringProperty(c.getValue()));
+
+  // this.coluMartes.setCellValueFactory(c -> new
+  // SimpleStringProperty(c.getValue()));
+  // this.coluMierc.setCellValueFactory(c -> new
+  // SimpleStringProperty(c.getValue()));
+  // this.coluJuev.setCellValueFactory(c -> new
+  // SimpleStringProperty(c.getValue()));
+  // this.ColuViernes.setCellValueFactory(c -> new
+  // SimpleStringProperty(c.getValue()));
+
+  // }

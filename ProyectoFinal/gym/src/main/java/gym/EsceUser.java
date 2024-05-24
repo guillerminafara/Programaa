@@ -11,7 +11,9 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Tooltip;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Circle;
 import javafx.util.Duration;
@@ -19,21 +21,33 @@ import modelo.Cliente;
 
 import java.lang.reflect.InvocationTargetException;
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
 public class EsceUser implements Initializable {
     App app= new App();
+    Connection con;
     static Cliente cliente1 = null;
     static Cliente cliente = null;
     RegistrateEsc reg;
     EscInitSes init;
 
+    public EsceUser() {
+        con= Conexion.getConexion();
+    }
+
+
     @FXML
     private AnchorPane anchor4;
     @FXML
     private Button botonAtras;
+    @FXML
+    private Button botonnFondo;
+
     @FXML
     private Button botonReserva;
     @FXML
@@ -41,6 +55,8 @@ public class EsceUser implements Initializable {
 
     @FXML
     private Label labelFecha;
+    @FXML
+    private Label labelReserva;
 
     @FXML
     private TextField textFApellido;
@@ -78,6 +94,10 @@ public class EsceUser implements Initializable {
     void accionEditaNombre(ActionEvent event) {
 
     }
+    @FXML
+    void accionAccesoReserva(MouseEvent event) {
+        App.escena3();
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -90,6 +110,7 @@ public class EsceUser implements Initializable {
         fechita();
         botonesEditables();
         circular();
+        sas();
 
     }
 
@@ -166,4 +187,45 @@ public class EsceUser implements Initializable {
         return cliente;
 
     }
+
+    public void sas(){
+        if(verificaCuota()){
+           // botonReserva.setDisable(false);
+            labelReserva.setDisable(false);
+            System.out.println("El cliente tiene un plan");
+            System.out.println(cliente.getPilaReservas());
+          }else{
+           // botonReserva.setDisable(true);
+            labelReserva.setDisable(true);
+            System.out.println("El cliente no tiene un plan  ");
+            Tooltip toolito= new Tooltip("Contrata un Plan para poder reservar");
+            Tooltip.install(botonnFondo, toolito);
+          }
+    }
+
+    public boolean verificaCuota() {
+    boolean puede = false;
+    String sql = "SELECT * FROM cliente where idCliente=?";
+    try {
+      PreparedStatement ps = con.prepareStatement(sql);
+      ps.setInt(1, cliente.getIdCliente());
+      // ResultSet rs= ps.executeQuery();
+      if (cliente.getCuota() == null) {
+        // Alert alert = new Alert(AlertType.WARNING);
+        // alert.setContentText("No tienes ningún plan contratado con nosotros. ");
+        // alert.setTitle("Reserva de Horario");
+
+      } else {
+        puede = true;
+      }
+      // si el cliente ya tiene una reserva en el mismo dia no deberia poder reservar
+      // de nuevo
+
+    } catch (SQLException e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+    }
+    return puede;
+
+  }
 }

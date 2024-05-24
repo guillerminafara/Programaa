@@ -52,6 +52,8 @@ public class EscReservaHorario implements Initializable {
   LocalDateTime ld = LocalDateTime.now();
   // static DateTimeFormatter formater= DateTimeFormatter.ofPattern("dd-MM-aaaa");
   DayOfWeek diaa = ld.getDayOfWeek();
+  static ArrayList<Button> listaBotones = new ArrayList<>();
+  static int i = 0;
 
   // LocalDateTime diaHoy= LocalDateTime.
   public EscReservaHorario() {
@@ -146,12 +148,21 @@ public class EscReservaHorario implements Initializable {
     botonSeleccionado = botonSeleccionado.substring(10, 17);
     System.out.println(botonSeleccionado);
 
+    i++;
+    System.out.println(i);
+    if (i % 2 == 0) {
+      habilitaBotones();
+    } else {
+      deshabilitaBotones(listaBotones, botonSeleccionado);
+    }
+
   }
 
   @FXML
   void DatePickerEvent(ActionEvent event) {
     String mayus = DatePickerB.getValue().getDayOfWeek().getDisplayName(TextStyle.FULL, espa);
     textFFecha.setText(mayus.toUpperCase());
+    habilitaBotones();
     // label.setText(DatePickerB.getValue().toString());
     // label.setText(diaa.toString());
     // label.setText(ld.getHour() + ":" + ld.getMinute());
@@ -174,7 +185,7 @@ public class EscReservaHorario implements Initializable {
     // time.setText(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd
     // HH:mm:ss")))
     // ),
-
+    deshabilitaTodosBotones();
     anchor.getStylesheets().add(getClass().getResource("css/principal.css").toExternalForm());
     circular();
     cargarUser();
@@ -183,6 +194,13 @@ public class EscReservaHorario implements Initializable {
     tl.setCycleCount(Animation.INDEFINITE);
     tl.play();
     textFFecha.setEditable(false);
+
+    if(verificaReserva()){
+      System.out.println("El cliente ya tiene una reserva");
+      System.out.println(cliente.getPilaReservas().get(cliente.getPilaReservas().size()));
+    }else{
+      System.out.println("El cliente no tiene reserva ");
+    }
     // cargarTabla();
 
   }
@@ -193,38 +211,7 @@ public class EscReservaHorario implements Initializable {
     return LocalDateTime.now().format(formatter);
   }
 
-  // @SuppressWarnings("unchecked")
-  // public void cargarTabla() {
-  // ArrayList<String> horas = new ArrayList();
-  // String dias = "";
-  // for (int i = 8; i < 21; i++) {
-  // dias = i + ":00";
-  // horas.add(dias);
-  // }
-
-  // datos = FXCollections.observableArrayList();
-  // datos.addAll(horas);
-
-  // tableLunes.setItems(datos);
-  // tableMartes.setItems(datos);
-  // tableMiercoles.setItems(datos);
-  // tableJueves.setItems(datos);
-  // tableViernes.setItems(datos);
-
-  // // SimpleStringProperty();
-  // this.coluLunes.setCellValueFactory(c -> new
-  // SimpleStringProperty(c.getValue()));
-
-  // this.coluMartes.setCellValueFactory(c -> new
-  // SimpleStringProperty(c.getValue()));
-  // this.coluMierc.setCellValueFactory(c -> new
-  // SimpleStringProperty(c.getValue()));
-  // this.coluJuev.setCellValueFactory(c -> new
-  // SimpleStringProperty(c.getValue()));
-  // this.ColuViernes.setCellValueFactory(c -> new
-  // SimpleStringProperty(c.getValue()));
-
-  // }
+  
   public void circular() {
     double radio = 25;
     Circle circulo = new Circle(radio, radio, radio);
@@ -322,17 +309,17 @@ public class EscReservaHorario implements Initializable {
   }
 
   public void deshabilitaBotones(ArrayList<Button> listaBotones, String boton) {
-    boton08.isPressed();
-    for (Button botons : listarBotones()) {
-        if(!botons.getId().toString().equals(boton)){
-          botons.setDisable(true);
 
-        }
+    for (Button botons : listarBotones()) {
+      if (!botons.getId().toString().equals(boton)) {
+        botons.setDisable(true);
+
+      }
     }
   }
 
   public ArrayList<Button> listarBotones() {
-    ArrayList<Button> listaBotones = new ArrayList<>();
+
     listaBotones.add(boton08);
     listaBotones.add(boton09);
     listaBotones.add(boton10);
@@ -346,8 +333,27 @@ public class EscReservaHorario implements Initializable {
     listaBotones.add(boton20);
     listaBotones.add(boton21);
 
-
     return listaBotones;
   }
+
+  public void habilitaBotones() {
+
+    for (Button botons : listarBotones()) {
+      // if (botons.getId().toString().equals(boton)) {
+      botons.setDisable(false);
+
+      // }
+    }
+  }
+
+  public void deshabilitaTodosBotones(){
+    for (Button botons : listarBotones()) {
+      
+         botons.setDisable(true);
+ 
+    }
+  }
+
+
 
 }

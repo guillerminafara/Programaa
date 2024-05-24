@@ -13,9 +13,11 @@
    <children>
       <Pane layoutY="1.0" prefHeight="657.0" prefWidth="323.0" style="-fx-background-color: #F1C411;">
          <children>
+            <Button fx:id="botonnFondo" layoutX="66.0" layoutY="317.0" mnemonicParsing="false" opacity="0.0" prefHeight="24.0" prefWidth="136.0" />
             <Label layoutX="67.0" layoutY="481.0" text="mi rutina" textFill="#2f2f2f" />
             <Button fx:id="botonAtras" layoutX="22.0" layoutY="23.0" mnemonicParsing="false" onAction="#accionAtras" text="🠔" />
-            <Button fx:id="botonReserva" graphicTextGap="0.0" layoutX="58.0" layoutY="317.0" mnemonicParsing="false" onAction="#accionReserva" prefHeight="24.0" prefWidth="136.0" style="-fx-background-color: #F1C411;" text="Reserva" textFill="#2803f8" />
+            <Button fx:id="botonReserva" graphicTextGap="0.0" layoutX="176.0" layoutY="211.0" mnemonicParsing="false" onAction="#accionReserva" prefHeight="24.0" prefWidth="78.0" style="-fx-background-color: #F1C411;" text="Reserva" textFill="#2803f8" />
+            <Label fx:id="labelReserva" layoutX="108.0" layoutY="321.0" onMouseClicked="#accionAccesoReserva" text="Reserva" />
          </children>
       </Pane>
       <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="67.0" layoutY="52.0" pickOnBounds="true" preserveRatio="true">
