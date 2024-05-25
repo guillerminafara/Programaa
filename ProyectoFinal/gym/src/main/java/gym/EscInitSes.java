@@ -104,7 +104,11 @@ public class EscInitSes implements Initializable{
                     entra=true;
                 }else{
                    // cliente= new Cliente(false,"","","","","", "");
-                    System.out.println("no esta entrando ");
+                   Alert alert = new Alert(Alert.AlertType.ERROR);
+                   alert.setHeaderText("Contraseña incorrecta!");
+                   alert.setContentText("Contraseña incorrecta");
+                   alert.setTitle("Inicio de Sesión ");
+                   alert.show();
                     
                 }
             }else{

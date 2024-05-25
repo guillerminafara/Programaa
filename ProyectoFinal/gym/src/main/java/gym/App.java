@@ -15,7 +15,7 @@ import java.util.Stack;
  */
 public class App extends Application {
     static Cliente cliente; 
-     static Scene scene, scene2, scene3, scene4,scene5;
+     static Scene scene, scene2, scene3, scene4,scene5, scene6;
      static Stage stage;
    static Stack<Scene> pila= new Stack<>();
 
@@ -85,6 +85,20 @@ public class App extends Application {
             scene5 = new Scene(fxmlLoader5.load());
             stackScenas(scene5);
             stage.setScene(scene5);
+            // stage.show();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
+    public static void escena6() {
+        
+        FXMLLoader fxmlLoader6 = new FXMLLoader(App.class.getResource("ContrataPlan.fxml"));
+        try {
+
+            scene6 = new Scene(fxmlLoader6.load());
+            stackScenas(scene6);
+            stage.setScene(scene6);
             // stage.show();
         } catch (IOException e) {
             // TODO Auto-generated catch block

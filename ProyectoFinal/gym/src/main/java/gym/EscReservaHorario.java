@@ -153,7 +153,7 @@ public class EscReservaHorario implements Initializable {
     if (i % 2 == 0) {
       habilitaBotones();
     } else {
-      deshabilitaBotones(listaBotones, botonSeleccionado);
+      deshabilitaBotones( botonSeleccionado);
     }
 
   }
@@ -308,7 +308,7 @@ public class EscReservaHorario implements Initializable {
 
   }
 
-  public void deshabilitaBotones(ArrayList<Button> listaBotones, String boton) {
+  public void deshabilitaBotones(String boton) {
 
     for (Button botons : listarBotones()) {
       if (!botons.getId().toString().equals(boton)) {

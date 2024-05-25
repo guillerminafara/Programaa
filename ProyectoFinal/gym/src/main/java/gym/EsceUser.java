@@ -40,7 +40,8 @@ public class EsceUser implements Initializable {
         con= Conexion.getConexion();
     }
 
-
+    @FXML
+    private Button Contrata;
     @FXML
     private AnchorPane anchor4;
     @FXML
@@ -50,6 +51,8 @@ public class EsceUser implements Initializable {
 
     @FXML
     private Button botonReserva;
+
+  
     @FXML
     private ImageView imagenUser;
 
@@ -71,18 +74,19 @@ public class EsceUser implements Initializable {
     private TextField textFNombre;
 
     @FXML
-    void accionReserva(ActionEvent event) {
+    void accionAccesoReserva(MouseEvent event) {//label 
         App.escena3();
     }
-
     @FXML
     void accionAtras(ActionEvent event) {
         App.escena1();
     }
 
+
+   
     @FXML
     void accionCambiaPlan(ActionEvent event) {
-
+        App.escena6();
     }
 
     @FXML
@@ -94,11 +98,12 @@ public class EsceUser implements Initializable {
     void accionEditaNombre(ActionEvent event) {
 
     }
-    @FXML
-    void accionAccesoReserva(MouseEvent event) {
-        App.escena3();
-    }
+    
 
+    @FXML
+    void accionReserva(ActionEvent event) {
+        App.escena3();
+    } 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         anchor4.getStylesheets().add(getClass().getResource("css/horario.css").toExternalForm());
