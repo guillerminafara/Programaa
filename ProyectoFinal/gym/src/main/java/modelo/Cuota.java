@@ -1,6 +1,7 @@
 
 package modelo;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 /**
@@ -11,14 +12,19 @@ public class Cuota {
     Planes plan;
     int idCliente;
     boolean estado;
-    LocalDateTime fechaVencimiento;
-    public Cuota(Planes plan, int idCliente, boolean estado, LocalDateTime fechaVencimiento) {
+    LocalDate fechaVencimiento;
+    LocalDate fechaInicio;
+
+    public Cuota(Planes plan, int idCliente, boolean estado, LocalDate fechaVencimiento) {
         this.plan = plan;
         this.idCliente = idCliente;
         this.estado = estado;
         this.fechaVencimiento = fechaVencimiento;
     }
     
+    public Cuota() {
+    }
+
     public int getIdCuota() {
         return idCuota;
     }
@@ -53,16 +59,25 @@ public class Cuota {
     public void setEstado(boolean estado) {
         this.estado = estado;
     }
-    public LocalDateTime getFechaVencimiento() {
+    public LocalDate getFechaVencimiento() {
         return fechaVencimiento;
     }
-    public void setFechaVencimiento(LocalDateTime fechaVencimiento) {
+    public void setFechaVencimiento(LocalDate fechaVencimiento) {
         this.fechaVencimiento = fechaVencimiento;
     }
+    
     @Override
     public String toString() {
         return "Cuota [idPlan=" + plan + ", idCliente=" + idCliente + ", estado=" + estado + ", fechaVencimiento="
                 + fechaVencimiento + "]";
+    }
+
+    public LocalDate getFechaInicio() {
+        return fechaInicio;
+    }
+
+    public void setFechaInicio(LocalDate fechaInicio) {
+        this.fechaInicio = fechaInicio;
     }
     
     

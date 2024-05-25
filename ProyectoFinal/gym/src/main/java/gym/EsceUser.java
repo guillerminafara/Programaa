@@ -18,26 +18,31 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Circle;
 import javafx.util.Duration;
 import modelo.Cliente;
+import modelo.Cuota;
 
 import java.lang.reflect.InvocationTargetException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
+
+
 public class EsceUser implements Initializable {
-    App app= new App();
+    App app = new App();
     Connection con;
     static Cliente cliente1 = null;
     static Cliente cliente = null;
+    static Cuota cuota;
     RegistrateEsc reg;
     EscInitSes init;
 
     public EsceUser() {
-        con= Conexion.getConexion();
+        con = Conexion.getConexion();
     }
 
     @FXML
@@ -52,7 +57,6 @@ public class EsceUser implements Initializable {
     @FXML
     private Button botonReserva;
 
-  
     @FXML
     private ImageView imagenUser;
 
@@ -74,16 +78,15 @@ public class EsceUser implements Initializable {
     private TextField textFNombre;
 
     @FXML
-    void accionAccesoReserva(MouseEvent event) {//label 
+    void accionAccesoReserva(MouseEvent event) {// label
         App.escena3();
     }
+
     @FXML
     void accionAtras(ActionEvent event) {
         App.escena1();
     }
 
-
-   
     @FXML
     void accionCambiaPlan(ActionEvent event) {
         App.escena6();
@@ -98,12 +101,12 @@ public class EsceUser implements Initializable {
     void accionEditaNombre(ActionEvent event) {
 
     }
-    
 
     @FXML
     void accionReserva(ActionEvent event) {
         App.escena3();
-    } 
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         anchor4.getStylesheets().add(getClass().getResource("css/horario.css").toExternalForm());
@@ -159,12 +162,17 @@ public class EsceUser implements Initializable {
         textFNombre.setText(client.getNombre());
         textFApellido.setText(client.getApellido());
         textFMail.setText(client.getMail());
-        if (client.getCuota() != null) {
+        // if (client.getCuota() != null) {
+        //     textFCuota.setText(client.getCuota().getplan().getIdPlan());
+        // } else {
+        //     textFCuota.setText("No cuentas con ningún plan activo");
+        // }
+
+            if (verificaCuota()) {
             textFCuota.setText(client.getCuota().getplan().getIdPlan());
         } else {
             textFCuota.setText("No cuentas con ningún plan activo");
         }
-
     }
 
     public void botonesEditables() {
@@ -188,49 +196,52 @@ public class EsceUser implements Initializable {
         labelFecha.setText(LocalDateTime.now().format(formatter));
         return LocalDateTime.now().format(formatter);
     }
-    public static Cliente pasarUser(){
+
+    public static Cliente pasarUser() {
         return cliente;
 
     }
 
-    public void sas(){
-        if(verificaCuota()){
-           // botonReserva.setDisable(false);
+    public void sas() {
+        if (verificaCuota()) {
+            // botonReserva.setDisable(false);
             labelReserva.setDisable(false);
             System.out.println("El cliente tiene un plan");
             System.out.println(cliente.getPilaReservas());
-          }else{
-           // botonReserva.setDisable(true);
+        } else {
+            // botonReserva.setDisable(true);
             labelReserva.setDisable(true);
             System.out.println("El cliente no tiene un plan  ");
-            Tooltip toolito= new Tooltip("Contrata un Plan para poder reservar");
+            Tooltip toolito = new Tooltip("Contrata un Plan para poder reservar");
             Tooltip.install(botonnFondo, toolito);
-          }
+        }
     }
 
     public boolean verificaCuota() {
-    boolean puede = false;
-    String sql = "SELECT * FROM cliente where idCliente=?";
-    try {
-      PreparedStatement ps = con.prepareStatement(sql);
-      ps.setInt(1, cliente.getIdCliente());
-      // ResultSet rs= ps.executeQuery();
-      if (cliente.getCuota() == null) {
-        // Alert alert = new Alert(AlertType.WARNING);
-        // alert.setContentText("No tienes ningún plan contratado con nosotros. ");
-        // alert.setTitle("Reserva de Horario");
+        boolean puede = false;
+        String sql = "SELECT * FROM cuota where idCliente=?";
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, cliente.getIdCliente());
+            // ResultSet rs= ps.executeQuery();
+            ResultSet rs = ps.executeQuery();
+            if(rs.next()){
+                rs.getInt("idCuota");
+                rs.getString("idPlan");
+                rs.getInt("idCliente");
+                rs.getBoolean("estado");
+                rs.getString("fechaInicio");
+                rs.getString("fechaVencimiento");
+                puede= true;
+            }
+            // si el cliente ya tiene una reserva en el mismo dia no deberia poder reservar
+            // de nuevo
 
-      } else {
-        puede = true;
-      }
-      // si el cliente ya tiene una reserva en el mismo dia no deberia poder reservar
-      // de nuevo
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return puede;
 
-    } catch (SQLException e) {
-      // TODO Auto-generated catch block
-      e.printStackTrace();
     }
-    return puede;
-
-  }
 }

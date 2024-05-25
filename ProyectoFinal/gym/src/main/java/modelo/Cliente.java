@@ -88,10 +88,13 @@ public class Cliente {
         this.reserva = reserva;
     }
 
+
+
     @Override
     public String toString() {
         return "Cliente [idCliente=" + idCliente + ", nif=" + nif + ", nombre=" + nombre + ", apellido=" + apellido
-                + ", mail=" + mail + ", pass=" + pass + "]";
+                + ", mail=" + mail + ", pass=" + pass + ", estado=" + estado + ", cuota=" + cuota + ", reserva="
+                + reserva + ", pilaReservas=" + pilaReservas + "]";
     }
 
     public Stack<HorarioReserva> getPilaReservas() {
