@@ -6,12 +6,14 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.DayOfWeek;
+import java.time.LocalDate;
 
 import javafx.beans.Observable;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.util.Callback;
 import javafx.util.Duration;
 import java.time.LocalDateTime;
 import java.time.Month;
@@ -21,6 +23,8 @@ import java.util.ArrayList;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
+
+
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -29,6 +33,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.DateCell;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
@@ -54,6 +59,7 @@ public class EscReservaHorario implements Initializable {
   DayOfWeek diaa = ld.getDayOfWeek();
   static ArrayList<Button> listaBotones = new ArrayList<>();
   static int i = 0;
+  static HorarioReserva reserva;
 
   // LocalDateTime diaHoy= LocalDateTime.
   public EscReservaHorario() {
@@ -153,7 +159,7 @@ public class EscReservaHorario implements Initializable {
     if (i % 2 == 0) {
       habilitaBotones();
     } else {
-      deshabilitaBotones( botonSeleccionado);
+      deshabilitaBotones(botonSeleccionado);
     }
 
   }
@@ -163,6 +169,7 @@ public class EscReservaHorario implements Initializable {
     String mayus = DatePickerB.getValue().getDayOfWeek().getDisplayName(TextStyle.FULL, espa);
     textFFecha.setText(mayus.toUpperCase());
     habilitaBotones();
+    crearId();
     // label.setText(DatePickerB.getValue().toString());
     // label.setText(diaa.toString());
     // label.setText(ld.getHour() + ":" + ld.getMinute());
@@ -185,6 +192,7 @@ public class EscReservaHorario implements Initializable {
     // time.setText(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd
     // HH:mm:ss")))
     // ),
+    System.out.println(cliente);
     deshabilitaTodosBotones();
     anchor.getStylesheets().add(getClass().getResource("css/principal.css").toExternalForm());
     circular();
@@ -195,23 +203,28 @@ public class EscReservaHorario implements Initializable {
     tl.play();
     textFFecha.setEditable(false);
 
-    if(verificaReserva()){
+    if (verificaReserva()) {
       System.out.println("El cliente ya tiene una reserva");
       System.out.println(cliente.getPilaReservas().get(cliente.getPilaReservas().size()));
-    }else{
+    } else {
       System.out.println("El cliente no tiene reserva ");
     }
     // cargarTabla();
-
+   
+    datePickerModifica();
   }
 
   private String fechita() {
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
     label.setText(LocalDateTime.now().format(formatter));
     return LocalDateTime.now().format(formatter);
+    
   }
+  public void cargarUser() {
+    cliente = initSes.pasarUSer();
+    labelNombre.setText(cliente.getNombre());
 
-  
+  }
   public void circular() {
     double radio = 25;
     Circle circulo = new Circle(radio, radio, radio);
@@ -220,39 +233,60 @@ public class EscReservaHorario implements Initializable {
     imagenUser.setFitHeight(2 * radio);
 
   }
+  public void crearHorarios(){
+    // String sql= "insert into horario(idHorario, fecha_hora, cantidad, estado) values(?, ?, ?, ?)";
+    // try {
+    //   PreparedStatement ps= con.prepareStatement(sql);
+    //   ps.setString(1, );
+    //   ps.setString(2, sql);
+    //   ps.setInt(3, i);
+    //   ps.setBoolean(4, true);
+
+    // } catch (SQLException e) {
+    //   // TODO Auto-generated catch block
+    //   e.printStackTrace();
+    // }
+
+  }
+
+public void crearId(){
+  String mes="";
+
+  DatePickerB.getValue().getDayOfMonth();
+  mes= DatePickerB.getValue().getMonth().toString().substring(0,3);
+  System.out.println(mes+ DatePickerB.getValue().getDayOfMonth());
+  
+ }
 
   // metodo que abre los horarios en caso de que tenga un user loggeado .. si no
   // hay user loggeado redirecciona a ingresar
-  public void cargarUser() {
-    cliente = initSes.pasarUSer();
-    labelNombre.setText(cliente.getNombre());
 
-  }
 
-  public boolean verificaCuota() {
-    boolean puede = false;
-    String sql = "SELECT * FROM cliente where idCliente=?";
-    try {
-      PreparedStatement ps = con.prepareStatement(sql);
-      ps.setInt(1, cliente.getIdCliente());
-      // ResultSet rs= ps.executeQuery();
-      if (cliente.getCuota() == null) {
-        Alert alert = new Alert(AlertType.WARNING);
-        alert.setContentText("No tienes ningún plan contratado con nosotros. ");
-        alert.setTitle("Reserva de Horario");
-      } else {
-        puede = true;
-      }
-      // si el cliente ya tiene una reserva en el mismo dia no deberia poder reservar
-      // de nuevo
+  // public boolean verificaCuota() {
+  // boolean puede = false;
+  // String sql = "SELECT * FROM cliente where idCliente=?";
+  // try {
+  // PreparedStatement ps = con.prepareStatement(sql);
+  // ps.setInt(1, cliente.getIdCliente());
+  // // ResultSet rs= ps.executeQuery();
+  // if (cliente.getCuota() == null) {
+  // Alert alert = new Alert(AlertType.WARNING);
+  // alert.setContentText("No tienes ningún plan contratado con nosotros. ");
+  // alert.setTitle("Reserva de Horario");
+  // } else {
+  // puede = true;
+  // }
+  // // si el cliente ya tiene una reserva en el mismo dia no deberia poder
+  // reservar
+  // // de nuevo
 
-    } catch (SQLException e) {
-      // TODO Auto-generated catch block
-      e.printStackTrace();
-    }
-    return puede;
+  // } catch (SQLException e) {
+  // // TODO Auto-generated catch block
+  // e.printStackTrace();
+  // }
+  // return puede;
 
-  }
+  // }
 
   public boolean verificaReserva() {
     int dia = ld.getDayOfMonth();
@@ -283,12 +317,13 @@ public class EscReservaHorario implements Initializable {
   }
 
   public void reservaHorario() {
-    HorarioReserva reserva = new HorarioReserva();
-    String sql = "Insert into reserva(idCliente, idCuota, estado) values (?, ?, ?)";
-    if (verificaCuota() && verificaReserva()) {
+
+    String sql = "Insert into reserva(idCliente, idHorario, estado) values (?, ?, ?)";
+    if (verificaReserva()) {
 
       try {
         PreparedStatement ps = con.prepareStatement(sql);
+        reserva = new HorarioReserva();
         ps.setInt(1, cliente.getIdCliente());
         ps.setInt(2, cliente.getCuota().getIdCuota());
         ps.setBoolean(3, true);
@@ -346,14 +381,33 @@ public class EscReservaHorario implements Initializable {
     }
   }
 
-  public void deshabilitaTodosBotones(){
+  public void deshabilitaTodosBotones() {
     for (Button botons : listarBotones()) {
-      
-         botons.setDisable(true);
- 
+
+      botons.setDisable(true);
+
     }
   }
+ public void datePickerModifica(){
+  Callback<DatePicker, DateCell> dayCellFactory = new Callback<DatePicker, DateCell>() {
+    @Override
+    public DateCell call(final DatePicker DatePickerB) {
+        return new DateCell() {
+            @Override
+            public void updateItem(LocalDate fecha, boolean vacio) {
+                super.updateItem(fecha, vacio);
+
+                // Deshabilitar días pasados
+                if (fecha.isBefore(LocalDate.now())) {
+                    setDisable(true);
+                    setStyle("-fx-background-color: #EEEEEE;");
+                }
+            }
+        };
+    }
+};
 
 
-
+DatePickerB.setDayCellFactory(dayCellFactory);
+ }
 }

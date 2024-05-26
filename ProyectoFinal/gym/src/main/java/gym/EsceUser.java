@@ -19,6 +19,7 @@ import javafx.scene.shape.Circle;
 import javafx.util.Duration;
 import modelo.Cliente;
 import modelo.Cuota;
+import modelo.Planes;
 
 import java.lang.reflect.InvocationTargetException;
 import java.net.URL;
@@ -26,18 +27,21 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Locale;
 import java.util.ResourceBundle;
-
-
 
 public class EsceUser implements Initializable {
     App app = new App();
+    // Locale espa = new Locale("es", "ES");
+    DateTimeFormatter formater = DateTimeFormatter.ofPattern("dd/MM/yyyy");
     Connection con;
     static Cliente cliente1 = null;
     static Cliente cliente = null;
     static Cuota cuota;
+    static Planes pla;
     RegistrateEsc reg;
     EscInitSes init;
 
@@ -51,6 +55,9 @@ public class EsceUser implements Initializable {
     private AnchorPane anchor4;
     @FXML
     private Button botonAtras;
+
+    @FXML
+    private Button botonCerrarSesion;
     @FXML
     private Button botonnFondo;
 
@@ -66,10 +73,13 @@ public class EsceUser implements Initializable {
     private Label labelReserva;
 
     @FXML
+    private Label vencimiento;
+
+    @FXML
     private TextField textFApellido;
 
     @FXML
-    private TextField textFCuota;
+    private Label textFCuota;
 
     @FXML
     private TextField textFMail;
@@ -90,6 +100,12 @@ public class EsceUser implements Initializable {
     @FXML
     void accionCambiaPlan(ActionEvent event) {
         App.escena6();
+    }
+
+    @FXML
+    void accionCerrarSesion(ActionEvent event) {
+        cliente = null;
+        App.escena1();
     }
 
     @FXML
@@ -163,13 +179,15 @@ public class EsceUser implements Initializable {
         textFApellido.setText(client.getApellido());
         textFMail.setText(client.getMail());
         // if (client.getCuota() != null) {
-        //     textFCuota.setText(client.getCuota().getplan().getIdPlan());
+        // textFCuota.setText(client.getCuota().getplan().getIdPlan());
         // } else {
-        //     textFCuota.setText("No cuentas con ningún plan activo");
+        // textFCuota.setText("No cuentas con ningún plan activo");
         // }
 
-            if (verificaCuota()) {
-            textFCuota.setText(client.getCuota().getplan().getIdPlan());
+        if (verificaCuota()) {
+            textFCuota.setText(cuota.getPlan().getDescripción());
+            vencimiento.setText("Tenes hasta el: " + cuota.getFechaVencimiento().format(formater));
+            System.out.println(cuota);
         } else {
             textFCuota.setText("No cuentas con ningún plan activo");
         }
@@ -179,7 +197,7 @@ public class EsceUser implements Initializable {
         textFNombre.setEditable(false);
         textFApellido.setEditable(false);
         textFMail.setEditable(false);
-        textFCuota.setEditable(false);
+        // textFCuota.setEditable(false);
     }
 
     public void circular() {
@@ -225,14 +243,23 @@ public class EsceUser implements Initializable {
             ps.setInt(1, cliente.getIdCliente());
             // ResultSet rs= ps.executeQuery();
             ResultSet rs = ps.executeQuery();
-            if(rs.next()){
-                rs.getInt("idCuota");
-                rs.getString("idPlan");
-                rs.getInt("idCliente");
-                rs.getBoolean("estado");
-                rs.getString("fechaInicio");
-                rs.getString("fechaVencimiento");
-                puede= true;
+            if (rs.next()) {
+                cuota = new Cuota();
+
+                cuota.setIdCuota(rs.getInt("idCuota"));
+                cuota.setPlan(buscaPlan(rs.getString("idPlan")));
+                cuota.setIdCliente(rs.getInt("idCliente"));
+                cuota.setEstado(rs.getBoolean("estado"));
+
+                cuota.setFechaInicio(LocalDate.parse(rs.getString("fechaInicio")));
+                cuota.setFechaVencimiento(LocalDate.parse(rs.getString("fechaVencimiento")));
+                if(cuota.isEstado()){
+                    puede = true;
+                }else{
+                    
+                }
+                
+                cliente.setCuota(cuota);
             }
             // si el cliente ya tiene una reserva en el mismo dia no deberia poder reservar
             // de nuevo
@@ -244,4 +271,33 @@ public class EsceUser implements Initializable {
         return puede;
 
     }
+
+    public Planes buscaPlan(String id) {
+        String sql = "Select *  from plan where idPlan=? ";
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setString(1, id);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                pla = new Planes();
+                pla.setIdPlan(rs.getString("idPlan"));
+                pla.setDescripción(rs.getString("descripcion"));
+                pla.setImporte(rs.getDouble("importe"));
+                pla.setEstado(true);
+            }
+
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return pla;
+    }
+
+    public void verificaVencimiento() {
+        if (cuota.getFechaVencimiento().isAfter(LocalDate.now())) {
+            cuota.setEstado(false);
+        }
+
+    }
+
 }

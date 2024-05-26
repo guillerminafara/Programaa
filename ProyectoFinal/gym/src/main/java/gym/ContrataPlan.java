@@ -231,6 +231,7 @@ public class ContrataPlan implements Initializable {
                 alert.setContentText(
                         pla.getDescripción() + ". El plan estará disponible hasta " + cuota.getFechaVencimiento());
                 alert.show();
+                cliente.setCuota(cuota);
             }
         } catch (SQLException e) {
             // TODO Auto-generated catch block
@@ -309,4 +310,6 @@ public class ContrataPlan implements Initializable {
         return puede[0];
     }
 
+    
 }
+   

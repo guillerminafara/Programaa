@@ -8,16 +8,35 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane fx:id="anchor4" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="657.0" prefWidth="915.0" style="-fx-background-color: #2F2F2F;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gym.EsceUser">
    <children>
-      <Pane layoutY="1.0" prefHeight="657.0" prefWidth="323.0" style="-fx-background-color: #F1C411;">
+      <Pane layoutY="-12.0" prefHeight="670.0" prefWidth="323.0" style="-fx-background-color: #F1C411;">
          <children>
             <Button fx:id="botonnFondo" layoutX="66.0" layoutY="317.0" mnemonicParsing="false" opacity="0.0" prefHeight="25.0" prefWidth="78.0" />
-            <Label layoutX="67.0" layoutY="481.0" text="mi rutina" textFill="#2f2f2f" />
+            <Label layoutX="66.0" layoutY="554.0" text="mi rutina" textFill="#2f2f2f" />
             <Button fx:id="botonAtras" layoutX="22.0" layoutY="23.0" mnemonicParsing="false" onAction="#accionAtras" text="🠔" />
-            <Button fx:id="botonReserva" graphicTextGap="0.0" layoutX="176.0" layoutY="211.0" mnemonicParsing="false" onAction="#accionReserva" prefHeight="24.0" prefWidth="78.0" style="-fx-background-color: #F1C411;" text="Reserva" textFill="#2803f8" />
-            <Label fx:id="labelReserva" layoutX="70.0" layoutY="320.0" onMouseClicked="#accionAccesoReserva" text="Reserva" />
+            <Button fx:id="botonReserva" disable="true" graphicTextGap="0.0" layoutX="176.0" layoutY="211.0" mnemonicParsing="false" onAction="#accionReserva" opacity="0.0" prefHeight="24.0" prefWidth="78.0" style="-fx-background-color: #F1C411;" text="Reserva" textFill="#2803f8" />
+            <Label fx:id="labelReserva" layoutX="47.0" layoutY="317.0" onMouseClicked="#accionAccesoReserva" text="Reserva">
+               <font>
+                  <Font size="16.0" />
+               </font></Label>
+            <Label fx:id="textFCuota" layoutX="47.0" layoutY="381.0" prefHeight="25.0" prefWidth="229.0" text="Label">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <Label fx:id="vencimiento" layoutX="49.0" layoutY="437.0" prefHeight="25.0" prefWidth="214.0">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <Label fx:id="labelFecha" layoutX="48.0" layoutY="264.0" text="Fecha" textFill="#2f2f2f">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
          </children>
       </Pane>
       <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="67.0" layoutY="52.0" pickOnBounds="true" preserveRatio="true">
@@ -25,9 +44,6 @@
             <Image url="@mono.png" />
          </image>
       </ImageView>
-    <Button layoutX="56.0" layoutY="360.0" mnemonicParsing="false" prefHeight="24.0" prefWidth="173.0" />
-      <Label fx:id="labelFecha" layoutX="74.0" layoutY="262.0" text="Fecha" textFill="#2f2f2f" />
-      <Label layoutX="68.0" layoutY="413.0" text="calendario" textFill="#2f2f2f" />
       <ImageView fx:id="imagenUser" fitHeight="136.0" fitWidth="163.0" layoutX="533.0" layoutY="63.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@iconouser.png" />
@@ -57,10 +73,10 @@
             </ImageView>
          </graphic>
       </Button>
-      <Button fx:id="Contrata" contentDisplay="TEXT_ONLY" layoutX="653.0" layoutY="528.0" mnemonicParsing="false" onAction="#accionCambiaPlan" prefHeight="49.0" prefWidth="114.0" text="Cambia tu Plan" />
       <TextField fx:id="textFNombre" layoutX="418.0" layoutY="306.0" prefHeight="37.0" prefWidth="253.0" style="-fx-background-color: #2F2F2F;" />
       <TextField fx:id="textFApellido" layoutX="418.0" layoutY="362.0" prefHeight="37.0" prefWidth="253.0" style="-fx-background-color: #2F2F2F;" />
       <TextField fx:id="textFMail" layoutX="418.0" layoutY="420.0" prefHeight="37.0" prefWidth="253.0" style="-fx-background-color: #2F2F2F;" />
-      <TextField fx:id="textFCuota" layoutX="418.0" layoutY="477.0" prefHeight="37.0" prefWidth="253.0" style="-fx-background-color: #2F2F2F;" />
+      <Button fx:id="botonCerrarSesion" layoutX="633.0" layoutY="507.0" mnemonicParsing="false" onAction="#accionCerrarSesion" prefHeight="29.0" prefWidth="87.0" text="Cerrar Sesión" />
+      <Button fx:id="Contrata" contentDisplay="TEXT_ONLY" layoutX="382.0" layoutY="483.0" mnemonicParsing="false" onAction="#accionCambiaPlan" prefHeight="49.0" prefWidth="114.0" text="Cambia tu Plan" />
    </children>
 </AnchorPane>
