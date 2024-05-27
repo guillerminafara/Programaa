@@ -23,8 +23,6 @@ import java.util.ArrayList;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
-
-
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -210,7 +208,7 @@ public class EscReservaHorario implements Initializable {
       System.out.println("El cliente no tiene reserva ");
     }
     // cargarTabla();
-   
+
     datePickerModifica();
   }
 
@@ -218,13 +216,15 @@ public class EscReservaHorario implements Initializable {
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
     label.setText(LocalDateTime.now().format(formatter));
     return LocalDateTime.now().format(formatter);
-    
+
   }
+
   public void cargarUser() {
     cliente = initSes.pasarUSer();
     labelNombre.setText(cliente.getNombre());
 
   }
+
   public void circular() {
     double radio = 25;
     Circle circulo = new Circle(radio, radio, radio);
@@ -233,34 +233,35 @@ public class EscReservaHorario implements Initializable {
     imagenUser.setFitHeight(2 * radio);
 
   }
-  public void crearHorarios(){
-    // String sql= "insert into horario(idHorario, fecha_hora, cantidad, estado) values(?, ?, ?, ?)";
+
+  public void crearHorarios() {
+    // String sql= "insert into horario(idHorario, fecha_hora, cantidad, estado)
+    // values(?, ?, ?, ?)";
     // try {
-    //   PreparedStatement ps= con.prepareStatement(sql);
-    //   ps.setString(1, );
-    //   ps.setString(2, sql);
-    //   ps.setInt(3, i);
-    //   ps.setBoolean(4, true);
+    // PreparedStatement ps= con.prepareStatement(sql);
+    // ps.setString(1, );
+    // ps.setString(2, sql);
+    // ps.setInt(3, i);
+    // ps.setBoolean(4, true);
 
     // } catch (SQLException e) {
-    //   // TODO Auto-generated catch block
-    //   e.printStackTrace();
+    // // TODO Auto-generated catch block
+    // e.printStackTrace();
     // }
 
   }
 
-public void crearId(){
-  String mes="";
+  public void crearId() {
+    String mes = "";
 
-  DatePickerB.getValue().getDayOfMonth();
-  mes= DatePickerB.getValue().getMonth().toString().substring(0,3);
-  System.out.println(mes+ DatePickerB.getValue().getDayOfMonth());
-  
- }
+    DatePickerB.getValue().getDayOfMonth();
+    mes = DatePickerB.getValue().getMonth().toString().substring(0, 3);
+    System.out.println(mes + DatePickerB.getValue().getDayOfMonth());
+
+  }
 
   // metodo que abre los horarios en caso de que tenga un user loggeado .. si no
   // hay user loggeado redirecciona a ingresar
-
 
   // public boolean verificaCuota() {
   // boolean puede = false;
@@ -388,26 +389,36 @@ public void crearId(){
 
     }
   }
- public void datePickerModifica(){
-  Callback<DatePicker, DateCell> dayCellFactory = new Callback<DatePicker, DateCell>() {
-    @Override
-    public DateCell call(final DatePicker DatePickerB) {
+
+  public void datePickerModifica() {
+    Callback<DatePicker, DateCell> dayCellFactory = new Callback<DatePicker, DateCell>() {
+      @Override
+      public DateCell call(final DatePicker DatePickerB) {
         return new DateCell() {
-            @Override
-            public void updateItem(LocalDate fecha, boolean vacio) {
-                super.updateItem(fecha, vacio);
+          @Override
+          public void updateItem(LocalDate fecha, boolean vacio) {
+            super.updateItem(fecha, vacio);
 
-                // Deshabilitar días pasados
-                if (fecha.isBefore(LocalDate.now())) {
-                    setDisable(true);
-                    setStyle("-fx-background-color: #EEEEEE;");
-                }
+            // Deshabilitar días pasados
+            if (fecha.isBefore(LocalDate.now())) {
+              setDisable(true);
+              setStyle("-fx-background-color: #EEEEEE;");
             }
+          }
         };
+      }
+    };
+
+    DatePickerB.setDayCellFactory(dayCellFactory);
+  }
+
+  public void deshabilitarPorHora(){
+    LocalDateTime ahora= LocalDateTime.now();
+    String hora= ahora.getHour().toString();
+    for (Button listaButton : listarBotones()) {
+      if(listaButton.contains(null)){
+
+      }
     }
-};
-
-
-DatePickerB.setDayCellFactory(dayCellFactory);
- }
+  }
 }

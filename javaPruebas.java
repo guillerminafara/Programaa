@@ -9,24 +9,23 @@ import java.util.Locale;
  */
 public class javaPruebas {
     public static void main(String[] args) {
-        LocalDateTime ld = LocalDateTime.now();
-        //DayOfWeek diaa = hoy.getDayOfWeek();
-        int dia= ld.getDayOfMonth();
-        Month mes =ld.getMonth();
+        // LocalDateTime ld = LocalDateTime.now();
+        // //DayOfWeek diaa = hoy.getDayOfWeek();
+        // int dia= ld.getDayOfMonth();
+        // Month mes =ld.getMonth();
    
-        Locale espa = new Locale("es", "ES");
-        System.out.println(ld);
-        System.out.println(mes.getDisplayName(TextStyle.FULL, espa));
-        String mayus= mes.getDisplayName(TextStyle.FULL, espa);
-        mayus= mayus.toUpperCase();
-        String clave= mayus.substring(0,3); 
-        System.out.println(clave);
-        System.out.println(dia);
-        clave+= dia;
-        System.out.println(clave);
+        // Locale espa = new Locale("es", "ES");
+        // System.out.println(ld);
+        // System.out.println(mes.getDisplayName(TextStyle.FULL, espa));
+        // String mayus= mes.getDisplayName(TextStyle.FULL, espa);
+        // mayus= mayus.toUpperCase();
+        // String clave= mayus.substring(0,3); 
+        // System.out.println(clave);
+        // System.out.println(dia);
+        // clave+= dia;
+        // System.out.println(clave);
         
-
-
+   
     }
 
 }

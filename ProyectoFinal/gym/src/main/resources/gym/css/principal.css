@@ -31,8 +31,8 @@
 
   -fx-text-fill: #ffffff;
 }
-.text-area {
+.text-area .text-field {
 
   -fx-background-color: #2F2F2F;
-  -fx-text-fill: #ffffff;
+  -fx-text-fill: #000000;
 }
