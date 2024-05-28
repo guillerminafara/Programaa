@@ -62,6 +62,7 @@ public class EscReservaHorario implements Initializable {
   String diahora = "";
   Horario horario;
   Map<Button, LocalTime> mapa = new HashMap<>();
+ 
 
   // LocalDateTime diaHoy= LocalDateTime.
   public EscReservaHorario() {
@@ -149,15 +150,15 @@ public class EscReservaHorario implements Initializable {
 
   @FXML
   void accionReservar(ActionEvent event) {
-   String id= crearId();
-    if (!verificaHorario(id) ){
+    String id = crearId();
+    if (!verificaHorario(id)) {
       System.out.println("entra en el true ");
 
-        crearHorarios(id);// por error meti el id dentro del metodo en otro metodo verificar crregir si da tiempo
+      crearHorarios(id);// por error meti el id dentro del metodo en otro metodo verificar crregir si da
+                        // tiempo
 
-
-    }else{
-      horario= buscaHorarios(id);
+    } else {
+      horario = buscaHorarios(id);
       reservaHorario(id);
       System.out.println("YA EXISTE EL ID");
     }
@@ -226,13 +227,13 @@ public class EscReservaHorario implements Initializable {
     tl.setCycleCount(Animation.INDEFINITE);
     tl.play();
     textFFecha.setEditable(false);
-    mapaBotones();
+    //mapaBotones();
 
     // if (!verificaReserva()) {
-    //   System.out.println("El cliente ya tiene una reserva");
-    //   System.out.println(cliente.getPilaReservas().get(cliente.getPilaReservas().size()));
+    // System.out.println("El cliente ya tiene una reserva");
+    // System.out.println(cliente.getPilaReservas().get(cliente.getPilaReservas().size()));
     // } else {
-    //   System.out.println("El cliente no tiene reserva ");
+    // System.out.println("El cliente no tiene reserva ");
     // }
     // cargarTabla();
 
@@ -263,19 +264,29 @@ public class EscReservaHorario implements Initializable {
 
     return horario;
   }
-public void cancelarReserva(){
-String sal=" update reserva set estado=? where idCliente=? ";
-PreparedStatement ps= con.prepareStatement(sal);
-ps.setBoolean(1,"estado"); 
-ps.setInt(2,"idCliente");
-ResultSet rs= ps.executeQuery():
-ir(rs.next()){
- Alert alert= new Alert(AlertType.CONFIRMATION);
-alert.setContentText("Estás seguro que deseas eliminar la reserva");
-alert.setTitle("Cancelar Reserva");
-alerta.show();
-}
-}
+
+  public void cancelarReserva() {
+    String sql = " update reserva set estado=? where idCliente=? ";
+    PreparedStatement ps;
+    try {
+      ps = con.prepareStatement(sql);
+      ps.setBoolean(1, false);
+      ps.setInt(2, cliente.getIdCliente());
+      
+      ResultSet rs = ps.executeQuery();
+      if (rs.next()) {
+        Alert alert = new Alert(AlertType.CONFIRMATION);
+        alert.setContentText("Estás seguro que deseas eliminar la reserva");
+        alert.setTitle("Cancelar Reserva");
+        alert.show();
+      }
+    } catch (SQLException e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+    }
+ 
+  }
+
   public void cargarUser() {
     cliente = initSes.pasarUSer();
     labelNombre.setText(cliente.getNombre());
@@ -294,35 +305,36 @@ alerta.show();
     imagenUser.setFitHeight(2 * radio);
 
   }
-//crea un horario y devuelve verdadero o false en caso de crearlo
+
+  // crea un horario y devuelve verdadero o false en caso de crearlo
   public boolean crearHorarios(String id) {
     boolean exito = false;
     // verifica horario es false o sea si el id no existe, procedemos a crearlo
-   // if (!verificaHorario(crearId())) {
+    // if (!verificaHorario(crearId())) {
 
-      String sql = "insert into horario(idHorario, fecha_hora, cantidad, estado)values(?, ?, ?, ?)";
-      try {
-        PreparedStatement ps = con.prepareStatement(sql);
-        horario = new Horario();
-        horario.setIdHorario(id);
-        horario.setDiaHora(ld);
-        horario.setCant(8);
-        horario.setEstado(true);
-        ps.setString(1, horario.getIdHorario());
-        ps.setString(2, diahora);
-        ps.setInt(3, 8);
-        ps.setBoolean(4, true);
-        if (ps.executeUpdate() == 1) {
-          System.out.println("creamos con exito el horario");
-          exito = true;
-          System.out.println("horario de crear horario" + horario);
+    String sql = "insert into horario(idHorario, fecha_hora, cantidad, estado)values(?, ?, ?, ?)";
+    try {
+      PreparedStatement ps = con.prepareStatement(sql);
+      horario = new Horario();
+      horario.setIdHorario(id);
+      horario.setDiaHora(ld);
+      horario.setCant(8);
+      horario.setEstado(true);
+      ps.setString(1, horario.getIdHorario());
+      ps.setString(2, diahora);
+      ps.setInt(3, 8);
+      ps.setBoolean(4, true);
+      if (ps.executeUpdate() == 1) {
+        System.out.println("creamos con exito el horario");
+        exito = true;
+        System.out.println("horario de crear horario" + horario);
 
-        }
-      } catch (SQLException e) {
-        // TODO Auto-generated catch block
-        e.printStackTrace();
       }
-   // }
+    } catch (SQLException e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+    }
+    // }
     return exito;
   }
 
@@ -333,10 +345,11 @@ alerta.show();
     mes = DatePickerB.getValue().getMonth().toString().substring(0, 3);
     // System.out.println(mes + DatePickerB.getValue().getDayOfMonth());
     mes += DatePickerB.getValue().getDayOfMonth() + "-";
-   // System.out.println("horarioSeleccionado(mapaBotones())" + deshabilitarPorHora(mapaBotones()));
+    // System.out.println("horarioSeleccionado(mapaBotones())" +
+    // deshabilitarPorHora(mapaBotones()));
     mes += deshabilitarPorHora(mapaBotones());
     mes = mes.substring(0, 8);
-    //System.out.println("salida crearId " + mes);
+     System.out.println("salida crearId " + mes);
 
     return mes;
   }
@@ -417,8 +430,8 @@ alerta.show();
   public String deshabilitarPorHora(Map<Button, LocalTime> mapa) {
     LocalDate hoy = LocalDate.now();
     LocalTime ahora = LocalTime.now();
-    
-    ahora = ahora.plusHours(5);
+
+    ahora = ahora.plusHours(1);
 
     for (Map.Entry<Button, LocalTime> mapita : mapa.entrySet()) {
       Button boton = mapita.getKey();
@@ -491,7 +504,7 @@ alerta.show();
     return listaBotones;
   }
 
-  public ArrayList listarReservas() {
+  public ArrayList<HorarioReserva> listarReservas() {
     ArrayList<HorarioReserva> listaReservas = new ArrayList<>();
     HorarioReserva reservaaa;
     String sql = "Select * from reserva where idCliente=?";
@@ -507,6 +520,7 @@ alerta.show();
         reservaaa.setEstado(rs.getBoolean("estado"));
         listaReservas.add(reserva);
       }
+      System.out.println(listaReservas);
     } catch (SQLException e) {
       // TODO Auto-generated catch block
       e.printStackTrace();
@@ -517,36 +531,36 @@ alerta.show();
   public void reservaHorario(String id) {
 
     String sql = "Insert into reserva(idCliente, idHorario, estado) values (?, ?, ?)";
-  //  if (verificaReserva()) {//completar metodo con una lista 
+    // if (verificaReserva()) {//completar metodo con una lista
 
-      try {
-        PreparedStatement ps = con.prepareStatement(sql);
-        reserva = new HorarioReserva();
-        
-        // reserva.setIdHorario();
-        reserva.setIdCliente(cliente.getIdCliente());
-        System.out.println("cliente.getIdCliente()"+ cliente.getIdCliente());
-        reserva.setIdHorario(horario.getIdHorario());
-        System.out.println("horario.getIdHorario()"+horario.getIdHorario());
-        reserva.setEstado(true);
-        ps.setInt(1, reserva.getIdCliente());
-        ps.setString(2, reserva.getIdHorario());
-        ps.setBoolean(3, reserva.isEstado());
-        if (ps.executeUpdate() == 1) {
-          Alert alert = new Alert(AlertType.INFORMATION);
-          alert.setContentText("Ya tenes tu reserva lista");
-          alert.setHeaderText("Reserva creada con exito");
-          alert.show();
-        }else{
-          System.out.println("no se que onda ");
-        }
+    try {
+      PreparedStatement ps = con.prepareStatement(sql);
+      reserva = new HorarioReserva();
 
-      } catch (SQLException e) {
-        // TODO Auto-generated catch block
-        e.printStackTrace();
+      // reserva.setIdHorario();
+      reserva.setIdCliente(cliente.getIdCliente());
+      System.out.println("cliente.getIdCliente()" + cliente.getIdCliente());
+      reserva.setIdHorario(horario.getIdHorario());
+      System.out.println("horario.getIdHorario()" + horario.getIdHorario());
+      reserva.setEstado(true);
+      ps.setInt(1, reserva.getIdCliente());
+      ps.setString(2, reserva.getIdHorario());
+      ps.setBoolean(3, reserva.isEstado());
+      if (ps.executeUpdate() == 1) {
+        Alert alert = new Alert(AlertType.INFORMATION);
+        alert.setContentText("Ya tenes tu reserva lista");
+        alert.setHeaderText("Reserva creada con exito");
+        alert.show();
+      } else {
+        System.out.println("no se que onda ");
       }
 
-   // }
+    } catch (SQLException e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+    }
+
+    // }
 
   }
 
@@ -580,7 +594,7 @@ alerta.show();
         System.out.println("id ingresado en verificar Horario : " + id);
         existe = true;
       }
-    //  System.out.println("estado de verificaHorario " + existe);
+      // System.out.println("estado de verificaHorario " + existe);
     } catch (SQLException e) {
       // TODO Auto-generated catch block
       e.printStackTrace();
@@ -588,36 +602,37 @@ alerta.show();
 
     return existe;
   }
-int id= crearId();
-  public boolean verificaReserva() {
-ArrayList<HorarioReserva> listaReservas=new ArrayList<>();
-listaReservas= listarReservas();
 
-    String dia = ld.getDayOfMonth();
-    Month mes = ld.getMonth();
-    String mayus = mes.getDisplayName(TextStyle.FULL, espa);
-    mayus = mayus.toUpperCase();
-    String clave = mayus.substring(0, 3);
-    clave += dia;
-    boolean puede = false;
-    if (lista  != null) {
-      for (HorarioReserva listaReservas: listaReservas()) {
-        if (listaReservas.getIdHorario().equals(id)) {
-          if (listaReservas.isEstado()) {
-            Alert alert = new Alert(AlertType.ERROR);
-            alert.setContentText("Ya tienes una reserva activa para este día.");
-            alert.setHeaderText("Ya tienes una reserva");
-            alert.setTitle("Reserva de Horario ");
+  // public boolean verificaReserva() {
+  //   //ArrayList<HorarioReserva> listaReservas = new ArrayList<>();
+  //  // listaReservas = listarReservas();
 
-          } else {
-            puede = true;
-          }
-        } else {
-          puede = true;
-        }
-      }
-    }
-    return puede;
-  }
+  //   // String dia = ld.getDayOfMonth();
+  //   // Month mes = ld.getMonth();
+  //   // String mayus = mes.getDisplayName(TextStyle.FULL, espa);
+  //   // mayus = mayus.toUpperCase();
+  //   // String clave = mayus.substring(0, 3);
+  //   // clave += dia;
+  //   boolean puede = false;
+  //   String id = crearId();
+  //   // if (lista != null) {
+  //   for (HorarioReserva listaReservas : listarReservas()) {
+  //     if (listaReservas.getIdHorario().equals(id)) {
+  //       if (listaReservas.isEstado()) {
+  //         Alert alert = new Alert(AlertType.ERROR);
+  //         alert.setContentText("Ya tienes una reserva activa para este día.");
+  //         alert.setHeaderText("Ya tienes una reserva");
+  //         alert.setTitle("Reserva de Horario ");
+  //         alert.show();
+  //       } else {
+  //         puede = true;
+  //       }
+  //     } else {
+  //       puede = true;
+  //     }
+  //   }
+  //   // }
+  //   return puede;
+  // }
 
 }

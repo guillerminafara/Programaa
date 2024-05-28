@@ -47,17 +47,17 @@
             <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Button fx:id="boton08" contentDisplay="CENTER" mnemonicParsing="false" onAction="#accionSeleccionaHora" onMouseClicked="#accionSeleccionaHora" prefHeight="25.0" prefWidth="120.0" text="08:00" GridPane.rowIndex="1" />
-            <Button fx:id="boton09" mnemonicParsing="false" onAction="#accionSeleccionaHora" onMouseClicked="#accionSeleccionaHora" prefHeight="25.0" prefWidth="120.0" text="09:00" GridPane.rowIndex="2" />
-            <Button fx:id="boton10" alignment="TOP_CENTER" mnemonicParsing="false" onAction="#accionSeleccionaHora" onMouseClicked="#accionSeleccionaHora" prefHeight="25.0" prefWidth="120.0" text="10:00" GridPane.rowIndex="3" />
-            <Button fx:id="boton11" alignment="TOP_CENTER" mnemonicParsing="false" onAction="#accionSeleccionaHora" prefHeight="25.0" prefWidth="120.0" text="11:00" GridPane.rowIndex="4" />
-            <Button fx:id="boton12" mnemonicParsing="false" onAction="#accionSeleccionaHora" prefHeight="25.0" prefWidth="120.0" text="12:00" GridPane.rowIndex="5" />
-            <Button fx:id="boton13" mnemonicParsing="false" onAction="#accionSeleccionaHora" prefHeight="25.0" prefWidth="120.0" text="13:00" GridPane.rowIndex="6" />
-            <Button fx:id="boton16" mnemonicParsing="false" onAction="#accionSeleccionaHora" prefHeight="25.0" prefWidth="120.0" text="16:00" GridPane.rowIndex="7" />
-            <Button fx:id="boton17" mnemonicParsing="false" onAction="#accionSeleccionaHora" prefWidth="120.0" text="17:00" GridPane.rowIndex="8" />
-            <Button fx:id="boton18" mnemonicParsing="false" onAction="#accionSeleccionaHora" prefWidth="120.0" text="18:00" GridPane.rowIndex="9" />
-            <Button fx:id="boton19" mnemonicParsing="false" onAction="#accionSeleccionaHora" onMouseClicked="#accionSeleccionaHora" prefWidth="120.0" text="19:00" GridPane.rowIndex="10" />
-            <Button fx:id="boton20" mnemonicParsing="false" onAction="#accionSeleccionaHora" onMouseClicked="#accionSeleccionaHora" prefWidth="120.0" text="20:00" GridPane.rowIndex="11" />
+            <Button fx:id="boton08" contentDisplay="CENTER" mnemonicParsing="false" onMouseClicked="#accionSeleccionaHora" prefHeight="25.0" prefWidth="120.0" text="08:00" GridPane.rowIndex="1" />
+            <Button fx:id="boton09" mnemonicParsing="false" onMouseClicked="#accionSeleccionaHora" prefHeight="25.0" prefWidth="120.0" text="09:00" GridPane.rowIndex="2" />
+            <Button fx:id="boton10" alignment="TOP_CENTER" mnemonicParsing="false" onMouseClicked="#accionSeleccionaHora" prefHeight="25.0" prefWidth="120.0" text="10:00" GridPane.rowIndex="3" />
+            <Button fx:id="boton11" alignment="TOP_CENTER" mnemonicParsing="false" onMouseClicked="#accionSeleccionaHora" prefHeight="25.0" prefWidth="120.0" text="11:00" GridPane.rowIndex="4" />
+            <Button fx:id="boton12" mnemonicParsing="false" onMouseClicked="#accionSeleccionaHora" prefHeight="25.0" prefWidth="120.0" text="12:00" GridPane.rowIndex="5" />
+            <Button fx:id="boton13" mnemonicParsing="false" onMouseClicked="#accionSeleccionaHora" prefHeight="25.0" prefWidth="120.0" text="13:00" GridPane.rowIndex="6" />
+            <Button fx:id="boton16" mnemonicParsing="false" onMouseClicked="#accionSeleccionaHora" prefHeight="25.0" prefWidth="120.0" text="16:00" GridPane.rowIndex="7" />
+            <Button fx:id="boton17" mnemonicParsing="false" onMouseClicked="#accionSeleccionaHora" prefWidth="120.0" text="17:00" GridPane.rowIndex="8" />
+            <Button fx:id="boton18" mnemonicParsing="false" onMouseClicked="#accionSeleccionaHora" prefWidth="120.0" text="18:00" GridPane.rowIndex="9" />
+            <Button fx:id="boton19" mnemonicParsing="false" onMouseClicked="#accionSeleccionaHora" prefWidth="120.0" text="19:00" GridPane.rowIndex="10" />
+            <Button fx:id="boton20" mnemonicParsing="false" onMouseClicked="#accionSeleccionaHora" prefWidth="120.0" text="20:00" GridPane.rowIndex="11" />
             <Button fx:id="boton21" mnemonicParsing="false" onMouseClicked="#accionSeleccionaHora" prefWidth="120.0" text="21:00" GridPane.rowIndex="12" />
             <TextField fx:id="textFFecha" onAction="#cargaDia" style="-fx-background-color: #f1c411;" />
          </children>
