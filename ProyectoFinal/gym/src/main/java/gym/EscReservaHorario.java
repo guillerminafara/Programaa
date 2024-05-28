@@ -263,7 +263,19 @@ public class EscReservaHorario implements Initializable {
 
     return horario;
   }
-
+public void cancelarReserva(){
+String sal=" update reserva set estado=? where idCliente=? ";
+PreparedStatement ps= con.prepareStatement(sal);
+ps.setBoolean(1,"estado"); 
+ps.setInt(2,"idCliente");
+ResultSet rs= ps.executeQuery():
+ir(rs.next()){
+ Alert alert= new Alert(AlertType.CONFIRMATION);
+alert.setContentText("Estás seguro que deseas eliminar la reserva");
+alert.setTitle("Cancelar Reserva");
+alerta.show();
+}
+}
   public void cargarUser() {
     cliente = initSes.pasarUSer();
     labelNombre.setText(cliente.getNombre());
@@ -576,19 +588,22 @@ public class EscReservaHorario implements Initializable {
 
     return existe;
   }
-
+int id= crearId();
   public boolean verificaReserva() {
-    int dia = ld.getDayOfMonth();
+ArrayList<HorarioReserva> listaReservas=new ArrayList<>();
+listaReservas= listarReservas();
+
+    String dia = ld.getDayOfMonth();
     Month mes = ld.getMonth();
     String mayus = mes.getDisplayName(TextStyle.FULL, espa);
     mayus = mayus.toUpperCase();
     String clave = mayus.substring(0, 3);
     clave += dia;
     boolean puede = false;
-    if (cliente.getPilaReservas() != null) {
-      for (HorarioReserva reservaList : cliente.getPilaReservas()) {
-        if (reservaList.getIdHorario().contains(clave)) {
-          if (reservaList.isEstado()) {
+    if (lista  != null) {
+      for (HorarioReserva listaReservas: listaReservas()) {
+        if (listaReservas.getIdHorario().equals(id)) {
+          if (listaReservas.isEstado()) {
             Alert alert = new Alert(AlertType.ERROR);
             alert.setContentText("Ya tienes una reserva activa para este día.");
             alert.setHeaderText("Ya tienes una reserva");
