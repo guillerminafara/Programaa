@@ -1,15 +1,16 @@
 package modelo;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class Horario {
     String idHorario;
-    LocalDate diaHora;
+    LocalDateTime diaHora;
     int cant;
     boolean estado;
 
   
-    public Horario(String idHorario, LocalDate diaHora, int cant, boolean estado) {
+    public Horario(String idHorario, LocalDateTime diaHora, int cant, boolean estado) {
         this.idHorario = idHorario;
         this.diaHora = diaHora;
         this.cant = cant;
@@ -17,10 +18,10 @@ public class Horario {
     }
     public Horario() {
     }
-    public LocalDate getDiaHora() {
+    public LocalDateTime getDiaHora() {
         return diaHora;
     }
-    public void setDiaHora(LocalDate diaHora) {
+    public void setDiaHora(LocalDateTime diaHora) {
         this.diaHora = diaHora;
     }
     public boolean isEstado() {
@@ -41,4 +42,10 @@ public class Horario {
     public void setIdHorario(String idHorario) {
         this.idHorario = idHorario;
     }
+    @Override
+    public String toString() {
+        return "Horario [idHorario=" + idHorario + ", diaHora=" + diaHora + ", cant=" + cant + ", estado=" + estado
+                + "]";
+    }
+    
 }
