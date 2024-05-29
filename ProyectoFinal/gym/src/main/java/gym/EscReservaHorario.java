@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.util.Callback;
 import javafx.util.Duration;
@@ -62,14 +63,13 @@ public class EscReservaHorario implements Initializable {
   String diahora = "";
   Horario horario;
   Map<Button, LocalTime> mapa = new HashMap<>();
- 
 
   // LocalDateTime diaHoy= LocalDateTime.
   public EscReservaHorario() {
     con = Conexion.getConexion();
 
   }
-
+  // ObservableList<ObservableList<String>> datos;
   ObservableList<String> datos;
   @FXML
   private AnchorPane anchor;
@@ -121,7 +121,16 @@ public class EscReservaHorario implements Initializable {
   private Button botonAtras;
 
   @FXML
-  private TableColumn<?, ?> coluLunes;
+  private TableColumn<String,Cliente> coluEstado;
+
+  @FXML
+  private TableColumn<String, HorarioReserva> coluFecha;
+
+  @FXML
+  private TableColumn<String,HorarioReserva> coluNombre;
+
+  @FXML
+  private TableView<String> tablaReservas;
 
   @FXML
   private GridPane gridPane;
@@ -139,9 +148,6 @@ public class EscReservaHorario implements Initializable {
 
   @FXML
   private TextField textFFecha;
-
-  @FXML
-  private TableView<?> tableLunes;
 
   @FXML
   void cargaDia(ActionEvent event) {
@@ -227,7 +233,7 @@ public class EscReservaHorario implements Initializable {
     tl.setCycleCount(Animation.INDEFINITE);
     tl.play();
     textFFecha.setEditable(false);
-    //mapaBotones();
+    // mapaBotones();
 
     // if (!verificaReserva()) {
     // System.out.println("El cliente ya tiene una reserva");
@@ -272,7 +278,7 @@ public class EscReservaHorario implements Initializable {
       ps = con.prepareStatement(sql);
       ps.setBoolean(1, false);
       ps.setInt(2, cliente.getIdCliente());
-      
+
       ResultSet rs = ps.executeQuery();
       if (rs.next()) {
         Alert alert = new Alert(AlertType.CONFIRMATION);
@@ -284,7 +290,7 @@ public class EscReservaHorario implements Initializable {
       // TODO Auto-generated catch block
       e.printStackTrace();
     }
- 
+
   }
 
   public void cargarUser() {
@@ -294,7 +300,9 @@ public class EscReservaHorario implements Initializable {
   }
 
   public void cargarTablaReservas() {
-
+      datos = FXCollections.observableArrayList();
+      cliente;
+      coluNombre.setCellFactory(this);
   }
 
   public void circular() {
@@ -349,7 +357,7 @@ public class EscReservaHorario implements Initializable {
     // deshabilitarPorHora(mapaBotones()));
     mes += deshabilitarPorHora(mapaBotones());
     mes = mes.substring(0, 8);
-     System.out.println("salida crearId " + mes);
+    System.out.println("salida crearId " + mes);
 
     return mes;
   }
@@ -512,7 +520,7 @@ public class EscReservaHorario implements Initializable {
       PreparedStatement ps = con.prepareStatement(sql);
       ps.setInt(1, cliente.getIdCliente());
       ResultSet rs = ps.executeQuery();
-      if (rs.next()) {
+      while (rs.next()) {
         reservaaa = new HorarioReserva();
         reservaaa.setIdReserva(rs.getInt("idReserva"));
         reservaaa.setIdCliente(cliente.getIdCliente());
@@ -603,36 +611,41 @@ public class EscReservaHorario implements Initializable {
     return existe;
   }
 
-  // public boolean verificaReserva() {
-  //   //ArrayList<HorarioReserva> listaReservas = new ArrayList<>();
-  //  // listaReservas = listarReservas();
+  public boolean verificaReserva() {
+    // ArrayList<HorarioReserva> listaReservas = new ArrayList<>();
+    // listaReservas = listarReservas();
 
-  //   // String dia = ld.getDayOfMonth();
-  //   // Month mes = ld.getMonth();
-  //   // String mayus = mes.getDisplayName(TextStyle.FULL, espa);
-  //   // mayus = mayus.toUpperCase();
-  //   // String clave = mayus.substring(0, 3);
-  //   // clave += dia;
-  //   boolean puede = false;
-  //   String id = crearId();
-  //   // if (lista != null) {
-  //   for (HorarioReserva listaReservas : listarReservas()) {
-  //     if (listaReservas.getIdHorario().equals(id)) {
-  //       if (listaReservas.isEstado()) {
-  //         Alert alert = new Alert(AlertType.ERROR);
-  //         alert.setContentText("Ya tienes una reserva activa para este día.");
-  //         alert.setHeaderText("Ya tienes una reserva");
-  //         alert.setTitle("Reserva de Horario ");
-  //         alert.show();
-  //       } else {
-  //         puede = true;
-  //       }
-  //     } else {
-  //       puede = true;
-  //     }
-  //   }
-  //   // }
-  //   return puede;
-  // }
+    // String dia = ld.getDayOfMonth();
+    // Month mes = ld.getMonth();
+    // String mayus = mes.getDisplayName(TextStyle.FULL, espa);
+    // mayus = mayus.toUpperCase();
+    // String clave = mayus.substring(0, 3);
+    // clave += dia;
+    boolean puede = false;
+    LocalDate hoy = LocalDate.now();
+
+    String id2 = hoy.getMonth().getDisplayName(TextStyle.FULL, espa);
+    id2 += hoy.getDayOfMonth() + "";
+
+    // String id = crearId();
+    // if (lista != null) {
+    for (HorarioReserva listaReservas : listarReservas()) {
+      if (listaReservas.getIdHorario().contains(id2)) {
+        if (listaReservas.isEstado()) {
+          Alert alert = new Alert(AlertType.ERROR);
+          alert.setContentText("Ya tienes una reserva activa para este día.");
+          alert.setHeaderText("Ya tienes una reserva");
+          alert.setTitle("Reserva de Horario ");
+          alert.show();
+        } else {
+          puede = true;
+        }
+      } else {
+        puede = true;
+      }
+    }
+    // }
+    return puede;
+  }
 
 }

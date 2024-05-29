@@ -72,10 +72,11 @@
       <Button fx:id="botonPrueba" layoutX="545.0" layoutY="228.0" mnemonicParsing="false" onAction="#accionPrueba" text="prueba" />
       <Pane layoutX="6.0" layoutY="594.0" prefHeight="200.0" prefWidth="794.0" style="-fx-background-color: #2F2F2F;">
          <children>
-            <TableView fx:id="tableLunes" layoutX="168.0" layoutY="44.0" prefHeight="122.0" prefWidth="416.0">
+            <TableView fx:id="tablaReservas" editable="true" layoutX="168.0" layoutY="44.0" prefHeight="122.0" prefWidth="416.0">
               <columns>
-                <TableColumn fx:id="coluFecha" prefWidth="104.0" text="Lunes" />
-                  <TableColumn fx:id="coluEstado" prefWidth="75.0" text="Column X" />
+                <TableColumn fx:id="coluNombre" prefWidth="138.0" text="Nombre" />
+                  <TableColumn fx:id="coluFecha" prefWidth="154.0" text="Fecha" />
+                  <TableColumn fx:id="coluEstado" prefWidth="124.0" text="Estado" />
               </columns>
                <columnResizePolicy>
                   <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
