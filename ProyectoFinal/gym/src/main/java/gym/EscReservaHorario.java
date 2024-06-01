@@ -171,14 +171,15 @@ public class EscReservaHorario implements Initializable {
 
   @FXML
   void accionCancelarReservas(ActionEvent event) {
-
+    cancelarReserva();
   }
 
   @FXML
   void accionCerrarListaReservas(ActionEvent event) {
+    botonListaReservas.setDisable(false);
     TranslateTransition transi2 = new TranslateTransition();
     transi2.setNode(anchor);
-    transi2.setDuration(Duration.seconds(4));
+    transi2.setDuration(Duration.seconds(2));
     transi2.setByY(200);
     transi2.play();
   }
@@ -187,12 +188,13 @@ public class EscReservaHorario implements Initializable {
   void accionListarReservas(ActionEvent event) {
     // TranslateTransition transi = new TranslateTransition();
     // transi.setNode(panelito);
-    // transi.setDuration(Duration.seconds(4));
+    // transi.setDuration(Duration.seconds(2));
     // transi.setByY(-200);
     // transi.play();
+    botonListaReservas.setDisable(true);
     TranslateTransition transi2 = new TranslateTransition();
     transi2.setNode(anchor);
-    transi2.setDuration(Duration.seconds(4));
+    transi2.setDuration(Duration.seconds(2));
     transi2.setByY(-200);
     transi2.play();
     cargarTablaReservasFiltrada();
@@ -206,7 +208,7 @@ public class EscReservaHorario implements Initializable {
   @FXML
   void accionReservar(ActionEvent event) {
     String id = crearId();
-    if (!verificaHorario(id)) { //para crear el id de reserva, false no existe y la crea
+    if (!verificaHorario(id)) { // para crear el id de reserva, false no existe y la crea
       System.out.println("creando el id ");
 
       crearHorarios(id);// por error meti el id dentro del metodo en otro metodo verificar crregir si da
@@ -237,7 +239,8 @@ public class EscReservaHorario implements Initializable {
     i++;
     System.out.println(i);
     if (i % 2 == 0) {
-      habilitaBotones();
+     habilitaBotones();
+      deshabilitarPorHora(mapa);
     } else {
       deshabilitaBotones(botonSeleccionado);
     }
@@ -249,8 +252,13 @@ public class EscReservaHorario implements Initializable {
     String mayus = DatePickerB.getValue().getDayOfWeek().getDisplayName(TextStyle.FULL, espa);
     textFFecha.setText(mayus.toUpperCase());
     habilitaBotones();
-
     deshabilitarPorHora(mapaBotones());
+    if(!verificaReserva()){
+      deshabilitarBotonesPorReserva(); 
+    }else{
+      System.out.println("no tiene reservas entonces si que puede");
+    }
+
     // label.setText(DatePickerB.getValue().toString());
     // label.setText(diaa.toString());
     // label.setText(ld.getHour() + ":" + ld.getMinute());
@@ -275,7 +283,7 @@ public class EscReservaHorario implements Initializable {
     // ),
 
     System.out.println(cliente);
-  deshabilitaTodosBotones();
+    deshabilitaTodosBotones();
     anchor.getStylesheets().add(getClass().getResource("css/principal.css").toExternalForm());
     circular();
     cargarUser();
@@ -306,14 +314,14 @@ public class EscReservaHorario implements Initializable {
       ps.setString(1, id);
       ResultSet rs = ps.executeQuery();
       if (rs.next()) {
-        System.out.println("id ingresado en buscarHorario: " + id);
+       // System.out.println("id ingresado en buscarHorario: " + id);
 
         horario1 = new Horario();
         horario1.setIdHorario(id);
         horario1.setDiaHora(LocalDateTime.parse(rs.getString("fecha_hora"), formater));
         horario1.setCant(rs.getInt("cantidad"));
         horario1.setEstado(rs.getBoolean("estado"));
-        System.out.println("horario ingresadi desde buscarHorario " + horario1);
+      //  System.out.println("horario ingresadi desde buscarHorario " + horario1);
       }
 
     } catch (SQLException e) {
@@ -329,8 +337,8 @@ public class EscReservaHorario implements Initializable {
     PreparedStatement ps;
     try {
       ps = con.prepareStatement(sql);
-      ps.setBoolean(1, false);
-      ps.setInt(2, cliente.getIdCliente());
+      //ps.setBoolean(1, false);
+      ps.setInt(1, cliente.getIdCliente());
 
       Alert alert = new Alert(AlertType.CONFIRMATION);
       alert.setContentText("Estás seguro que deseas eliminar la reserva");
@@ -338,9 +346,7 @@ public class EscReservaHorario implements Initializable {
       alert.showAndWait().ifPresent(response -> {
         if (response == ButtonType.OK) {
           try {
-            ResultSet rs = ps.executeQuery();
-
-            if (rs.next()) {
+            if (ps.executeUpdate()==1) {
               Alert alertita = new Alert(AlertType.INFORMATION);
               alertita.setTitle("Cancelar Reserva");
               alertita.setContentText("Reserva Cancelada");
@@ -432,13 +438,13 @@ public class EscReservaHorario implements Initializable {
 
     mes = DatePickerB.getValue().getMonth().toString().substring(0, 3);
     // System.out.println(mes + DatePickerB.getValue().getDayOfMonth());
-    
-    if(DatePickerB.getValue().getDayOfMonth() <10){
-      mes += "0"+DatePickerB.getValue().getDayOfMonth() + "-";
-    
-    }else{
+
+    if (DatePickerB.getValue().getDayOfMonth() < 10) {
+      mes += "0" + DatePickerB.getValue().getDayOfMonth() + "-";
+
+    } else {
       mes += DatePickerB.getValue().getDayOfMonth() + "-";
-     
+
     }
     // System.out.println("horarioSeleccionado(mapaBotones())" +
     // deshabilitarPorHora(mapaBotones()));
@@ -493,7 +499,7 @@ public class EscReservaHorario implements Initializable {
               setStyle("-fx-background-color: #EEEEEE;");
             }
             // deshabilito los dias posteriores
-            if (fecha.isAfter(LocalDate.now().plusDays(2))) {
+            if (fecha.isAfter(LocalDate.now().plusDays(4))) {
               setDisable(true);
               setStyle("-fx-background-color: #EEEEEE;");
             }
@@ -515,24 +521,29 @@ public class EscReservaHorario implements Initializable {
   }
 
   public void deshabilitaBotones(String boton) {
-    System.out.println("BOTON QUE SE NO DESHABILITA"+ boton);
+    System.out.println("BOTON QUE SE NO DESHABILITA" + boton);
     for (Button botons : listarBotones()) {
       if (!botons.getId().toString().equals(boton)) {
         botons.setDisable(true);
+
+      }else{
+        botons.setDisable(false);
 
       }
     }
   }
 
-  public void deshabilitarBotonesPorReserva(){
-    String bton= verificaReserva();
-    System.out.println("BOTON DE DESHABILITAR BOTON");
-    if(bton!=null){// vamos a verificar si tiene una reserva vigente
+  public void deshabilitarBotonesPorReserva() {
+    String bton = consigueId();
+    bton = "boton" + bton.substring(6, 8);
+    //System.out.println("BOTON DE DESHABILITAR BOTON" + bton);
+    if (bton != null) {// vamos a verificar si tiene una reserva vigente
       deshabilitaBotones(bton);
-    }else{
+    } else {
 
     }
   }
+
   public void deshabilitaTodosBotones() {
     for (Button botons : listarBotones()) {
 
@@ -541,22 +552,24 @@ public class EscReservaHorario implements Initializable {
     }
   }
 
-
   public String deshabilitarPorHora(Map<Button, LocalTime> mapa) {
     LocalDate hoy = LocalDate.now();
     LocalTime ahora = LocalTime.now();
 
-    ahora = ahora.plusHours(1);
+  //  ahora = ahora.plusHours(3);
+    ahora = ahora.minusHours(3);
 
     for (Map.Entry<Button, LocalTime> mapita : mapa.entrySet()) {
       Button boton = mapita.getKey();
       LocalTime hora = mapita.getValue();
+     //LocalTime hora = ahora.minusHours(5);
+     // System.out.println("Hora del botón: " + hora);
       if (hora.isBefore(ahora) && DatePickerB.getValue().isEqual(hoy)) {
         boton.setDisable(true);
-      } else if (ahora.isAfter(hora)) { // eliminable
-        boton.setDisable(true);
+      } // else if (ahora.isAfter(hora)) { // eliminable
+      // boton.setDisable(true);
 
-      }
+      // }
       boton.setOnAction(event -> {
         seleccion = hora.toString();
         // System.out.println("boton seleccion: " + seleccion);
@@ -594,14 +607,14 @@ public class EscReservaHorario implements Initializable {
       LocalTime hora = mapita.getValue();
 
       boton.setOnAction(event -> {
-        if(hora.toString().length()==3){
-          seleccion = "0"+hora.toString();
+        if (hora.toString().length() == 3) {
+          seleccion = "0" + hora.toString();
 
-        }else{
-          seleccion =hora.toString();
+        } else {
+          seleccion = hora.toString();
         }
         System.out.println("boton seleccion: " + seleccion);
-         //System.out.println("botn presionado: " + boton.getText());
+        // System.out.println("botn presionado: " + boton.getText());
         // System.out.println("Hora del botón: " + hora);
       });
 
@@ -640,10 +653,10 @@ public class EscReservaHorario implements Initializable {
         reservaaa.setIdReserva(rs.getInt("idReserva"));
         reservaaa.setCliente(cliente);
         Horario horarioo = buscaHorarios(rs.getString("idHorario"));
-        System.out.println("horario" + horarioo);
+       // System.out.println("horario" + horarioo);
         reservaaa.setHorario(horarioo); // buscar horario por id
         reservaaa.setEstado(rs.getBoolean("estado"));
-        System.out.println("reservaaa: " + reservaaa);
+       // System.out.println("reservaaa: " + reservaaa);
         listaReservas.add(reservaaa);
       }
       System.out.println(listaReservas);
@@ -739,44 +752,63 @@ public class EscReservaHorario implements Initializable {
     return existe;
   }
 
-  public String verificaReserva() {
-    //boolean puede = false;
-    String botonReserva=null;
-    LocalDate hoy =  DatePickerB.getValue();
+  public boolean verificaReserva() {
+    boolean puede = false;
 
-    String id2 = hoy.getMonth().getDisplayName(TextStyle.FULL, espa);
-    id2=id2.toUpperCase();
-    id2=id2.substring(0,3);
-    if(hoy.getDayOfMonth()<10){
-      id2 += "0"+hoy.getDayOfMonth() + "";
-      
-    }else{
-      id2 +=hoy.getDayOfMonth() + "";
-
-    }
-    //id2= id2.substring(4);
-
-    System.out.println("id2: "+ id2);
-
+    String id2 = devuelveMesDia();
     for (HorarioReserva listaReservas : listarReservas()) {
       if (listaReservas.getHorario().getIdHorario().contains(id2)) {
+        puede= false;
+
         if (listaReservas.isEstado()) {
-          botonReserva=listaReservas.getHorario().getIdHorario();
-          System.out.println("boton reserva"+ botonReserva);
+          puede= false;
           Alert alert = new Alert(AlertType.ERROR);
           alert.setContentText("Ya tienes una reserva activa para este día.");
           alert.setHeaderText("Ya tienes una reserva");
           alert.setTitle("Reserva de Horario ");
           alert.show();
         } else {
-         // puede = true;
+          System.out.println("sout de verificacion de estados :"+ puede);
+          puede = true;
         }
-      } else {
-       // puede = true;
+       } else {
+        puede = true;
       }
     }
-    // }
-    return botonReserva;
+    return puede;
+
+  }
+
+  public String consigueId() {
+    String id2 = devuelveMesDia();
+    String ideReserva = null;
+
+    for (HorarioReserva listaReservas : listarReservas()) {
+      if (listaReservas.getHorario().getIdHorario().contains(id2)) {
+
+        if (listaReservas.isEstado()) {
+          ideReserva = listaReservas.getHorario().getIdHorario();
+          System.out.println("boton reserva" + botonReserva);
+        }
+      }
+    }
+    return ideReserva;
+  }
+
+  public String devuelveMesDia() {
+    LocalDate hoy = DatePickerB.getValue();// tomo el valor
+    String id2 = hoy.getMonth().getDisplayName(TextStyle.FULL, espa);
+    id2 = id2.toUpperCase();// mes en mayuscula
+    id2 = id2.substring(0, 3);
+    if (hoy.getDayOfMonth() < 10) { // el dia pero no hora JUN-10
+      id2 += "0" + hoy.getDayOfMonth() + "";
+    } else {
+      id2 += hoy.getDayOfMonth() + "";
+    }
+    // id2= id2.substring(4);
+
+    System.out.println("id2: " + id2);
+    return id2;
   }
 
   public void desactivaReservasVencidas() {

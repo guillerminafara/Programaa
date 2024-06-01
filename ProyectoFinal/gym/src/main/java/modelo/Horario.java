@@ -48,7 +48,8 @@ public class Horario {
   Locale espa = new Locale("es", "ES");
     @Override
     public String toString() {
-        return diaHora.getMonth().getDisplayName(TextStyle.FULL, espa)+" "+ diaHora.getHour()+":00" ;
+        return diaHora.getDayOfWeek().getDisplayName(TextStyle.FULL, espa)+" " +diaHora.getDayOfMonth()+ " de "+diaHora.getMonth().getDisplayName(TextStyle.FULL, espa)+
+        " "+ diaHora.getHour()+":00" ;
     }
     
 }

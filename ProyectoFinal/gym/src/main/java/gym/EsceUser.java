@@ -225,7 +225,7 @@ public class EsceUser implements Initializable {
             // botonReserva.setDisable(false);
             labelReserva.setDisable(false);
             System.out.println("El cliente tiene un plan");
-            System.out.println(cliente.getPilaReservas());
+            System.out.println("Tu promo: "+cliente.getPilaReservas());
         } else {
             // botonReserva.setDisable(true);
             labelReserva.setDisable(true);
