@@ -2,8 +2,8 @@ package modelo;
 
 public class HorarioReserva {
     int idReserva;
-    int idCliente;
-    String idHorario;
+    Cliente cliente;
+    Horario horario;
     boolean estado;
     public HorarioReserva() {
     }
@@ -13,17 +13,17 @@ public class HorarioReserva {
     public void setIdReserva(int idReserva) {
         this.idReserva = idReserva;
     }
-    public int getIdCliente() {
-        return idCliente;
+    public Cliente getCliente() {
+        return cliente;
     }
-    public void setIdCliente(int idCliente) {
-        this.idCliente = idCliente;
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
     }
-    public String getIdHorario() {
-        return idHorario;
+    public Horario getHorario() {
+        return horario;
     }
-    public void setIdHorario(String idHorario) {
-        this.idHorario = idHorario;
+    public void setHorario(Horario horario) {
+        this.horario = horario;
     }
     public boolean isEstado() {
         return estado;
@@ -33,8 +33,10 @@ public class HorarioReserva {
     }
     @Override
     public String toString() {
-        return "HorarioReserva [idReserva=" + idReserva + ", idCliente=" + idCliente + ", idHorario=" + idHorario + "]";
+        return "HorarioReserva [idReserva=" + idReserva + cliente.getNombre() + ", idHorario=" + horario
+                + ", estado=" + estado + "]";
     }
+
    
 
     

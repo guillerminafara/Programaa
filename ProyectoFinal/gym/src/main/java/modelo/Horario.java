@@ -2,6 +2,8 @@ package modelo;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.TextStyle;
+import java.util.Locale;
 
 public class Horario {
     String idHorario;
@@ -42,10 +44,11 @@ public class Horario {
     public void setIdHorario(String idHorario) {
         this.idHorario = idHorario;
     }
+     @SuppressWarnings("deprecation")
+  Locale espa = new Locale("es", "ES");
     @Override
     public String toString() {
-        return "Horario [idHorario=" + idHorario + ", diaHora=" + diaHora + ", cant=" + cant + ", estado=" + estado
-                + "]";
+        return diaHora.getMonth().getDisplayName(TextStyle.FULL, espa)+" "+ diaHora.getHour()+":00" ;
     }
     
 }

@@ -11,7 +11,7 @@ public class Cliente {
     String pass;
     boolean estado;
     Cuota cuota;
-    HorarioReserva reserva;
+   // HorarioReserva reserva;
     Stack <HorarioReserva>pilaReservas= new Stack<>();
 
     public Cliente() {
@@ -80,21 +80,19 @@ public class Cliente {
         this.cuota = cuota;
     }
 
-    public HorarioReserva getReserva() {
-        return reserva;
-    }
+    // public HorarioReserva getReserva() {
+    //     return reserva;
+    // }
 
-    public void setReserva(HorarioReserva reserva) {
-        this.reserva = reserva;
-    }
+    // public void setReserva(HorarioReserva reserva) {
+    //     this.reserva = reserva;
+    // }
 
 
 
     @Override
     public String toString() {
-        return "Cliente [idCliente=" + idCliente + ", nif=" + nif + ", nombre=" + nombre + ", apellido=" + apellido
-                + ", mail=" + mail + ", pass=" + pass + ", estado=" + estado + ", cuota=" + cuota + ", reserva="
-                + reserva + ", pilaReservas=" + pilaReservas + "]";
+        return nombre +"";
     }
 
     public Stack<HorarioReserva> getPilaReservas() {

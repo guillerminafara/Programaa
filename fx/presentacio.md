@@ -63,4 +63,33 @@ Trabajaremos con 5 clases para el manejo de objetos.
 
 
 
+tabla reservas
 
+void accionCerrarListaReservas(ActionEvent event) 
+void accionListarReservas(ActionEvent event)
+ void accionMuestraTodas(ActionEvent event)
+ void accionReservar(ActionEvent event) 
+  void accionSeleccionaHora(MouseEvent event) 
+ void DatePickerEvent(ActionEvent event)
+ public Horario buscaHorarios(String id) 
+ public void cancelarReserva()
+ public void cargarUser()
+ public void cargarTablaReservas() 
+ public void cargarTablaReservasFiltrada() 
+public boolean crearHorarios(String id)
+ public String crearId() 
+public void datePickerModifica()
+ public void deshabilitaBotones(String boton) 
+public void deshabilitarBotonesPorReserva()
+ public void deshabilitaTodosBotones() 
+ public String deshabilitarPorHora(Map<Button, LocalTime> mapa)
+ public void habilitaBotones() 
+public String horarioSeleccionado(Map<Button, LocalTime> mapa) 
+public ArrayList<Button> listarBotones() 
+ public ArrayList<HorarioReserva> listarReservas()
+ public ArrayList<HorarioReserva> listarReservasActivas()
+ public void reservaHorario(String id) 
+ public Map<Button, LocalTime> mapaBotones()
+public boolean verificaHorario(String id) 
+public boolean verificaReserva()
+ublic void desactivaReservasVencidas()
