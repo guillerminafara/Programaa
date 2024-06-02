@@ -89,12 +89,6 @@ public class Cliente {
     // }
 
 
-
-    @Override
-    public String toString() {
-        return nombre +"";
-    }
-
     public Stack<HorarioReserva> getPilaReservas() {
         return pilaReservas;
     }
@@ -102,6 +96,13 @@ public class Cliente {
     public void setPilaReservas(Stack<HorarioReserva> pilaReservas) {
         this.pilaReservas = pilaReservas;
     }
+
+    @Override
+    public String toString() {
+        return nombre;
+    }
+
+ 
     
 
 }

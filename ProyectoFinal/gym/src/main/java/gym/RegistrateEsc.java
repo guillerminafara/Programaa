@@ -13,7 +13,12 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
+
+import javafx.scene.input.KeyEvent;
 import javafx.scene.control.Alert.AlertType;
 import modelo.Cliente;
 
@@ -29,7 +34,14 @@ public class RegistrateEsc implements Initializable {
     private Button botonAtras;
     @FXML
     private Button botonRegistrate;
+    @FXML
+    private ImageView imagenlogo;
 
+    @FXML
+    private Label labelAdvierte;
+
+    @FXML
+    private Label labelComprueba;
     @FXML
     private TextField textFApellido;
 
@@ -43,7 +55,10 @@ public class RegistrateEsc implements Initializable {
     private TextField textFNombre;
 
     @FXML
-    private TextField textFPass;
+    private PasswordField textFPass;
+
+    @FXML
+    private PasswordField textPass2;
 
     @FXML
     void accionAtras(ActionEvent event) {
@@ -52,10 +67,10 @@ public class RegistrateEsc implements Initializable {
 
     @FXML
     void accionRegistrate(ActionEvent event) {
-      //  cliente= new Cliente();
+        // cliente= new Cliente();
         try {
             crearUsuario();
-            
+
         } catch (InvocationTargetException e) {
             // TODO Auto-generated catch block
             Alert alert = new Alert(AlertType.WARNING);
@@ -63,14 +78,24 @@ public class RegistrateEsc implements Initializable {
             alert.setContentText("Ya eres parte de nuestro equipo Accion 1");
             alert.setTitle("Registro de Usuario");
             alert.show();
-        }catch(NullPointerException e){
+        } catch (NullPointerException e) {
             Alert alert = new Alert(AlertType.WARNING);
             alert.setHeaderText("Alto!");
             alert.setContentText("Ya eres parte de nuestro equipo Accion 5");
             alert.setTitle("Registro de Usuario");
             alert.show();
         }
-       
+
+    }
+
+    @FXML
+    void accionVerificaContra(KeyEvent event) {
+        if (textFPass.getText().equals(textPass2.getText())) {
+            System.out.println("contraseñas iguales");
+            labelComprueba.setText("");
+        } else {
+            labelComprueba.setText("Contraseñas no coinciden");
+        }
     }
 
     @Override
@@ -79,62 +104,80 @@ public class RegistrateEsc implements Initializable {
 
     }
 
-    public void crearUsuario()  throws InvocationTargetException{
-       
+    public void crearUsuario()  throws InvocationTargetException {
+
         String sql = "INSERT INTO cliente(nombre, apellido, nif, estado, mail, pass) values (?, ?, ?, ?, ?, ?) ";
         try {
-            PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            ps.setString(1, textFNombre.getText());
-            ps.setString(2, textFApellido.getText());
-            ps.setString(3, textFNif.getText());
-            ps.setBoolean(4, true);
-            ps.setString(5, textFEmail.getText());
-            ps.setString(6,textFPass.getText());
-         //   ps.executeUpdate();
+            if (verificaExtension()) {
 
-        //     ResultSet rs = ps.getGeneratedKeys();
-        //  if (rs.next()) {
-                cliente= new Cliente();
-                System.out.println(textFApellido.getText());
-                cliente.setNombre(textFNombre.getText());
-                cliente.setApellido(textFApellido.getText());
-                cliente.setEstado(true);
-                cliente.setNif(textFNif.getText());
-                cliente.setMail(textFEmail.getText());
-                cliente.setPass(textFPass.getText());
-          
-                    Alert alert = new Alert(AlertType.INFORMATION);
-                    alert.setHeaderText("Bienvenido!");
-                    alert.setContentText("Ya eres parte de nuestro equipo");
-                    alert.setTitle("Registro de Usuario");
-                    alert.show();
-                    App.escena4();
-            
-            
-            // } else{
-            //     System.out.println("else del rs.next");
-            // }
+                PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+                ps.setString(1, textFNombre.getText());
+                ps.setString(2, textFApellido.getText());
+                ps.setString(3, textFNif.getText());
+                ps.setBoolean(4, true);
+                ps.setString(5, textFEmail.getText());
+                ps.setString(6, textFPass.getText());
+               
+                if (ps.executeUpdate() == 1) {
+                    ResultSet rs = ps.getGeneratedKeys();
+                    if(rs.next()){
+                    cliente = new Cliente();
+                    int idClienteGenerado = rs.getInt(1);
+                        System.out.println(textFApellido.getText());
+                        cliente.setIdCliente(idClienteGenerado);
+                        cliente.setNombre(textFNombre.getText());
+                        cliente.setApellido(textFApellido.getText());
+                        cliente.setEstado(true);
+                        cliente.setNif(textFNif.getText());
+                        cliente.setMail(textFEmail.getText());
+                        cliente.setPass(textFPass.getText());
+    
+                        Alert alert = new Alert(AlertType.INFORMATION);
+                        alert.setHeaderText("Bienvenido!");
+                        alert.setContentText("Ya eres parte de nuestro equipo");
+                        alert.setTitle("Registro de Usuario");
+                        alert.show();
+                        App.escena4();
+                        System.out.println("el usuario es:"+ cliente);
+                    }
+                }
+            }
            
+
         } catch (SQLException e) {
             Alert alert = new Alert(AlertType.WARNING);
             alert.setHeaderText("Alto!");
-            alert.setContentText("Ya eres parte de nuestro equipo Accion 2");
+            alert.setContentText("Ya eres parte de nuestro equipo Accion 3");
             alert.setTitle("Registro de Usuario");
             alert.show();
-            System.out.println("ya estas loquillo");
-        }catch(NullPointerException e){
+          //  System.out.println(e);
+        } catch (NullPointerException e) {
             Alert alert = new Alert(AlertType.WARNING);
             alert.setHeaderText("Alto!");
             alert.setContentText("Ya eres parte de nuestro equipo Accion 2");
             alert.setTitle("Registro de Usuario");
             alert.show();
         }
-       // return cliente;
+        // return cliente;
     }
 
-    public static Cliente pasarUser(){
-        System.out.println(RegistrateEsc.cliente);
+    public static Cliente pasarUser() {
+     //   System.out.println(cliente.getApellido()+ "el apellido");
         return cliente;
     }
 
+    public boolean verificaExtension() {
+        boolean puede = true;
+        if (textFNif.getText().length() > 9) {
+            // textFNif.setText("");
+            labelAdvierte.setText("NIF INVÁLIDO");
+            puede = false;
+        } else if (textFNif.getText().isEmpty() || textFApellido.getText().isEmpty() || textFNombre.getText().isEmpty()
+                || textFEmail.getText().isEmpty()) {
+            labelAdvierte.setText("TODOS LOS CAMPOS SON OBLIGATORIOS");
+            puede = false;
+        }
+        return puede;
+
+    }
 }

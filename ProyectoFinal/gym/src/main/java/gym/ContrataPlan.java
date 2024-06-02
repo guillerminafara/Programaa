@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -45,6 +46,8 @@ public class ContrataPlan implements Initializable {
     Cuota cuota;
     static Planes pla;
     static Cliente cliente;
+    static DateTimeFormatter formater = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+    ArrayList<Cuota> listaCuotas = new ArrayList<>();
 
     public ContrataPlan() {
         con = Conexion.getConexion();
@@ -71,6 +74,9 @@ public class ContrataPlan implements Initializable {
     private Button botonSalir;
     @FXML
     private ImageView img;
+
+    @FXML
+    private Label labelPlan;
 
     @FXML
     private TextArea textArea1;
@@ -110,14 +116,14 @@ public class ContrataPlan implements Initializable {
     @FXML
     void accionGenerarReserva(ActionEvent event) {
         // TextInputDialog texInput = new TextInputDialog();
-        System.out.println("boton selecciona: "+ botonSelect);
+        System.out.println("boton selecciona: " + botonSelect);
         buscaPlan(botonSelect);
-        boolean aux=crearDialog();
-        if(aux){
+        boolean aux = crearDialog();
+        if (aux) {
             crearCuota();
-            System.out.println("entra al true"+aux);
-        }else{
-            System.out.println("entra al false"+aux );
+            System.out.println("entra al true" + aux);
+        } else {
+            System.out.println("entra al false" + aux);
 
         }
     }
@@ -128,7 +134,15 @@ public class ContrataPlan implements Initializable {
         System.out.println(botonSelect);
         deshabilitaBotones(botonSelect);
         buscaPlan(botonSelect);
-        cargarTabla();
+        if (cliente.getCuota() != null) {
+            if (cliente.getCuota().isEstado()) {
+                recontrata();
+
+            }
+
+        } else {
+            cargarTabla();
+        }
         botonAcepta.setDisable(false);
     }
 
@@ -136,8 +150,18 @@ public class ContrataPlan implements Initializable {
     public void initialize(URL arg0, ResourceBundle arg1) {
         // TODO Auto-generated method stub
         botonAcepta.setDisable(true);
-        
-        cliente= EscInitSes.pasarUSer();
+
+        cliente = EscInitSes.pasarUSer();
+        if (cliente.getCuota() != null) {
+            if (cliente.getCuota().isEstado()) {
+                labelPlan.setText("Tu promo hasta el:" + cliente.getCuota().getFechaVencimiento().format(formater));
+
+            }
+            // System.out.println("salida de cliente" +
+            // cliente.getCuota().getFechaVencimiento().format(formater));
+        } else {
+            labelPlan.setText(" ");
+        }
     }
 
     public void buscaPlan(String botonSelect) {
@@ -161,6 +185,30 @@ public class ContrataPlan implements Initializable {
             e.printStackTrace();
         }
 
+    }
+
+    public Planes buscaPlanxId(String id) {
+        Planes plann = null;
+        String sql = "Select *  from plan where idPlan=? ";
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setString(1, id);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                plann = new Planes();
+                plann.setIdPlan(rs.getString("idPlan"));
+                plann.setDescripción(rs.getString("descripcion"));
+                // System.out.println(plann.getDescripción() + "descr");
+                // System.out.println(rs.getString("descripcion") + "rs");
+                plann.setImporte(rs.getDouble("importe"));
+                plann.setEstado(rs.getBoolean("estado"));
+            }
+
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return plann;
     }
 
     public void deshabilitaBotones(String botonSelect) {
@@ -195,9 +243,9 @@ public class ContrataPlan implements Initializable {
     public void cargarTabla() {
         ObservableList<String> fila = FXCollections.observableArrayList();
         datos = FXCollections.observableArrayList();
-        fila.add(LocalDate.now().toString());
+        fila.add(LocalDate.now().format(formater));
         fila.add(pla.getDescripción());
-        fila.add(fechasFinaliza(pla) + "");
+        fila.add(fechasFinaliza(pla).format(formater));
         fila.add(pla.getImporte() + "");
         datos.add(fila);
         tabla.setItems(datos);
@@ -209,10 +257,10 @@ public class ContrataPlan implements Initializable {
 
     public void crearCuota() {
         String sql = "Insert into cuota (idPlan, idCliente, estado, fechaInicio, fechaVencimiento) values (?, ?, ?, ?, ?)";
-        
+
         try {
             PreparedStatement ps = con.prepareStatement(sql);
-            cuota= new Cuota();
+            cuota = new Cuota();
             cuota.setIdPlan(pla);
             cuota.setIdCliente(cliente.getIdCliente());
             cuota.setEstado(true);
@@ -231,6 +279,7 @@ public class ContrataPlan implements Initializable {
                 alert.setContentText(
                         pla.getDescripción() + ". El plan estará disponible hasta " + cuota.getFechaVencimiento());
                 alert.show();
+                botonAcepta.setDisable(true);
                 cliente.setCuota(cuota);
             }
         } catch (SQLException e) {
@@ -255,8 +304,8 @@ public class ContrataPlan implements Initializable {
     }
 
     public boolean crearDialog() {
-        boolean[] puede= {false};
-       // String puede="0";
+        boolean[] puede = { false };
+        // String puede="0";
         Dialog<List<String>> dialog = new Dialog();
         dialog.setHeaderText("Pago con tarjeta");
         // dialog.setContentText("Número de tarjeta: ");
@@ -296,20 +345,82 @@ public class ContrataPlan implements Initializable {
 
         Optional<List<String>> result = dialog.showAndWait();
         result.ifPresent(inputs -> {
-            if (inputs.get(0).length() != 22) {
+            if (inputs.get(0).length() != 16) {
                 alert.show();
             } else if (inputs.get(1).length() != 3) {
                 alert.show();
             } else if (inputs.get(2).length() != 7) {
                 alert.show();
-            }else{
-                puede[0]=true;
+            } else {
+                puede[0] = true;
             }
 
         });
         return puede[0];
     }
 
-    
+    public void recontrata() {
+        LocalDate fechaInicio = LocalDate.now();
+        String fechaVencimiento = "";
+
+        fechaInicio = cliente.getCuota().getFechaVencimiento().plusDays(1);
+
+        ObservableList<String> fila = FXCollections.observableArrayList();
+        datos = FXCollections.observableArrayList();
+        fila.add(fechaInicio.format(formater) + "");
+        fila.add(pla.getDescripción());
+        fila.add(fechasFinaliza2(pla, fechaInicio).format(formater) + "");
+        fila.add(pla.getImporte() + "");
+        datos.add(fila);
+        tabla.setItems(datos);
+        columnaFechaInicio.setCellValueFactory(c -> new SimpleStringProperty(c.getValue().get(0)));
+        columnaDescripcion.setCellValueFactory(c -> new SimpleStringProperty(c.getValue().get(1)));
+        columnaFechaFin.setCellValueFactory(c -> new SimpleStringProperty(c.getValue().get(2)));
+        columnaPrecio.setCellValueFactory(c -> new SimpleStringProperty(c.getValue().get(3)));
+    }
+
+    public LocalDate fechasFinaliza2(Planes pla, LocalDate inicio) {
+        LocalDate fechas = null;
+        if (pla.getIdPlan().equals("01M")) {
+            fechas = inicio.plusMonths(1).minusDays(1);
+        } else if (pla.getIdPlan().equals("03M")) {
+            fechas = inicio.plusMonths(3).minusDays(1);
+
+        } else if (pla.getIdPlan().equals("12M")) {
+            fechas = inicio.plusMonths(12).minusDays(1);
+
+        }
+        return fechas;
+    }
+
+    public void cancelaxVencimiento() {
+        for (Cuota lista : listarCuotas()) {
+
+        }
+    }
+
+    public ArrayList<Cuota> listarCuotas() {
+        listaCuotas = new ArrayList<>();
+        Cuota cuotaa = new Cuota();
+        String sql = "Select * from cuota where idcliente= ?";
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, cliente.getIdCliente());
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                String fecha = "";
+                fecha = rs.getString("fechaInicio");
+                cuotaa.setPlan(buscaPlanxId(rs.getString("idPlan")));
+                cuotaa.setIdCliente(rs.getInt("idCliente"));
+                cuotaa.setFechaInicio(LocalDate.parse(fecha));
+                cuotaa.setFechaVencimiento(LocalDate.parse(rs.getString("fechaVencimiento")));
+                listaCuotas.add(cuotaa);
+            }
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return listaCuotas;
+    }
+
 }
-   

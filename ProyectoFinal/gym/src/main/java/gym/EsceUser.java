@@ -13,6 +13,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Circle;
@@ -39,6 +40,7 @@ public class EsceUser implements Initializable {
     DateTimeFormatter formater = DateTimeFormatter.ofPattern("dd/MM/yyyy");
     Connection con;
     static Cliente cliente1 = null;
+    static Cliente cliente2 = null;
     static Cliente cliente = null;
     static Cuota cuota;
     static Planes pla;
@@ -66,7 +68,8 @@ public class EsceUser implements Initializable {
 
     @FXML
     private ImageView imagenUser;
-
+    @FXML
+    private Label labelCoincide;
     @FXML
     private Label labelFecha;
     @FXML
@@ -86,6 +89,12 @@ public class EsceUser implements Initializable {
 
     @FXML
     private TextField textFNombre;
+    
+    @FXML
+    private TextField textFPass;
+
+    @FXML
+    private TextField textFPass2;
 
     @FXML
     void accionAccesoReserva(MouseEvent event) {// label
@@ -105,16 +114,21 @@ public class EsceUser implements Initializable {
     @FXML
     void accionCerrarSesion(ActionEvent event) {
         cliente = null;
+        cliente2 = null;
+        cliente1 = null;
         App.escena1();
     }
 
     @FXML
-    void accionEditaApellido(ActionEvent event) {
-
+    void accionCorrobora(KeyEvent event) {
+        if(textFPass.getText().equals(textFPass2.getText())){
+            labelCoincide.setText("Las contraseñas deben coincidir");
+        }else{
+            labelCoincide.setText(" ");
+        }
     }
-
     @FXML
-    void accionEditaNombre(ActionEvent event) {
+    void accionEdita(ActionEvent event) {
 
     }
 
@@ -140,25 +154,28 @@ public class EsceUser implements Initializable {
 
     public void cargaUser() {
         cliente = null;
+        cliente2 = null;
         cliente1 = null;
         try {
             this.cliente1 = reg.pasarUser();
-            this.cliente = init.pasarUSer();
-            System.out.println(cliente1);
+            this.cliente2 = init.pasarUSer();
+            // System.out.println(cliente1);
 
         } catch (Exception e) {
-            System.out.println("sigue siendo nulo");
+            System.out.println("sigue siendo nulo" );
         }
-        //
-        if (cliente != null) {
-            // cliente = reg.pasarUser();
-            cargarPagina(cliente);
+
+        if (cliente2 != null) {
+            cliente = cliente2;
+
+            cargarPagina(cliente2);
             System.out.println("carga cliente");
 
         } else if (cliente1 != null) {
+            cliente = cliente1;
+
             System.out.println("carga cliente1");
             cargarPagina(cliente1);
-
             // cliente = init.pasarUSer();
         } else {
 
@@ -208,6 +225,10 @@ public class EsceUser implements Initializable {
         imagenUser.setFitHeight(2 * radio);
 
     }
+    public void desactivaText(){
+        textFPass.setVisible(false);
+        textFPass2.setVisible(false);
+    }
 
     private String fechita() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
@@ -225,7 +246,7 @@ public class EsceUser implements Initializable {
             // botonReserva.setDisable(false);
             labelReserva.setDisable(false);
             System.out.println("El cliente tiene un plan");
-            System.out.println("Tu promo: "+cliente.getPilaReservas());
+            System.out.println("Tu promo: " + cliente.getPilaReservas());
         } else {
             // botonReserva.setDisable(true);
             labelReserva.setDisable(true);
@@ -235,6 +256,7 @@ public class EsceUser implements Initializable {
         }
     }
 
+    /* */
     public boolean verificaCuota() {
         boolean puede = false;
         String sql = "SELECT * FROM cuota where idCliente=?";
@@ -253,12 +275,12 @@ public class EsceUser implements Initializable {
 
                 cuota.setFechaInicio(LocalDate.parse(rs.getString("fechaInicio")));
                 cuota.setFechaVencimiento(LocalDate.parse(rs.getString("fechaVencimiento")));
-                if(cuota.isEstado()){
+                if (cuota.isEstado()) {
                     puede = true;
-                }else{
-                    
+                } else {
+
                 }
-                
+
                 cliente.setCuota(cuota);
             }
             // si el cliente ya tiene una reserva en el mismo dia no deberia poder reservar
@@ -298,6 +320,16 @@ public class EsceUser implements Initializable {
             cuota.setEstado(false);
         }
 
+    }
+    public Cliente cargaClienteParaEdit(){
+        Cliente cliente2= null;
+        cliente2.setNombre(textFNombre.getText());
+        cliente2.setApellido(textFApellido.getText());
+       cliente2.setPass(textFPass.getText());
+       return cliente2;
+    }
+    public void editarCliente(){
+        String sql= "update cliente set nombre=?, apellido=?, pass=? where idcliente=?";
     }
 
 }

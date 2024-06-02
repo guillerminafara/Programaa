@@ -44,6 +44,7 @@
                </image>
             </ImageView>
             <TextArea editable="false" layoutX="598.0" layoutY="401.0" prefHeight="68.0" prefWidth="151.0" style="-fx-background-color: #2F2F2F;" text="Pago solo con tarjeta.&#10; Para abonar en efectivo&#10; acercate a nuestro local. " />
+            <Label fx:id="labelPlan" layoutX="89.0" layoutY="418.0" prefHeight="17.0" prefWidth="452.0" text="Tu promo: " textFill="WHITE" />
          </children>
       </AnchorPane>
    </content>

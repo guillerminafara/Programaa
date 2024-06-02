@@ -1,4 +1,5 @@
 package gym;
+
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -18,10 +19,10 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import modelo.Cliente;
 
-public class EscInitSes implements Initializable{
+public class EscInitSes implements Initializable {
     private Connection con = null;
     static Cliente cliente;
-    boolean entra=false;
+
     // static String url = "jdbc:mysql://127.0.0.1:33006/Gimnasio";
     // static String user = "root";
     // static String password = "Paquito2024----";
@@ -29,12 +30,6 @@ public class EscInitSes implements Initializable{
         con = Conexion.getConexion();
     }
 
-//    public Connection conectar() throws SQLException {
-//     con= DriverManager.getConnection(url,user,password);
-//     return con;
-// }
-
-   
     @FXML
     private Button botonAtras;
 
@@ -47,13 +42,12 @@ public class EscInitSes implements Initializable{
     @FXML
     private PasswordField TextContra;
 
-
     @FXML
     private ImageView imagenLogo;
 
     @FXML
     private TextField textFmail;
-    
+
     @FXML
     void accionRegistrate(ActionEvent event) {
         App.escena5();
@@ -61,37 +55,40 @@ public class EscInitSes implements Initializable{
 
     @FXML
     void InicaSesion(ActionEvent event) {
-        //login(textFmail.getText(),TextContra.getText() )
-      
-       if(login(textFmail.getText(),TextContra.getText() )){
+        // login(textFmail.getText(),TextContra.getText() )
+
+        if (login(textFmail.getText(), TextContra.getText())) {
+            System.out.println("a1");
             App.escena4();
-         }else{
-          botonRegistrate.setStyle("-fx-background-color: #F7641D; ");
-         }
+        } else {
+            System.out.println("entra al false :(");
+        }
     }
+
     @FXML
     void atras(ActionEvent event) {
         App.escena1();
     }
 
-    public boolean login(String log, String pass){
+    public boolean login(String log, String pass) {
+    boolean entra = false;
         PreparedStatement ps;
         String sql;
 
-        if(log.contains("@")){
-             sql="Select * from cliente where mail= ?"; // verifiicar el metodo de ingreso
-             System.out.println("entra con mail");
-        }else{
-             sql="Select * from cliente where nif= ?";
-             System.out.println("entra con nif");
+        if (log.contains("@")) {
+            sql = "Select * from cliente where mail= ?"; // verifiicar el metodo de ingreso
+            System.out.println("entra con mail");
+        } else {
+            sql = "Select * from cliente where nif= ?";
+            System.out.println("entra con nif");
 
         }
         try {
             ps = con.prepareStatement(sql);
             ps.setString(1, log);
-            ResultSet rs= ps.executeQuery();
-            if(rs.next()){
-                cliente= new Cliente();
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                cliente = new Cliente();
                 cliente.setIdCliente(rs.getInt("idcliente"));
                 cliente.setNif(rs.getString("nif"));
                 cliente.setApellido(rs.getString("apellido"));
@@ -99,27 +96,29 @@ public class EscInitSes implements Initializable{
                 cliente.setMail(rs.getString("mail"));
                 cliente.setPass(rs.getString("pass"));
                 cliente.setEstado(rs.getBoolean("estado"));
-                if(cliente.getPass().equals(pass)&& (cliente.getMail().equals(log) ||cliente.getNif().equals(log) )){
-                    System.out.println("entra al next");
-                    entra=true;
-                }else{
-                   // cliente= new Cliente(false,"","","","","", "");
-                   Alert alert = new Alert(Alert.AlertType.ERROR);
-                   alert.setHeaderText("Contraseña incorrecta!");
-                   alert.setContentText("Contraseña incorrecta");
-                   alert.setTitle("Inicio de Sesión ");
-                   alert.show();
-                    
+                if (cliente.getPass().equals(pass) && (cliente.getMail().equals(log) || cliente.getNif().equals(log))) {
+                    System.out.println("entra al nexttt");
+                    System.out.println("el cliente desde: "+ cliente);
+                    entra = true;
+                } else {
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setHeaderText("Contraseña incorrecta!");
+                    alert.setContentText("Contraseña incorrecta");
+                    alert.setTitle("Inicio de Sesión ");
+                    alert.show();
+
                 }
-            }else{
+            } else {
+                botonRegistrate.setStyle("-fx-background-color: #F7641D; ");
+
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setHeaderText("Regístrate!");
                 alert.setContentText("El usuario no se encuentra registrado");
                 alert.setTitle("Inicio de Sesión ");
                 alert.show();
 
-              //  cliente= new Cliente(false,"","","","","", "");
-           //   throw new NullPointerException("No se ha podido iniciar sesión");
+                // cliente= new Cliente(false,"","","","","", "");
+                // throw new NullPointerException("No se ha podido iniciar sesión");
 
             }
         } catch (SQLException e) {
@@ -127,26 +126,26 @@ public class EscInitSes implements Initializable{
             e.printStackTrace();
         }
         return entra;
-   
+
     }
-
-
-
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
         // TODO Auto-generated method stub
-       
+
     }
 
-    public void alerta(){
+    public void alerta() {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setContentText("El mail no se encuentra registrado");
         alert.setTitle("Inicio de Sesión ");
         alert.show();
     }
 
-    public static Cliente pasarUSer(){
+    public static Cliente pasarUSer() {
+
+    // System.out.println(cliente.getApellido()+ "el apellido sss");
+
         return cliente;
     }
 }

@@ -44,12 +44,12 @@
             <Image url="@mono.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="imagenUser" fitHeight="136.0" fitWidth="163.0" layoutX="533.0" layoutY="63.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="imagenUser" fitHeight="136.0" fitWidth="163.0" layoutX="575.0" layoutY="63.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@iconouser.png" />
          </image>
       </ImageView>
-      <Button contentDisplay="GRAPHIC_ONLY" layoutX="720.0" layoutY="308.0" mnemonicParsing="false" onAction="#accionEditaNombre" prefHeight="29.0" prefWidth="17.0" text="Button">
+      <Button fx:id="botonEdita" contentDisplay="GRAPHIC_ONLY" layoutX="545.0" layoutY="548.0" mnemonicParsing="false" onAction="#accionEdita" prefHeight="29.0" prefWidth="17.0" text="Button">
          <graphic>
             <ImageView fitHeight="21.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
                <cursor>
@@ -61,22 +61,13 @@
             </ImageView>
          </graphic>
       </Button>
-      <Button contentDisplay="GRAPHIC_ONLY" layoutX="720.0" layoutY="367.0" mnemonicParsing="false" onAction="#accionEditaApellido" prefHeight="17.0" prefWidth="37.0" text="Button">
-         <graphic>
-            <ImageView fitHeight="21.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
-               <cursor>
-                  <Cursor fx:constant="DEFAULT" />
-               </cursor>
-               <image>
-                  <Image url="@lapiz.png" />
-               </image>
-            </ImageView>
-         </graphic>
-      </Button>
-      <TextField fx:id="textFNombre" layoutX="418.0" layoutY="306.0" prefHeight="37.0" prefWidth="253.0" style="-fx-background-color: #2F2F2F;" />
-      <TextField fx:id="textFApellido" layoutX="418.0" layoutY="362.0" prefHeight="37.0" prefWidth="253.0" style="-fx-background-color: #2F2F2F;" />
-      <TextField fx:id="textFMail" layoutX="418.0" layoutY="420.0" prefHeight="37.0" prefWidth="253.0" style="-fx-background-color: #2F2F2F;" />
-      <Button fx:id="botonCerrarSesion" layoutX="633.0" layoutY="507.0" mnemonicParsing="false" onAction="#accionCerrarSesion" prefHeight="29.0" prefWidth="87.0" text="Cerrar Sesión" />
-      <Button fx:id="Contrata" contentDisplay="TEXT_ONLY" layoutX="382.0" layoutY="483.0" mnemonicParsing="false" onAction="#accionCambiaPlan" prefHeight="49.0" prefWidth="114.0" text="Cambia tu Plan" />
+      <TextField fx:id="textFNombre" editable="false" layoutX="418.0" layoutY="244.0" prefHeight="37.0" prefWidth="253.0" promptText="Nombre" style="-fx-background-color: #2F2F2F;" />
+      <TextField fx:id="textFApellido" editable="false" layoutX="418.0" layoutY="300.0" prefHeight="37.0" prefWidth="253.0" promptText="Apellido" style="-fx-background-color: #2F2F2F;" />
+      <TextField fx:id="textFMail" editable="false" layoutX="418.0" layoutY="358.0" prefHeight="37.0" prefWidth="253.0" promptText="mail" style="-fx-background-color: #2F2F2F;" />
+      <Button fx:id="botonCerrarSesion" layoutX="633.0" layoutY="548.0" mnemonicParsing="false" onAction="#accionCerrarSesion" prefHeight="29.0" prefWidth="87.0" text="Cerrar Sesión" />
+      <Button fx:id="Contrata" contentDisplay="TEXT_ONLY" layoutX="382.0" layoutY="528.0" mnemonicParsing="false" onAction="#accionCambiaPlan" prefHeight="49.0" prefWidth="114.0" text="Cambia tu Plan" />
+      <TextField fx:id="textFPass" disable="true" layoutX="419.0" layoutY="411.0" onKeyTyped="#accionCorrobora" prefHeight="37.0" prefWidth="253.0" promptText="Contraseña" style="-fx-background-color: #2F2F2F;" visible="false" />
+      <TextField fx:id="textFPass2" disable="true" editable="false" layoutX="417.0" layoutY="463.0" onKeyTyped="#accionCorrobora" prefHeight="37.0" prefWidth="253.0" promptText="Repite Contraseña" style="-fx-background-color: #2F2F2F;" visible="false" />
+      <Label fx:id="labelCoincide" layoutX="721.0" layoutY="455.0" prefHeight="17.0" prefWidth="175.0" text="coincide" textFill="WHITE" />
    </children>
 </AnchorPane>
