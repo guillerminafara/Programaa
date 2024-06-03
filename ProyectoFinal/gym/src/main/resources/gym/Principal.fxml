@@ -18,7 +18,14 @@
             <Image url="@mono.png" />
          </image>
       </ImageView>
-      <Pane layoutX="-1.0" layoutY="605.0" prefHeight="200.0" prefWidth="839.0" style="-fx-background-color: #2F2F2F;" />
-      <TextArea fx:id="textAreaAnim" layoutX="90.0" layoutY="649.0" prefHeight="200.0" prefWidth="697.0" />
+      <Pane fx:id="panelito" layoutX="-1.0" layoutY="605.0" prefHeight="200.0" prefWidth="839.0" style="-fx-background-color: #2F2F2F;">
+         <children>
+            <ImageView fx:id="imagenEvolucion" fitHeight="150.0" fitWidth="200.0" layoutX="96.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@WhatsApp%20Image%202024-06-03%20at%2015.14.13.jpeg" />
+               </image>
+            </ImageView>
+            <TextArea fx:id="textAreaAnim" layoutX="390.0" layoutY="-3.0" prefHeight="175.0" prefWidth="348.0" text="&#10;Nuestra filosofía: somos un grupo de deportistas con la&#10; apuesta en el trabajo de fuerza como eje de entrenamiento&#10; necesario para todos los ámbitos de l vida.&#10;Viendo mejoras propioceptivas en el control del cuerpo, &#10;equilibrio y destrezas físicas y crecimiento muscular.  &#10;apto y adaptado a todos los niveles. Nuestros coachs te&#10; van a acompañar en este camino con un seguimiento&#10; adaptado a tu nivel y a tu ritmo." />
+         </children></Pane>
    </children>
 </AnchorPane>

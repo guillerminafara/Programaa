@@ -10,6 +10,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.transform.Translate;
 import javafx.util.Duration;
 import modelo.Cliente;
@@ -31,7 +32,11 @@ static Cliente cliente;
     private Button BotonSobreNosotros;
 
     @FXML
+    private ImageView imagenEvolucion;
+    @FXML
     private ImageView ImagenLogo;
+  @FXML
+    private Pane panelito;
       @FXML
     private TextArea textAreaAnim;
 
@@ -45,6 +50,7 @@ static Cliente cliente;
        // escenitas=true;
        if(cliente!=null){
         App.escena4();
+        BotonReserva.setDisable(true);
        }else{
         
         App.escena2();
@@ -56,24 +62,40 @@ static Cliente cliente;
        // escenitas= false;
         App.escena5();
     }
-    
+    boolean entra=false;
     @FXML
     void accionSobreNosotros(ActionEvent event) {
-        TranslateTransition text= new TranslateTransition();
-        text.setNode(textAreaAnim);
-        text.setDuration(Duration.seconds(4));
-        text.setByY(-200);
-        text.play();
+       
+        if(!entra){
+        // TranslateTransition text= new TranslateTransition();
+        // text.setNode(panelito);
+        // text.setDuration(Duration.seconds(4));
+        // text.setByY(-200);
+        // text.play();
         TranslateTransition text2= new TranslateTransition();
         text2.setNode(anchor);
-        text2.setDuration(Duration.seconds(4));
+        text2.setDuration(Duration.seconds(2));
         text2.setByY(-200);
         text2.play();
+        entra=true;
+        }else{
+            // TranslateTransition text= new TranslateTransition();
+            // text.setNode(panelito);
+            // text.setDuration(Duration.seconds(4));
+            // text.setByY(200);
+            // text.play();
+            TranslateTransition text2= new TranslateTransition();
+            text2.setNode(anchor);
+            text2.setDuration(Duration.seconds(2));
+            text2.setByY(200);
+            text2.play();
+        }
     }
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
         anchor.getStylesheets().add(getClass().getResource("css/principal.css").toExternalForm());
        
     }
+
 
 }

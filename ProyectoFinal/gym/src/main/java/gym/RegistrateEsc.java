@@ -90,12 +90,7 @@ public class RegistrateEsc implements Initializable {
 
     @FXML
     void accionVerificaContra(KeyEvent event) {
-        if (textFPass.getText().equals(textPass2.getText())) {
-            System.out.println("contraseñas iguales");
-            labelComprueba.setText("");
-        } else {
-            labelComprueba.setText("Contraseñas no coinciden");
-        }
+        verificaContra();
     }
 
     @Override
@@ -103,12 +98,23 @@ public class RegistrateEsc implements Initializable {
         // TODO Auto-generated method stub
 
     }
-
-    public void crearUsuario()  throws InvocationTargetException {
-
+public boolean verificaContra(){
+    boolean puede= false;
+    if (textFPass.getText().equals(textPass2.getText())) {
+        System.out.println("contraseñas iguales");
+       puede= true;
+    
+        labelComprueba.setText("");
+    } else {
+        labelComprueba.setText("Contraseñas no coinciden");
+    }
+    return puede;
+}
+    public boolean crearUsuario()  throws InvocationTargetException {
+        boolean puede=false;
         String sql = "INSERT INTO cliente(nombre, apellido, nif, estado, mail, pass) values (?, ?, ?, ?, ?, ?) ";
         try {
-            if (verificaExtension()) {
+            if (verificaExtension()&& verificaContra()) {
 
                 PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
                 ps.setString(1, textFNombre.getText());
@@ -136,11 +142,16 @@ public class RegistrateEsc implements Initializable {
                         alert.setHeaderText("Bienvenido!");
                         alert.setContentText("Ya eres parte de nuestro equipo");
                         alert.setTitle("Registro de Usuario");
+                        puede=true;
                         alert.show();
                         App.escena4();
                         System.out.println("el usuario es:"+ cliente);
                     }
                 }
+            }else{
+                Alert alert= new Alert(AlertType.ERROR);
+                alert.setContentText("errror en la carga de datos ");
+                alert.show();
             }
            
 
@@ -158,7 +169,7 @@ public class RegistrateEsc implements Initializable {
             alert.setTitle("Registro de Usuario");
             alert.show();
         }
-        // return cliente;
+         return puede;
     }
 
     public static Cliente pasarUser() {

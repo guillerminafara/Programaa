@@ -56,6 +56,8 @@ import modelo.HorarioReserva;
 public class EscReservaHorario implements Initializable {
   static Connection con;
   static Cliente cliente = null;
+  static Cliente cliente2 = null;
+
   EscInitSes initSes = new EscInitSes();
   @SuppressWarnings("deprecation")
   Locale espa = new Locale("es", "ES");
@@ -214,6 +216,7 @@ public class EscReservaHorario implements Initializable {
   void accionCerrarListaReservas(ActionEvent event) {
     botonListaReservas.setDisable(false);
     botonReserva.setDisable(true);
+    botonReserva.setDisable(false);
     TranslateTransition transi2 = new TranslateTransition();
     transi2.setNode(anchor);
     transi2.setDuration(Duration.seconds(2));
@@ -431,7 +434,12 @@ public class EscReservaHorario implements Initializable {
   }
 
   public void cargarUser() {
-    cliente = initSes.pasarUSer();
+    cliente= EsceUser.pasarUser();
+    // if(cliente!=null){
+    
+    // }
+    // cliente = initSes.pasarUSer();
+    // cliente2=
     labelNombre.setText(cliente.getNombre());
 
   }
@@ -569,7 +577,7 @@ public class EscReservaHorario implements Initializable {
               setStyle("-fx-background-color: #EEEEEE;");
             }
             // deshabilito los dias posteriores
-            if (fecha.isAfter(LocalDate.now().plusDays(4))) {
+            if (fecha.isAfter(LocalDate.now().plusDays(2))) {
               setDisable(true);
               setStyle("-fx-background-color: #EEEEEE;");
             }

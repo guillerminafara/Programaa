@@ -46,6 +46,9 @@ public class ContrataPlan implements Initializable {
     Cuota cuota;
     static Planes pla;
     static Cliente cliente;
+    static Cliente cliente1;
+    static Cliente cliente2;
+
     static DateTimeFormatter formater = DateTimeFormatter.ofPattern("dd-MM-yyyy");
     ArrayList<Cuota> listaCuotas = new ArrayList<>();
 
@@ -150,20 +153,22 @@ public class ContrataPlan implements Initializable {
     public void initialize(URL arg0, ResourceBundle arg1) {
         // TODO Auto-generated method stub
         botonAcepta.setDisable(true);
-
-        cliente = EscInitSes.pasarUSer();
-        if (cliente.getCuota() != null) {
-            if (cliente.getCuota().isEstado()) {
-                labelPlan.setText("Tu promo hasta el:" + cliente.getCuota().getFechaVencimiento().format(formater));
-
-            }
-            // System.out.println("salida de cliente" +
-            // cliente.getCuota().getFechaVencimiento().format(formater));
-        } else {
-            labelPlan.setText(" ");
-        }
+        cargarUser();
     }
+    public Cliente cargarUser(){
+        cliente1= new Cliente();
+        cliente2= new Cliente();
 
+        cliente1= RegistrateEsc.pasarUser();
+        cliente2= EscInitSes.pasarUSer();
+        if(cliente1!=null){
+            cliente= cliente1;
+        }
+        if(cliente2!=null){
+            cliente=cliente2;
+        }
+        return cliente;
+    }
     public void buscaPlan(String botonSelect) {
         String sql = "Select *  from plan where idPlan=? ";
         try {

@@ -144,8 +144,6 @@ public class EscInitSes implements Initializable {
 
     public static Cliente pasarUSer() {
 
-    // System.out.println(cliente.getApellido()+ "el apellido sss");
-
         return cliente;
     }
 }

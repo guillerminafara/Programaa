@@ -223,6 +223,7 @@ public class EsceUser implements Initializable {
         // textFContraActual.setVisible(false);
         botonCambiarContraseña.setVisible(false);
         botonCancelar.setVisible(false);
+        System.out.println("entra en iniciar");
     }
 
     public void cargaUser() {
@@ -231,8 +232,10 @@ public class EsceUser implements Initializable {
         cliente1 = null;
         try {
             this.cliente1 = reg.pasarUser();
+            System.out.println("prueba para ver 1 "+  cliente1);
             this.cliente2 = init.pasarUSer();
-            // System.out.println(cliente1);
+            System.out.println("prueba para ver "+  cliente2);
+
 
         } catch (Exception e) {
             System.out.println("sigue siendo nulo");
