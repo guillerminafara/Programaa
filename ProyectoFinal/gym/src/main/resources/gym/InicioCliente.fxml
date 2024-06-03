@@ -37,6 +37,7 @@
                   <Font size="16.0" />
                </font>
             </Label>
+            <Button fx:id="Contrata" contentDisplay="TEXT_ONLY" layoutX="45.0" layoutY="546.0" mnemonicParsing="false" onAction="#accionCambiaPlan" prefHeight="49.0" prefWidth="114.0" text="Cambia tu Plan" />
          </children>
       </Pane>
       <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="67.0" layoutY="52.0" pickOnBounds="true" preserveRatio="true">
@@ -44,12 +45,12 @@
             <Image url="@mono.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="imagenUser" fitHeight="136.0" fitWidth="163.0" layoutX="575.0" layoutY="63.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="imagenUser" fitHeight="136.0" fitWidth="163.0" layoutX="576.0" layoutY="44.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@iconouser.png" />
          </image>
       </ImageView>
-      <Button fx:id="botonEdita" contentDisplay="GRAPHIC_ONLY" layoutX="545.0" layoutY="548.0" mnemonicParsing="false" onAction="#accionEdita" prefHeight="29.0" prefWidth="17.0" text="Button">
+      <Button fx:id="botonEdita" contentDisplay="GRAPHIC_ONLY" layoutX="684.0" layoutY="548.0" mnemonicParsing="false" onAction="#accionEdita" prefHeight="29.0" prefWidth="17.0" text="Button">
          <graphic>
             <ImageView fitHeight="21.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
                <cursor>
@@ -64,10 +65,11 @@
       <TextField fx:id="textFNombre" editable="false" layoutX="418.0" layoutY="244.0" prefHeight="37.0" prefWidth="253.0" promptText="Nombre" style="-fx-background-color: #2F2F2F;" />
       <TextField fx:id="textFApellido" editable="false" layoutX="418.0" layoutY="300.0" prefHeight="37.0" prefWidth="253.0" promptText="Apellido" style="-fx-background-color: #2F2F2F;" />
       <TextField fx:id="textFMail" editable="false" layoutX="418.0" layoutY="358.0" prefHeight="37.0" prefWidth="253.0" promptText="mail" style="-fx-background-color: #2F2F2F;" />
-      <Button fx:id="botonCerrarSesion" layoutX="633.0" layoutY="548.0" mnemonicParsing="false" onAction="#accionCerrarSesion" prefHeight="29.0" prefWidth="87.0" text="Cerrar Sesión" />
-      <Button fx:id="Contrata" contentDisplay="TEXT_ONLY" layoutX="382.0" layoutY="528.0" mnemonicParsing="false" onAction="#accionCambiaPlan" prefHeight="49.0" prefWidth="114.0" text="Cambia tu Plan" />
-      <TextField fx:id="textFPass" disable="true" layoutX="419.0" layoutY="411.0" onKeyTyped="#accionCorrobora" prefHeight="37.0" prefWidth="253.0" promptText="Contraseña" style="-fx-background-color: #2F2F2F;" visible="false" />
-      <TextField fx:id="textFPass2" disable="true" editable="false" layoutX="417.0" layoutY="463.0" onKeyTyped="#accionCorrobora" prefHeight="37.0" prefWidth="253.0" promptText="Repite Contraseña" style="-fx-background-color: #2F2F2F;" visible="false" />
-      <Label fx:id="labelCoincide" layoutX="721.0" layoutY="455.0" prefHeight="17.0" prefWidth="175.0" text="coincide" textFill="WHITE" />
+      <Button fx:id="botonCerrarSesion" layoutX="777.0" layoutY="548.0" mnemonicParsing="false" onAction="#accionCerrarSesion" prefHeight="29.0" prefWidth="87.0" text="Cerrar Sesión" />
+      <TextField fx:id="textFPass" layoutX="419.0" layoutY="411.0" onKeyTyped="#accionCorrobora" prefHeight="37.0" prefWidth="253.0" promptText="Contraseña" style="-fx-background-color: #2F2F2F;" visible="false" />
+      <TextField fx:id="textFPass2" layoutX="417.0" layoutY="463.0" onKeyTyped="#accionCorrobora" prefHeight="37.0" prefWidth="253.0" promptText="Repite Contraseña" style="-fx-background-color: #2F2F2F;" visible="false" />
+      <Label fx:id="labelCoincide" layoutX="721.0" layoutY="455.0" prefHeight="17.0" prefWidth="175.0" textFill="WHITE" />
+      <Button fx:id="botonCambiarContraseña" layoutX="355.0" layoutY="550.0" mnemonicParsing="false" onAction="#accionCambiarContraseña" text="Cambiar Contraseña" />
+      <Button fx:id="botonCancelar" layoutX="736.0" layoutY="552.0" mnemonicParsing="false" onAction="#accionCancelar" text="x" />
    </children>
 </AnchorPane>

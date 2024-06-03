@@ -9,6 +9,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
@@ -57,7 +58,10 @@ public class EsceUser implements Initializable {
     private AnchorPane anchor4;
     @FXML
     private Button botonAtras;
-
+    @FXML
+    private Button botonCancelar;
+    @FXML
+    private Button botonCambiarContraseña;
     @FXML
     private Button botonCerrarSesion;
     @FXML
@@ -81,6 +85,8 @@ public class EsceUser implements Initializable {
     @FXML
     private TextField textFApellido;
 
+    // @FXML
+    // private TextField textFContraActual;
     @FXML
     private Label textFCuota;
 
@@ -89,7 +95,7 @@ public class EsceUser implements Initializable {
 
     @FXML
     private TextField textFNombre;
-    
+
     @FXML
     private TextField textFPass;
 
@@ -107,9 +113,47 @@ public class EsceUser implements Initializable {
     }
 
     @FXML
+    void accionCancelar(ActionEvent event) {
+        botonCambiarContraseña.setVisible(false);
+        // textFContraActual.setVisible(false);
+        desactivaText(false);
+        botonesEditables(false);
+        textFApellido.setText(cliente.getApellido());
+        textFNombre.setText(cliente.getNombre());
+        i--;
+        j--;
+    }
+
+    @FXML
     void accionCambiaPlan(ActionEvent event) {
         App.escena6();
     }
+
+    int i = 0;
+
+    @FXML
+    void accionCambiarContraseña(ActionEvent event) {
+        i++;
+        if (i % 2 == 0) {
+            desactivaText(false); // deshabilita
+
+            // textFContraActual.setVisible(false);
+        } else {// apretar 1 vez
+            // textFContraActual.setVisible(true);
+            desactivaText(true); // se activa
+
+        }
+    }
+    // @FXML
+    // void accionCambiaContrTeclado(KeyEvent event) {
+    // if (textFContraActual.getText().equals(cliente.getPass())) {
+    // textFContraActual.setVisible(false);
+    // desactivaText(false);
+    // }else{
+    // labelCoincide.setText("contraseña incorrecta");
+    // }
+
+    // }
 
     @FXML
     void accionCerrarSesion(ActionEvent event) {
@@ -121,14 +165,40 @@ public class EsceUser implements Initializable {
 
     @FXML
     void accionCorrobora(KeyEvent event) {
-        if(textFPass.getText().equals(textFPass2.getText())){
-            labelCoincide.setText("Las contraseñas deben coincidir");
-        }else{
+        if (textFPass.getText().equals(textFPass2.getText())) {
             labelCoincide.setText(" ");
+        } else {
+            labelCoincide.setText("Las contraseñas deben coincidir");
+
         }
     }
+
+    int j = 0;
+
     @FXML
     void accionEdita(ActionEvent event) {
+        j++;
+        if (j % 2 == 0) {// par
+            Alert alert = new Alert(AlertType.CONFIRMATION);
+            alert.setTitle("Modificar User");
+            alert.setContentText("¿Estas seguro de que deseas modificar tus datos?");
+            alert.setHeaderText("Modificar Usuarios");
+            alert.showAndWait().ifPresent(response -> {
+                if (response == ButtonType.OK) {
+
+                    botonCambiarContraseña.setVisible(false);
+                    botonesEditables(false);
+                    editarCliente();
+                    botonCancelar.setVisible(false);
+                    desactivaText(false);
+                }
+            });
+
+        } else {
+            botonCambiarContraseña.setVisible(true);
+            botonesEditables(true);
+            botonCancelar.setVisible(true);
+        }
 
     }
 
@@ -146,10 +216,13 @@ public class EsceUser implements Initializable {
         tl.setCycleCount(Animation.INDEFINITE);
         tl.play();
         fechita();
-        botonesEditables();
+        botonesEditables(false);
         circular();
         sas();
-
+        desactivaText(false);
+        // textFContraActual.setVisible(false);
+        botonCambiarContraseña.setVisible(false);
+        botonCancelar.setVisible(false);
     }
 
     public void cargaUser() {
@@ -162,7 +235,7 @@ public class EsceUser implements Initializable {
             // System.out.println(cliente1);
 
         } catch (Exception e) {
-            System.out.println("sigue siendo nulo" );
+            System.out.println("sigue siendo nulo");
         }
 
         if (cliente2 != null) {
@@ -210,10 +283,10 @@ public class EsceUser implements Initializable {
         }
     }
 
-    public void botonesEditables() {
-        textFNombre.setEditable(false);
-        textFApellido.setEditable(false);
-        textFMail.setEditable(false);
+    public void botonesEditables(boolean editar) {
+        textFNombre.setEditable(editar);
+        textFApellido.setEditable(editar);
+        textFMail.setEditable(editar);
         // textFCuota.setEditable(false);
     }
 
@@ -225,9 +298,19 @@ public class EsceUser implements Initializable {
         imagenUser.setFitHeight(2 * radio);
 
     }
-    public void desactivaText(){
-        textFPass.setVisible(false);
-        textFPass2.setVisible(false);
+
+    public void desactivaText(boolean activar) {
+        textFPass.setStyle("-fx-background-color: #ffffff;");
+        textFPass2.setStyle("-fx-background-color: #ffffff;");
+
+        textFPass.setStyle("-fx-text-fill: #2F2F2F;");
+        textFPass2.setStyle("-fx-text-fill: #2F2F2F;");
+
+        textFPass.setVisible(activar);
+        textFPass2.setVisible(activar);
+        textFPass.setEditable(activar);
+        textFPass2.setEditable(activar);
+
     }
 
     private String fechita() {
@@ -321,15 +404,54 @@ public class EsceUser implements Initializable {
         }
 
     }
-    public Cliente cargaClienteParaEdit(){
-        Cliente cliente2= null;
+
+    public Cliente cargaClienteParaEdit() {
+        Cliente cliente2 = new Cliente();
+        System.out.println(textFNombre.getText());
+        System.out.println(textFApellido.getText());
+        System.out.println(textFPass.getText());
+        System.out.println(textFPass2.getText());
         cliente2.setNombre(textFNombre.getText());
+
         cliente2.setApellido(textFApellido.getText());
-       cliente2.setPass(textFPass.getText());
-       return cliente2;
+        if (textFPass.getText() != null && textFPass2.getText() != null) {
+            if (textFPass.getText().equals(textFPass2.getText())) {
+                cliente2.setPass(textFPass.getText());
+            }
+        }
+
+        return cliente2;
     }
-    public void editarCliente(){
-        String sql= "update cliente set nombre=?, apellido=?, pass=? where idcliente=?";
+
+    public void editarCliente() {
+        Cliente aux = cargaClienteParaEdit();
+        String sql = "update cliente set nombre=?, apellido=?, pass=? where idcliente=?";
+        try {
+
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setString(1, aux.getNombre());
+            ps.setString(2, aux.getApellido());
+
+            if (aux.getPass() != null) {
+                ps.setString(3, aux.getPass());
+            } else {
+                ps.setString(3, cliente.getPass());
+
+            }
+            ps.setInt(4, cliente.getIdCliente());
+
+            if (ps.executeUpdate() == 1) {
+                cliente.setApellido(aux.getApellido());
+                cliente.setNombre(aux.getNombre());
+                if (aux.getPass() != null) {
+                    cliente.setPass(aux.getPass());
+                }
+            }
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
     }
 
 }
