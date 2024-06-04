@@ -173,7 +173,7 @@ public boolean verificaContra(){
     }
 
     public static Cliente pasarUser() {
-     //   System.out.println(cliente.getApellido()+ "el apellido");
+       //System.out.println(cliente.getApellido()+ "el apellido");
         return cliente;
     }
 

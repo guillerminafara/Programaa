@@ -231,10 +231,10 @@ public class EsceUser implements Initializable {
         cliente2 = null;
         cliente1 = null;
         try {
-            this.cliente1 = reg.pasarUser();
-            System.out.println("prueba para ver 1 "+  cliente1);
+            this.cliente1 = RegistrateEsc.pasarUser(); //reg.pasarUser();
+            //System.out.println("prueba para ver 1 "+  cliente1);
             this.cliente2 = init.pasarUSer();
-            System.out.println("prueba para ver "+  cliente2);
+          //  System.out.println("prueba para ver "+  cliente2);
 
 
         } catch (Exception e) {
