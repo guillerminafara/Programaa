@@ -52,7 +52,7 @@ static Cliente cliente;
         App.escena4();
         BotonReserva.setDisable(true);
        }else{
-        
+        BotonReserva.setDisable(false);
         App.escena2();
 
        }
@@ -67,11 +67,7 @@ static Cliente cliente;
     void accionSobreNosotros(ActionEvent event) {
        
         if(!entra){
-        // TranslateTransition text= new TranslateTransition();
-        // text.setNode(panelito);
-        // text.setDuration(Duration.seconds(4));
-        // text.setByY(-200);
-        // text.play();
+   
         TranslateTransition text2= new TranslateTransition();
         text2.setNode(anchor);
         text2.setDuration(Duration.seconds(2));
@@ -79,16 +75,13 @@ static Cliente cliente;
         text2.play();
         entra=true;
         }else{
-            // TranslateTransition text= new TranslateTransition();
-            // text.setNode(panelito);
-            // text.setDuration(Duration.seconds(4));
-            // text.setByY(200);
-            // text.play();
+    
             TranslateTransition text2= new TranslateTransition();
             text2.setNode(anchor);
             text2.setDuration(Duration.seconds(2));
             text2.setByY(200);
             text2.play();
+            entra=false;
         }
     }
     @Override

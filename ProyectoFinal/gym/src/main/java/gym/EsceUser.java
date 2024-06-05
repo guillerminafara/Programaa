@@ -232,9 +232,9 @@ public class EsceUser implements Initializable {
         cliente1 = null;
         try {
             this.cliente1 = RegistrateEsc.pasarUser(); //reg.pasarUser();
-            //System.out.println("prueba para ver 1 "+  cliente1);
+         
             this.cliente2 = init.pasarUSer();
-          //  System.out.println("prueba para ver "+  cliente2);
+    
 
 
         } catch (Exception e) {
@@ -250,7 +250,7 @@ public class EsceUser implements Initializable {
         } else if (cliente1 != null) {
             cliente = cliente1;
 
-            System.out.println("carga cliente1");
+          
             cargarPagina(cliente1);
             // cliente = init.pasarUSer();
         } else {
@@ -280,7 +280,7 @@ public class EsceUser implements Initializable {
         if (verificaCuota()) {
             textFCuota.setText(cuota.getPlan().getDescripción());
             vencimiento.setText("Tenes hasta el: " + cuota.getFechaVencimiento().format(formater));
-            System.out.println(cuota);
+        
         } else {
             textFCuota.setText("No cuentas con ningún plan activo");
         }
@@ -331,7 +331,7 @@ public class EsceUser implements Initializable {
         if (verificaCuota()) {
             // botonReserva.setDisable(false);
             labelReserva.setDisable(false);
-            System.out.println("El cliente tiene un plan");
+           
             System.out.println("Tu promo: " + cliente.getPilaReservas());
         } else {
             // botonReserva.setDisable(true);
@@ -349,7 +349,7 @@ public class EsceUser implements Initializable {
         try {
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, cliente.getIdCliente());
-            // ResultSet rs= ps.executeQuery();
+        
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
                 cuota = new Cuota();

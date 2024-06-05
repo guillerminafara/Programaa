@@ -55,13 +55,13 @@ public class EscInitSes implements Initializable {
 
     @FXML
     void InicaSesion(ActionEvent event) {
-        // login(textFmail.getText(),TextContra.getText() )
+        
 
         if (login(textFmail.getText(), TextContra.getText())) {
-            System.out.println("a1");
+           
             App.escena4();
         } else {
-            System.out.println("entra al false :(");
+       //     System.out.println("entra al false :(");
         }
     }
 
@@ -77,10 +77,10 @@ public class EscInitSes implements Initializable {
 
         if (log.contains("@")) {
             sql = "Select * from cliente where mail= ?"; // verifiicar el metodo de ingreso
-            System.out.println("entra con mail");
+         
         } else {
             sql = "Select * from cliente where nif= ?";
-            System.out.println("entra con nif");
+            
 
         }
         try {
@@ -97,8 +97,7 @@ public class EscInitSes implements Initializable {
                 cliente.setPass(rs.getString("pass"));
                 cliente.setEstado(rs.getBoolean("estado"));
                 if (cliente.getPass().equals(pass) && (cliente.getMail().equals(log) || cliente.getNif().equals(log))) {
-                    System.out.println("entra al nexttt");
-                    System.out.println("el cliente desde: "+ cliente);
+                
                     entra = true;
                 } else {
                     Alert alert = new Alert(Alert.AlertType.ERROR);

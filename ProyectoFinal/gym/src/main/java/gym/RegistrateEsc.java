@@ -101,7 +101,7 @@ public class RegistrateEsc implements Initializable {
 public boolean verificaContra(){
     boolean puede= false;
     if (textFPass.getText().equals(textPass2.getText())) {
-        System.out.println("contraseñas iguales");
+       
        puede= true;
     
         labelComprueba.setText("");
@@ -129,7 +129,7 @@ public boolean verificaContra(){
                     if(rs.next()){
                     cliente = new Cliente();
                     int idClienteGenerado = rs.getInt(1);
-                        System.out.println(textFApellido.getText());
+                        
                         cliente.setIdCliente(idClienteGenerado);
                         cliente.setNombre(textFNombre.getText());
                         cliente.setApellido(textFApellido.getText());
@@ -145,7 +145,7 @@ public boolean verificaContra(){
                         puede=true;
                         alert.show();
                         App.escena4();
-                        System.out.println("el usuario es:"+ cliente);
+                        
                     }
                 }
             }else{
@@ -161,7 +161,7 @@ public boolean verificaContra(){
             alert.setContentText("Ya eres parte de nuestro equipo Accion 3");
             alert.setTitle("Registro de Usuario");
             alert.show();
-          //  System.out.println(e);
+        
         } catch (NullPointerException e) {
             Alert alert = new Alert(AlertType.WARNING);
             alert.setHeaderText("Alto!");
@@ -173,7 +173,7 @@ public boolean verificaContra(){
     }
 
     public static Cliente pasarUser() {
-       //System.out.println(cliente.getApellido()+ "el apellido");
+       
         return cliente;
     }
 

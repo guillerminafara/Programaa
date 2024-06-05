@@ -119,7 +119,7 @@ public class ContrataPlan implements Initializable {
     @FXML
     void accionGenerarReserva(ActionEvent event) {
         // TextInputDialog texInput = new TextInputDialog();
-        System.out.println("boton selecciona: " + botonSelect);
+     
         buscaPlan(botonSelect);
         boolean aux = crearDialog();
         if (aux) {
@@ -134,7 +134,7 @@ public class ContrataPlan implements Initializable {
     @FXML
     void accionSelecciona(ActionEvent event) {
         botonSelect = event.getSource().toString().substring(11, 14);
-        System.out.println(botonSelect);
+       
         deshabilitaBotones(botonSelect);
         buscaPlan(botonSelect);
         if (cliente.getCuota() != null) {
@@ -179,8 +179,7 @@ public class ContrataPlan implements Initializable {
                 pla = new Planes();
                 pla.setIdPlan(rs.getString("idPlan"));
                 pla.setDescripción(rs.getString("descripcion"));
-                System.out.println(pla.getDescripción() + "descr");
-                System.out.println(rs.getString("descripcion") + "rs");
+             
                 pla.setImporte(rs.getDouble("importe"));
                 pla.setEstado(true);
             }
@@ -203,8 +202,7 @@ public class ContrataPlan implements Initializable {
                 plann = new Planes();
                 plann.setIdPlan(rs.getString("idPlan"));
                 plann.setDescripción(rs.getString("descripcion"));
-                // System.out.println(plann.getDescripción() + "descr");
-                // System.out.println(rs.getString("descripcion") + "rs");
+              
                 plann.setImporte(rs.getDouble("importe"));
                 plann.setEstado(rs.getBoolean("estado"));
             }
@@ -217,19 +215,19 @@ public class ContrataPlan implements Initializable {
     }
 
     public void deshabilitaBotones(String botonSelect) {
-        System.out.println(b01M.getId() + "1");
+      
 
         if (b01M.getId().contains(botonSelect)) {
-            System.out.println(b01M.getId() + "1");
+            
             b03M.setDisable(true);
             b12M.setDisable(true);
         } else if (b03M.getId().contains(botonSelect)) {
-            System.out.println(b03M.getId() + "3");
+        
             b01M.setDisable(true);
             b12M.setDisable(true);
 
         } else if (b12M.getId().contains(botonSelect)) {
-            System.out.println(b12M.getId() + "12");
+            
             b01M.setDisable(true);
             b03M.setDisable(true);
 

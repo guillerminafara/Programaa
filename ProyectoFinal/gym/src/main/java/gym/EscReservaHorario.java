@@ -173,37 +173,7 @@ public class EscReservaHorario implements Initializable {
   void cargaDia(ActionEvent event) {
 
   }
-  // private final ListChangeListener<HorarioReserva> selectorTablaReservas = new
-  // ListChangeListener<HorarioReserva>() {
-
-  // };
-  // @Override
-  // public void onChanged(ListChangeListener.Change<? extends HorarioReserva> c)
-  // {
-  // System.out.println("tabla selecciona"+ c);
-  // }
-  // };
-  // private final ListChangeListener<Cliente> selectorTablaClientes = new
-  // ListChangeListener<Cliente>() {
-  // @Override
-  // public void onChanged(ListChangeListener.Change<? extends Cliente> c) {
-  // ponerClienteSeleccionado();
-  // }
-  // };
-
-  // // Método que devuelve el objeto de la fila seleccionada
-  // public HorarioReserva getTablaClientesSeleccionado() {
-  // if (tablaReservas != null) {
-  // List<HorarioReserva> tabla =
-  // tablaReservas.getSelectionModel().getSelectedItems();
-  // if (tabla.size() == 1) {
-  // final HorarioReserva reservaSeleccionada = tabla.get(0);
-  // System.out.println(reservaSeleccionada + " queeee");
-  // return reservaSeleccionada;
-  // }
-  // }
-  // return null;
-  // }
+ 
 
   @FXML
   void accionCancelarReservas(ActionEvent event) {
@@ -215,8 +185,8 @@ public class EscReservaHorario implements Initializable {
   @FXML
   void accionCerrarListaReservas(ActionEvent event) {
     botonListaReservas.setDisable(false);
-    botonReserva.setDisable(true);
-    botonReserva.setDisable(false);
+  
+   
     TranslateTransition transi2 = new TranslateTransition();
     transi2.setNode(anchor);
     transi2.setDuration(Duration.seconds(2));
@@ -227,11 +197,7 @@ public class EscReservaHorario implements Initializable {
 
   @FXML
   void accionListarReservas(ActionEvent event) {
-    // TranslateTransition transi = new TranslateTransition();
-    // transi.setNode(panelito);
-    // transi.setDuration(Duration.seconds(2));
-    // transi.setByY(-200);
-    // transi.play();
+   
     botonListaReservas.setDisable(true);
      botonReserva.setDisable(true);
     TranslateTransition transi2 = new TranslateTransition();
@@ -251,7 +217,7 @@ public class EscReservaHorario implements Initializable {
   void accionReservar(ActionEvent event) {
     String id = crearId();
     if (!verificaHorario(id)) { // para crear el id de reserva, false no existe y la crea
-      // System.out.println("creando el id ");
+     
 
       crearHorarios(id);// por error meti el id dentro del metodo en otro metodo verificar crregir si da
       reservaHorario(id);
@@ -260,7 +226,7 @@ public class EscReservaHorario implements Initializable {
     } else {
       horario = buscaHorarios(id);
       reservaHorario(id);
-      // System.out.println("YA EXISTE EL ID");
+      
     }
   }
 
@@ -271,20 +237,22 @@ public class EscReservaHorario implements Initializable {
 
   @FXML
   void accionSeleccionaHora(MouseEvent event) {
-    // botonSeleccionado ="";
+    
     crearId();
-    // System.out.println(event.getPickResult());
+    
     String botonSeleccionado = event.getSource().toString();
     botonSeleccionado = botonSeleccionado.substring(10, 17);
-    // System.out.println(botonSeleccionado);
+    
 
     i++;
-    // System.out.println(i);
+    
     if (i % 2 == 0) {
       habilitaBotones();
       deshabilitarPorHora(mapa);
     } else {
+      botonReserva.setDisable(false);
       deshabilitaBotones(botonSeleccionado);
+      
     }
 
   }
@@ -301,11 +269,7 @@ public class EscReservaHorario implements Initializable {
       System.out.println("no tiene reservas entonces si que puede");
     }
 
-    // label.setText(DatePickerB.getValue().toString());
-    // label.setText(diaa.toString());
-    // label.setText(ld.getHour() + ":" + ld.getMinute());
-    // System.out.println("dia "+ diaa);
-    // System.out.println("hora " + ld.getHour() + ":" + ld.getMinute());
+
   }
 
   @FXML
@@ -346,16 +310,10 @@ public class EscReservaHorario implements Initializable {
         cargarTablaReservasFiltrada();
       }
     });
-    // mapaBotones();
+   
 
-    // if (!verificaReserva()) {
-    // System.out.println("El cliente ya tiene una reserva");
-    // System.out.println(cliente.getPilaReservas().get(cliente.getPilaReservas().size()));
-    // } else {
-    // System.out.println("El cliente no tiene reserva ");
-    // }
-    // cargarTabla();
-
+  
+    botonReserva.setDisable(true);
     datePickerModifica();
   }
 
@@ -413,16 +371,15 @@ public class EscReservaHorario implements Initializable {
               alertita.setContentText("Reserva Cancelada");
               alertita.setContentText("Reserva Cancelada. Puedes reservar en otros horarios");
               alertita.show();
-             // cambiosCancelar();
+            
              Platform.runLater(this::cambiosCancelar);
              
             }
           } catch (SQLException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
-           }//catch(IndexOutOfBoundsException e){
-          //   System.out.println("nada");
-          // }
+           }
+          
         }
       });
 
@@ -435,11 +392,7 @@ public class EscReservaHorario implements Initializable {
 
   public void cargarUser() {
     cliente= EsceUser.pasarUser();
-    // if(cliente!=null){
     
-    // }
-    // cliente = initSes.pasarUSer();
-    // cliente2=
     labelNombre.setText(cliente.getNombre());
 
   }
@@ -482,8 +435,7 @@ public class EscReservaHorario implements Initializable {
   // crea un horario y devuelve verdadero o false en caso de crearlo
   public boolean crearHorarios(String id) {
     boolean exito = false;
-    // verifica horario es false o sea si el id no existe, procedemos a crearlo
-    // if (!verificaHorario(crearId())) {
+    
 
     String sql = "insert into horario(idHorario, fecha_hora, cantidad, estado)values(?, ?, ?, ?)";
     try {
@@ -533,34 +485,7 @@ public class EscReservaHorario implements Initializable {
     return mes;
   }
 
-  // metodo que abre los horarios en caso de que tenga un user loggeado .. si no
-  // hay user loggeado redirecciona a ingresar
-
-  // public boolean verificaCuota() {
-  // boolean puede = false;
-  // String sql = "SELECT * FROM cliente where idCliente=?";
-  // try {
-  // PreparedStatement ps = con.prepareStatement(sql);
-  // ps.setInt(1, cliente.getIdCliente());
-  // // ResultSet rs= ps.executeQuery();
-  // if (cliente.getCuota() == null) {
-  // Alert alert = new Alert(AlertType.WARNING);
-  // alert.setContentText("No tienes ningún plan contratado con nosotros. ");
-  // alert.setTitle("Reserva de Horario");
-  // } else {
-  // puede = true;
-  // }
-  // // si el cliente ya tiene una reserva en el mismo dia no deberia poder
-  // reservar
-  // // de nuevo
-
-  // } catch (SQLException e) {
-  // // TODO Auto-generated catch block
-  // e.printStackTrace();
-  // }
-  // return puede;
-
-  // }
+  
   public void datePickerModifica() {
 
     Callback<DatePicker, DateCell> dayCellFactory = new Callback<DatePicker, DateCell>() {
@@ -582,11 +507,11 @@ public class EscReservaHorario implements Initializable {
               setStyle("-fx-background-color: #EEEEEE;");
             }
             // deshabilito los findes
-            // if((fecha.getDayOfWeek() == DayOfWeek.SATURDAY)||(fecha.getDayOfWeek() ==
-            // DayOfWeek.SUNDAY)){
-            // setDisable(true);
-            // setStyle("-fx-background-color: #EEEEEE;");
-            // }
+             if((fecha.getDayOfWeek() == DayOfWeek.SATURDAY)||(fecha.getDayOfWeek() ==
+            DayOfWeek.SUNDAY)){
+            setDisable(true);
+            setStyle("-fx-background-color: #EEEEEE;");
+            }
             // if(fecha.now().getDayOfWeek()==DayOfWeek.SATURDAY){
 
             // }
