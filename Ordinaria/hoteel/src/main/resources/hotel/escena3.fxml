@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="509.0" style="-fx-background-color: #CC913E;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hotel.Escena3">
+   <children>
+      <ImageView fx:id="img" fitHeight="82.0" fitWidth="84.0" layoutX="23.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@logo.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="labelSErvicios" layoutX="180.0" layoutY="37.0" prefHeight="16.0" prefWidth="150.0" text="servicios" textFill="WHITE">
+         <font>
+            <Font size="30.0" />
+         </font></Label>
+      <ComboBox fx:id="comboBox" layoutX="97.0" layoutY="148.0" onAction="#accionCombo" prefHeight="24.0" prefWidth="267.0" />
+      <Label layoutX="75.0" layoutY="106.0" text="Elige un servicio:" textFill="#7200dd">
+         <font>
+            <Font size="23.0" />
+         </font>
+      </Label>
+      <Label layoutX="75.0" layoutY="207.0" text="Precio:" textFill="#0f0083">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="75.0" layoutY="269.0" text="Habitación:" textFill="#0f0083">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <TextField fx:id="textFPrecio" layoutX="238.0" layoutY="195.0" prefHeight="24.0" prefWidth="111.0" />
+      <TextField fx:id="textFHabitacion" layoutX="238.0" layoutY="265.0" prefHeight="24.0" prefWidth="111.0" />
+      <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="imagenBasura" fitHeight="60.0" fitWidth="63.0" layoutX="313.0" layoutY="319.0" onMouseClicked="#accionDescartar" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@trash.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="imgGuardar" fitHeight="60.0" fitWidth="82.0" layoutX="150.0" layoutY="319.0" onMouseClicked="#accionGuardar" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@anotar.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>

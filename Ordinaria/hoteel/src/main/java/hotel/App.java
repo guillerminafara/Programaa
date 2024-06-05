@@ -13,7 +13,7 @@ import java.io.IOException;
  */
 public class App extends Application {
 
-    private static Scene scene, scene2;
+    private static Scene scene, scene2,scene3;
     static Stage stage;
     @Override
     public void start(Stage stage) throws IOException {
@@ -23,14 +23,24 @@ public class App extends Application {
         stage.setScene(scene);
         stage.show();
     }
-    public void escena1(){
+    public static void escena1(){
         stage.setScene(scene);
     }
-    public void escena2(){
+    public static void escena2(){
         FXMLLoader fxmlLoader2 = new FXMLLoader(App.class.getResource("escena2.fxml"));
         try {
             scene2 = new Scene(fxmlLoader2.load());
             stage.setScene(scene2);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void escena3(){
+        FXMLLoader fxmlLoader3 = new FXMLLoader(App.class.getResource("escena3.fxml"));
+        try {
+            scene3 = new Scene(fxmlLoader3.load());
+            stage.setScene(scene3);
         } catch (IOException e) {
             e.printStackTrace();
         }

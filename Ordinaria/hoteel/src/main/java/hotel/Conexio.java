@@ -1,20 +1,20 @@
-package gym;
+package hotel;
+
+
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public class Conexion {
-     static String url = "jdbc:mysql://127.0.0.1:33006/Gym";
+public class Conexio {
+     static String url = "jdbc:mysql://127.0.0.1:33006/servicios";
     static String user = "root";
     static String password = "Paquito2024----";
 
-    // static String url = "jdbc:mysql://localhost/Gimnasio";
-    // static String user = "root";
-    // static String password = "";
+  
     static Connection conectar = null;
 
-    Conexion() {
+    Conexio() {
 
     }
 

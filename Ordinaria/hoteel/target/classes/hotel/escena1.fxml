@@ -1,6 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hotel.Escena1"/>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="621.0" prefWidth="481.0" style="-fx-background-color: #DAA147;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hotel.Escena1">
+   <children>
+      <PasswordField fx:id="textFCod" layoutX="159.0" layoutY="274.0" prefHeight="125.0" prefWidth="185.0">
+         <font>
+            <Font size="21.0" />
+         </font>
+      </PasswordField>
+      <Button fx:id="botonEntrar" layoutX="173.0" layoutY="469.0" mnemonicParsing="false" onAction="#accionEntrar" prefHeight="24.0" prefWidth="157.0" text="ENTRAR" />
+      <ImageView fx:id="img" fitHeight="150.0" fitWidth="200.0" layoutX="177.0" layoutY="69.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@logo.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>

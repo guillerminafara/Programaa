@@ -4,7 +4,7 @@ public class Servicio {
     int id_Servicio;
     int cod_grupo;
     String detalle;
-    double decimal;
+    double precio;
     Grupo grupo;
     public Servicio() {
     }
@@ -26,16 +26,22 @@ public class Servicio {
     public void setDetalle(String detalle) {
         this.detalle = detalle;
     }
-    public double getDecimal() {
-        return decimal;
+    public double getPrecio() {
+        return precio;
     }
-    public void setDecimal(double decimal) {
-        this.decimal = decimal;
+    public void setPrecio(double precio) {
+        this.precio = precio;
     }
+    
     @Override
     public String toString() {
-        return "Servicio [id_Servicio=" + id_Servicio + ", cod_grupo=" + cod_grupo + ", detalle=" + detalle
-                + ", decimal=" + decimal + "]";
+        return detalle;
+    }
+    public Grupo getGrupo() {
+        return grupo;
+    }
+    public void setGrupo(Grupo grupo) {
+        this.grupo = grupo;
     }
     
 }

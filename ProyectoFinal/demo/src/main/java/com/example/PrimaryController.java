@@ -65,6 +65,7 @@ public class PrimaryController implements Initializable {
             if (eventi.getClickCount() == 2) {
                 Prueba prueba= tablaCliente.getSelectionModel().getSelectedItem();
                 if(prueba!= null){
+                    
                     texfEdad.setText(prueba.getEdad() + "");
                     textfNombre.setText(prueba.getNombre());
                 }
@@ -250,7 +251,7 @@ public class PrimaryController implements Initializable {
     //     }
     // };
 
-    // Método que devuelve el objeto de la fila seleccionada
+   // Método que devuelve el objeto de la fila seleccionada
     // public Prueba getTablaClientesSeleccionado() {
     //     if (tablaCliente != null) {
     //         List<Prueba> tabla = tablaCliente.getSelectionModel().getSelectedItems();
